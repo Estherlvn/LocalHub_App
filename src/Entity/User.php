@@ -30,8 +30,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
-    #[ORM\Column]
-    private array $role = [];
+    #[ORM\Column(length: 50)]
+    private ?string $role = null;
+
+
 
     public function getId(): ?int
     {
@@ -84,11 +86,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Renvoie les rôles de l'utilisateur.
      * Pour l'instant, on renvoie un rôle par défaut.
      */
+
     public function getRoles(): array
     {
-        // Par défaut, on retourne ROLE_USER.
-        return ['ROLE_USER'];
+        $role = $this->role ? 'ROLE_' . strtoupper($this->role) : 'ROLE_USER';
+        return [$role, 'ROLE_USER'];
     }
+    
 
     /**
      * Méthode permettant d'effacer les données sensibles, si nécessaire.
@@ -110,12 +114,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRole(): array
+    public function getRole(): string
     {
         return $this->role;
     }
 
-    public function setRole(array $role): static
+    public function setRole(string $role): static
     {
         $this->role = $role;
 

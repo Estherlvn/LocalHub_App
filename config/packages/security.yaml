@@ -30,6 +30,7 @@ security:
                 # redirection after logout
                 target: app_login
 
+
             # Vous pouvez activer d'autres méthodes d'authentification si besoin.
             # switch_user: true
 
