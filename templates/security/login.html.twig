@@ -17,14 +17,14 @@
         <h1>Connexion</h1>
         <label for="username">Email</label>
         <input type="email" value="{{ last_username }}" name="_username" id="username" required autofocus>
-        
+                
         <label for="password">Mot de passe</label>
         <input type="password" name="_password" id="password" required>
-
+        
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
+        
         <button type="submit">Se connecter</button>
-    </form>
+        
 {% endblock %}
 
 
