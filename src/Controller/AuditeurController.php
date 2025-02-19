@@ -8,10 +8,10 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class AuditeurController extends AbstractController
 {
-    #[Route('/auditeur', name: 'app_auditeur')]
+    #[Route('/auditeur/home', name: 'auditeur_home')]
     public function index(): Response
     {
-        return $this->render('auditeur/index.html.twig', [
+        return $this->render('auditeur/home.html.twig', [
             'controller_name' => 'AuditeurController',
         ]);
     }
