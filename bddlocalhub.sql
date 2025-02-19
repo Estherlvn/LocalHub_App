@@ -101,11 +101,13 @@ CREATE TABLE IF NOT EXISTS `user` (
   `role` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bddlocalhub.user : ~1 rows (environ)
+-- Listage des données de la table bddlocalhub.user : ~3 rows (environ)
 INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `is_verified`, `role`) VALUES
-	(3, 'Esther', 'estherlvn@gmail.com', '$2y$13$N11NpZbOarYGSqo7.kq1T.D2yKLElKGJ/DZs6nMEI2QzLz/9QBkKK', 0, 'admin');
+	(4, 'Esther', 'esther@gmail.com', '$2y$13$R4cgyrUSdcjLes0HV.fiWOYc09EkCGwwYOKH771INpJhaDD5JU1Hi', 0, 'auditeur'),
+	(5, 'exemple', 'exemple@exemple.com', '$2y$13$p/sD02igR0Pxm3M2pMLRp.9JnM.JlDgvavSjUJV5q.vmoJ7dSHKpO', 0, 'auditeur'),
+	(6, 'Admin', 'admin@exemple.com', '$2y$13$5YDH4S3oXQDNKpxlZFl9ZOQHPy0Q2yVVHRaaIO9Cwz4W0hNFd.JP.', 0, 'admin');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
