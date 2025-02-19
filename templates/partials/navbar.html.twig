@@ -1,0 +1,26 @@
+
+<nav>
+    <ul>
+
+        {% if not app.user %}
+        {# Menu commun visible uniquement si aucun utilisateur n'est connecté #}
+        <li>
+            <a href="{{ path('app_home') }}">Accueil</a>
+        </li>
+    {% else %}
+        {# Menu adapté pour un utilisateur connecté, en fonction de son rôle #}
+        <li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin_home') }}">Accueil</a>
+            {% elseif is_granted('ROLE_ARTISTE') %}
+                <a href="{{ path('artiste_home') }}">Accueil</a>
+            {% else %}
+                <a href="{{ path('auditeur_home') }}">Accueil</a>
+            {% endif %}
+            <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        </li>
+    {% endif %}
+    
+
+    </ul>
+</nav>
