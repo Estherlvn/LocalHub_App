@@ -29,6 +29,8 @@ security:
                 path: app_logout
                 # redirection after logout
                 target: app_login
+            custom_authenticators:
+                - App\Security\AppCustomAuthenticator
 
 
             # Vous pouvez activer d'autres méthodes d'authentification si besoin.
