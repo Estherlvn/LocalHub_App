@@ -11,4 +11,18 @@
         <a href="{{ path('app_login') }}">Se connecter</a>
     </p>
 </div>
+
+<div>
+<h2>Les Artistes à la une</h2>
+<ul>
+    {% for artiste in artistes %}
+        <li>
+            {{ artiste.pseudo }} - <a href="{{ path('artiste_detail', { 'id': artiste.id }) }}">Voir détail</a>
+        </li>
+    {% else %}
+        <li>Aucun artiste trouvé.</li>
+    {% endfor %}
+</ul>
+</div>
+
 {% endblock %}

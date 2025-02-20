@@ -19,16 +19,16 @@ class Track
     #[ORM\Column(length: 50)]
     private ?string $trackName = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $audioFile = null;
 
     #[ORM\Column]
     private ?int $duration = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $uploadDate = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $viewCount = null;
 
     #[ORM\ManyToOne(inversedBy: 'tracks')]
