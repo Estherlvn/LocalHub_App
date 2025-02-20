@@ -65,6 +65,8 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+
+    // VERIFICATION VALIDITE DE L'ADRESSE MAIL
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {
