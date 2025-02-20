@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TrackRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,27 @@ class Track
 
     #[ORM\Column]
     private ?int $viewCount = null;
+
+    #[ORM\ManyToOne(inversedBy: 'tracks')]
+    private ?User $user = null;
+
+    /**
+     * @var Collection<int, genre>
+     */
+    #[ORM\ManyToMany(targetEntity: genre::class, inversedBy: 'tracks')]
+    private Collection $genres;
+
+    /**
+     * @var Collection<int, Playlist>
+     */
+    #[ORM\ManyToMany(targetEntity: Playlist::class, mappedBy: 'tracks')]
+    private Collection $playlists;
+
+    public function __construct()
+    {
+        $this->genres = new ArrayCollection();
+        $this->playlists = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +113,69 @@ class Track
     public function setViewCount(int $viewCount): static
     {
         $this->viewCount = $viewCount;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, genre>
+     */
+    public function getGenres(): Collection
+    {
+        return $this->genres;
+    }
+
+    public function addGenre(genre $genre): static
+    {
+        if (!$this->genres->contains($genre)) {
+            $this->genres->add($genre);
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(genre $genre): static
+    {
+        $this->genres->removeElement($genre);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Playlist>
+     */
+    public function getPlaylists(): Collection
+    {
+        return $this->playlists;
+    }
+
+    public function addPlaylist(Playlist $playlist): static
+    {
+        if (!$this->playlists->contains($playlist)) {
+            $this->playlists->add($playlist);
+            $playlist->addTrack($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlaylist(Playlist $playlist): static
+    {
+        if ($this->playlists->removeElement($playlist)) {
+            $playlist->removeTrack($this);
+        }
 
         return $this;
     }

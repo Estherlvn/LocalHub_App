@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -10,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Un compte existe déjà avec cet email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -32,6 +34,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 50)]
     private ?string $role = null;
+
+    /**
+     * @var Collection<int, track>
+     */
+    #[ORM\OneToMany(targetEntity: track::class, mappedBy: 'user')]
+    private Collection $tracks;
+
+    /**
+     * @var Collection<int, playlist>
+     */
+    #[ORM\OneToMany(targetEntity: playlist::class, mappedBy: 'user')]
+    private Collection $playlists;
+
+    /**
+     * @var Collection<int, Playlist>
+     */
+    #[ORM\ManyToMany(targetEntity: Playlist::class, mappedBy: 'likedBy')]
+    private Collection $likedPlaylists;
+
+    public function __construct()
+    {
+        $this->tracks = new ArrayCollection();
+        $this->playlists = new ArrayCollection();
+        $this->likedPlaylists = new ArrayCollection();
+    }
 
 
 
@@ -122,6 +149,93 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRole(string $role): static
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, track>
+     */
+    public function getTracks(): Collection
+    {
+        return $this->tracks;
+    }
+
+    public function addTrack(track $track): static
+    {
+        if (!$this->tracks->contains($track)) {
+            $this->tracks->add($track);
+            $track->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrack(track $track): static
+    {
+        if ($this->tracks->removeElement($track)) {
+            // set the owning side to null (unless already changed)
+            if ($track->getUser() === $this) {
+                $track->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, playlist>
+     */
+    public function getPlaylists(): Collection
+    {
+        return $this->playlists;
+    }
+
+    public function addPlaylist(playlist $playlist): static
+    {
+        if (!$this->playlists->contains($playlist)) {
+            $this->playlists->add($playlist);
+            $playlist->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlaylist(playlist $playlist): static
+    {
+        if ($this->playlists->removeElement($playlist)) {
+            // set the owning side to null (unless already changed)
+            if ($playlist->getUser() === $this) {
+                $playlist->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Playlist>
+     */
+    public function getLikedPlaylists(): Collection
+    {
+        return $this->likedPlaylists;
+    }
+
+    public function addLikedPlaylist(Playlist $likedPlaylist): static
+    {
+        if (!$this->likedPlaylists->contains($likedPlaylist)) {
+            $this->likedPlaylists->add($likedPlaylist);
+            $likedPlaylist->addLikedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedPlaylist(Playlist $likedPlaylist): static
+    {
+        if ($this->likedPlaylists->removeElement($likedPlaylist)) {
+            $likedPlaylist->removeLikedBy($this);
+        }
 
         return $this;
     }
