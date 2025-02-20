@@ -1,3 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de {{ artiste.pseudo }}{% endblock %}
+
+{% block body %}
+
 <div>
-    <h1>DETAIL D'un artiste</h1>
+    <h1>{{ artiste.pseudo }}</h1>
 </div>
+
+<div>
+    <h2>Morceaux disponibles</h2>
+    <ul>
+        {% for track in tracks %}
+            <li>{{ track.trackName }} ({{ track.duration }} sec)</li>
+        {% else %}
+            <li>Aucun morceau trouvé.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<a href="{{ path('app_home') }}">Retour à l'accueil</a>
+
+{% endblock %}

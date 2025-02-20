@@ -23,25 +23,21 @@ class HomeController extends AbstractController
         ]);
     }
 
-    // Afficher les détails d'un artiste (User avec ID sélectionné)
+    // Rediriger vers la vue 'détail d'un artiste' (:id)
     #[Route('/artiste/{id}', name: 'artiste_detail')]
     public function showArtist(UserRepository $userRepository, int $id): Response
     {
-        // Récupérer l'utilisateur correspondant à l'ID
+        // Récupérer l'artiste par son ID
         $artiste = $userRepository->find($id);
 
-        // Vérifier si l'utilisateur existe et est bien un artiste
-        if (!$artiste || $artiste->getRole() !== 'artiste') {
-            throw $this->createNotFoundException("L'utilisateur demandé n'est pas un artiste.");
+        // Vérifier si l'artiste existe
+        if (!$artiste) {
+            throw $this->createNotFoundException("L'artiste demandé n'existe pas.");
         }
 
-        // Récupérer les morceaux (tracks) de cet artiste
-        $tracks = $artiste->getTracks();
-
+        // Rendre la page détail avec l'artiste
         return $this->render('artiste/detail.html.twig', [
             'artiste' => $artiste,
-            'tracks' => $tracks, // Passer les morceaux à la vue
-            
         ]);
     }
 }

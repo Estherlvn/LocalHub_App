@@ -17,7 +17,8 @@
 <ul>
     {% for artiste in artistes %}
         <li>
-            {{ artiste.pseudo }} - <a href="{{ path('artiste_detail', { 'id': artiste.id }) }}">Voir détail</a>
+            {{ artiste.pseudo }} -
+            <a href="{{ path('artiste_detail', { 'id': artiste.id }) }}">Voir détail</a>
         </li>
     {% else %}
         <li>Aucun artiste trouvé.</li>

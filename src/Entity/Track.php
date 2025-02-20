@@ -31,7 +31,8 @@ class Track
     #[ORM\Column(nullable: true)]
     private ?int $viewCount = null;
 
-    #[ORM\ManyToOne(inversedBy: 'tracks')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "tracks")]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id", nullable: true)]
     private ?User $user = null;
 
     /**

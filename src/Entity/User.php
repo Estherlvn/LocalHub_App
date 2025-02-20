@@ -35,6 +35,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $role = null;
 
+
+
     /**
      * @var Collection<int, Track>
      */
@@ -53,14 +55,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Playlist::class, mappedBy: 'likedBy')]
     private Collection $likedPlaylists;
 
+
+    
     public function __construct()
     {
         $this->tracks = new ArrayCollection();
         $this->playlists = new ArrayCollection();
         $this->likedPlaylists = new ArrayCollection();
     }
-
-
 
     public function getId(): ?int
     {
