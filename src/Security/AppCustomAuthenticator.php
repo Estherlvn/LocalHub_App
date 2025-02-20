@@ -4,7 +4,6 @@ namespace App\Security;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
@@ -17,7 +16,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Core\Security;
 
 /**
- * @see https://symfony.com/doc/current/security/custom_authenticator.html
+ * Voir : https://symfony.com/doc/current/security/custom_authenticator.html
  */
 class AppCustomAuthenticator extends AbstractAuthenticator
 {
@@ -45,7 +44,7 @@ class AppCustomAuthenticator extends AbstractAuthenticator
         $email = $request->request->get('_username', '');
         $password = $request->request->get('_password', '');
         
-        // Stocke l'email dans la session pour pré-remplir le formulaire en cas d'erreur
+        // Optionnel : stocker l'email dans la session pour pré-remplir le formulaire en cas d'erreur
         // $request->getSession()->set(Security::LAST_USERNAME, $email);
     
         return new Passport(
@@ -89,12 +88,12 @@ class AppCustomAuthenticator extends AbstractAuthenticator
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        $request->getSession()->getFlashBag()->add('error', 'Authentification échouée : ' . $exception->getMessage());
+        if ($request->hasSession()) {
+            // $request->getSession()->getFlashBag()->add('error', 'Authentification échouée : ' . $exception->getMessage());
+        }
         return new RedirectResponse($this->urlGenerator->generate('app_login'));
     }
 }
-
-
 
     
     // public function start(Request $request, ?AuthenticationException $authException = null): Response

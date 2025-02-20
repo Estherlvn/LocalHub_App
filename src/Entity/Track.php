@@ -35,9 +35,9 @@ class Track
     private ?User $user = null;
 
     /**
-     * @var Collection<int, genre>
+     * @var Collection<int, Genre>
      */
-    #[ORM\ManyToMany(targetEntity: genre::class, inversedBy: 'tracks')]
+    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'tracks')]
     private Collection $genres;
 
     /**
@@ -130,14 +130,14 @@ class Track
     }
 
     /**
-     * @return Collection<int, genre>
+     * @return Collection<int, Genre>
      */
     public function getGenres(): Collection
     {
         return $this->genres;
     }
 
-    public function addGenre(genre $genre): static
+    public function addGenre(Genre $genre): static
     {
         if (!$this->genres->contains($genre)) {
             $this->genres->add($genre);
@@ -146,7 +146,7 @@ class Track
         return $this;
     }
 
-    public function removeGenre(genre $genre): static
+    public function removeGenre(Genre $genre): static
     {
         $this->genres->removeElement($genre);
 

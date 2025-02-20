@@ -25,9 +25,9 @@ class Playlist
     private ?User $user = null;
 
     /**
-     * @var Collection<int, track>
+     * @var Collection<int, Track>
      */
-    #[ORM\ManyToMany(targetEntity: track::class, inversedBy: 'playlists')]
+    #[ORM\ManyToMany(targetEntity: Track::class, inversedBy: 'playlists')]
     private Collection $tracks;
 
     /**
@@ -84,14 +84,14 @@ class Playlist
     }
 
     /**
-     * @return Collection<int, track>
+     * @return Collection<int, Track>
      */
     public function getTracks(): Collection
     {
         return $this->tracks;
     }
 
-    public function addTrack(track $track): static
+    public function addTrack(Track $track): static
     {
         if (!$this->tracks->contains($track)) {
             $this->tracks->add($track);
@@ -100,7 +100,7 @@ class Playlist
         return $this;
     }
 
-    public function removeTrack(track $track): static
+    public function removeTrack(Track $track): static
     {
         $this->tracks->removeElement($track);
 

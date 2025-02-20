@@ -36,15 +36,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $role = null;
 
     /**
-     * @var Collection<int, track>
+     * @var Collection<int, Track>
      */
-    #[ORM\OneToMany(targetEntity: track::class, mappedBy: 'user')]
+    #[ORM\OneToMany(targetEntity: Track::class, mappedBy: 'user')]
     private Collection $tracks;
 
     /**
-     * @var Collection<int, playlist>
+     * @var Collection<int, Playlist>
      */
-    #[ORM\OneToMany(targetEntity: playlist::class, mappedBy: 'user')]
+    #[ORM\OneToMany(targetEntity: Playlist::class, mappedBy: 'user')]
     private Collection $playlists;
 
     /**
@@ -154,14 +154,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, track>
+     * @return Collection<int, Track>
      */
     public function getTracks(): Collection
     {
         return $this->tracks;
     }
 
-    public function addTrack(track $track): static
+    public function addTrack(Track $track): static
     {
         if (!$this->tracks->contains($track)) {
             $this->tracks->add($track);
@@ -171,7 +171,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeTrack(track $track): static
+    public function removeTrack(Track $track): static
     {
         if ($this->tracks->removeElement($track)) {
             // set the owning side to null (unless already changed)
@@ -184,14 +184,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, playlist>
+     * @return Collection<int, Playlist>
      */
     public function getPlaylists(): Collection
     {
         return $this->playlists;
     }
 
-    public function addPlaylist(playlist $playlist): static
+    public function addPlaylist(Playlist $playlist): static
     {
         if (!$this->playlists->contains($playlist)) {
             $this->playlists->add($playlist);
@@ -201,7 +201,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removePlaylist(playlist $playlist): static
+    public function removePlaylist(Playlist $playlist): static
     {
         if ($this->playlists->removeElement($playlist)) {
             // set the owning side to null (unless already changed)
