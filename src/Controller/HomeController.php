@@ -3,25 +3,30 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\TrackRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
 
-    // Afficher tous les artistes de la BDD
+    // Afficher tous les artistes de la BDD et les derniers titres ajoutés
     #[Route('/home', name: 'app_home')]
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository, TrackRepository $trackRepository): Response
     {
-        // Récupérer tous les utilisateurs avec le rôle "ARTISTE"
+        // Récupérer tous les artistes (Users ayant le rôle "artiste")
         $artistes = $userRepository->findBy(['role' => 'artiste']);
-
-        // Envoyer les artistes à la vue Twig
+    
+        // Récupérer les derniers morceaux ajoutés (5 par défaut)
+        $latestTracks = $trackRepository->findLatestTracks();
+    
         return $this->render('home/index.html.twig', [
             'artistes' => $artistes,
+            'latestTracks' => $latestTracks, // 🔹 Envoi des morceaux à la vue
         ]);
     }
+    
 
     // Afficher les détails d'un artiste (User avec ID sélectionné)
     #[Route('/artiste/{id}', name: 'artiste_detail')]

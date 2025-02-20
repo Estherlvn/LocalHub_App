@@ -16,6 +16,18 @@ class TrackRepository extends ServiceEntityRepository
         parent::__construct($registry, Track::class);
     }
 
+
+    public function findLatestTracks(int $limit = 5): array
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.uploadDate', 'DESC') // Trier par date d'ajout (du plus récent au plus ancien)
+            ->setMaxResults($limit) // Limite à 5 morceaux (modifiable)
+            ->getQuery()
+            ->getResult();
+    }
+
+    
+
     //    /**
     //     * @return Track[] Returns an array of Track objects
     //     */

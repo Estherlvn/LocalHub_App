@@ -13,7 +13,7 @@
 </div>
 
 <div>
-<h2>Les Artistes à la une</h2>
+<h2>Les Artistes à la Une</h2>
 <ul>
     {% for artiste in artistes %}
         <li>
@@ -25,5 +25,18 @@
     {% endfor %}
 </ul>
 </div>
+
+<div>
+    <h2>Derniers Titres ajoutés</h2>
+    <ul>
+        {% for track in latestTracks %}
+            <li>
+                {{ track.trackName }}
+            </li>
+        {% else %}
+            <li>Aucun morceau disponible.</li>
+        {% endfor %}
+    </ul>
+    </div>
 
 {% endblock %}
