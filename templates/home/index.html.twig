@@ -3,40 +3,47 @@
 {% block title %}HomePage{% endblock %}
 
 {% block body %}
-<div>
-    <h1>LocalHub, faites rayonner la scène locale</h1>
-    <p>Rejoignez-nous dès maintenant pour célébrer la musique de votre région</p>
-    <p>
-        <a href="{{ path('app_register') }}">S'inscrire</a>
-        <a href="{{ path('app_login') }}">Se connecter</a>
-    </p>
-</div>
 
-<div>
-<h2>Les Artistes à la Une</h2>
-<ul>
-    {% for artiste in artistes %}
-        <li>
-            {{ artiste.pseudo }} -
-            <a href="{{ path('artiste_detail', { 'id': artiste.id }) }}">Voir détail</a>
-        </li>
-    {% else %}
-        <li>Aucun artiste trouvé.</li>
-    {% endfor %}
-</ul>
-</div>
-
-<div>
-    <h2>Derniers Titres ajoutés</h2>
-    <ul>
-        {% for track in latestTracks %}
-            <li>
-                {{ track.trackName }}
-            </li>
-        {% else %}
-            <li>Aucun morceau disponible.</li>
-        {% endfor %}
-    </ul>
+<div class="main">
+    <div class="page-title">
+        <h1>LocalHub, faites rayonner la scène locale</h1>
+        <h2>Rejoignez-nous dès maintenant pour célébrer la musique de votre région</h2>
     </div>
+
+        <div class="auth-buttons">
+            <a href="{{ path('app_register') }}" class="btn-log">S'inscrire</a>
+            <a href="{{ path('app_login') }}" class="btn-log">Se connecter</a>
+        </div>
+
+
+    <div class="container">
+        <div>
+            <h2>Les Artistes à la Une</h2>
+                <ul>
+                    {% for artiste in artistes %}
+                        <li>
+                            {{ artiste.pseudo }} -
+                            <a href="{{ path('artiste_detail', { 'id': artiste.id }) }}">Voir détail</a>
+                        </li>
+                    {% else %}
+                        <li>Aucun artiste trouvé.</li>
+                    {% endfor %}
+                </ul>
+        </div>
+
+        <div>
+            <h2>Derniers Titres ajoutés</h2>
+                <ul>
+                    {% for track in latestTracks %}
+                        <li>
+                            {{ track.trackName }}
+                        </li>
+                    {% else %}
+                        <li>Aucun morceau disponible.</li>
+                    {% endfor %}
+                </ul>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

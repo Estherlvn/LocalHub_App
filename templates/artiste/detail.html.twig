@@ -4,11 +4,11 @@
 
 {% block body %}
 
-<div>
+<div class="page-title">
     <h1>{{ artiste.pseudo }}</h1>
 </div>
 
-<div>
+<div class="container">
     <h2>Morceaux disponibles</h2>
     <ul>
         {% for track in tracks %}
@@ -17,8 +17,10 @@
             <li>Aucun morceau trouvé.</li>
         {% endfor %}
     </ul>
-</div>
 
-<a href="{{ path('app_home') }}">Retour à l'accueil</a>
+
+    <a href="{{ path('app_home') }}">Retour à l'accueil</a>
+
+</div>
 
 {% endblock %}
