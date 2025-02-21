@@ -1,28 +1,25 @@
 <nav class="nav-top">
+    <img src="{{ asset('img/Logo.png') }}" alt="LocalHub Logo" class="logo">
 
-    <div class="nav-container">
+
+    <div class="nav-menu-container">
+
         {% if not app.user %}
-        {# Menu commun visible uniquement si aucun utilisateur n'est connecté #}
-            <img src="{{ asset('img/Logo.png') }}" alt="LocalHub Logo" class="logo">
-            <a class="nav-item" href="{{ path('app_home') }}">Accueil</a>
-    </div>
-
-
+            <a class="nav-menu" href="{{ path('app_home') }}">Accueil</a>
+            
+        <a class="nav-menu" href="{{ path('app_login') }}" >Connexion</a>
+        <a href="{{ path('app_register') }}" id="nav-log">Inscription</a>
         {% else %}
-        {# Menu adapté pour un utilisateur connecté, en fonction de son rôle #}
-        <div class="nav-container">
-            <img src="{{ asset('img/Logo.png') }}" alt="LocalHub Logo" class="logo">
-
             {% if is_granted('ROLE_ADMIN') %}
-                <a class="nav-item" href="{{ path('admin_home') }}">Accueil</a>
+                <a class="nav-menu" href="{{ path('admin_home') }}">Accueil</a>
             {% elseif is_granted('ROLE_ARTISTE') %}
-                <a href="{{ path('artiste_home') }}">Accueil</a>
+                <a class="nav-menu" href="{{ path('artiste_home') }}">Accueil</a>
             {% else %}
-                <a href="{{ path('auditeur_home') }}">Accueil</a>
+                <a class="nav-menu" href="{{ path('auditeur_home') }}">Accueil</a>
             {% endif %}
-            <a href="{{ path('app_logout') }}">Se déconnecter</a>
-        </div>
+            <a class="nav-menu" href="{{ path('app_logout') }}">Se déconnecter</a>
         {% endif %}
+
+
     </div>
-    
 </nav>

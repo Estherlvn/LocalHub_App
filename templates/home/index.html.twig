@@ -5,6 +5,7 @@
 {% block body %}
 
 <div class="main">
+
 <div class="accueil">
     <img src="{{ asset('img/background.jpg') }}" alt="Image d'illustration avec foule dans un concert festival" class="background">
 
@@ -48,6 +49,20 @@
                     {% endfor %}
                 </ul>
         </div>
+
+        <div>
+            <h2>Les artistes par région</h2>
+                <ul>
+                    {% for track in latestTracks %}
+                        <li>
+                            {{ track.trackName }}
+                        </li>
+                    {% else %}
+                        <li>Aucun morceau disponible.</li>
+                    {% endfor %}
+                </ul>
+        </div>
+
     </div>
 </div>
 

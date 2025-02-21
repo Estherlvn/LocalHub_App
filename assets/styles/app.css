@@ -25,21 +25,55 @@ ul {
 }
 
 
+
+
 /**** Navigation ****/
-
-.nav-top {
+nav.nav-top {
     background-color: #03030D;
-}
-
-.nav-item {
     color: #F3F3F1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
 }
 
-
-/**** Conteneur principal *****/
-.main {
+/* Conteneur du menu (place les liens à droite) */
+.nav-menu-container {
+    margin-right: 50px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Style des liens */
+.nav-menu {
+    color: #F3F3F1;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-menu:hover {
+    color: #DEA732;
+}
+
+#nav-log {
+    color: #DEA732;
+    border: 2px solid #DEA732;
+    border-radius: 2px;
+    padding: 8px 24px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+#nav-log:hover {
+    background-color: #eec263;
+}
+
+a#nav-log:hover {
+    color:#03030D
 }
 
 
@@ -84,17 +118,20 @@ ul {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
+
 }
 
 .page-title h1 {
     font-size: 2.5rem;
     font-weight: bold;
+    color:  black;
+    margin-right: 400px;
+    margin-bottom: 200px;
 }
 
 .page-title h2 {
     font-size: 1.5rem;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 /**** Boutons *****/
@@ -102,15 +139,17 @@ ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px; /* Espace entre les boutons */
-    margin-top: 20px;
+    gap: 80px; /* Espace entre les boutons */
+    margin-top: 50px;
+    margin-bottom: 80px;
 }
 
 .btn-log {
+    width: 100px;
     color: #DEA732;
     border: 2px solid #DEA732;
     border-radius: 2px;
-    padding: 12px 24px;
+    padding: 10px 22px;
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
@@ -126,6 +165,15 @@ a.btn-log:hover {
 }
 
 
+
+/**** CONTENEUR principal *****/
+ .container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
 
 
 
