@@ -3,18 +3,18 @@
     <div class="nav-container">
         {% if not app.user %}
         {# Menu commun visible uniquement si aucun utilisateur n'est connecté #}
-        <div class="nav-item">
             <img src="{{ asset('img/Logo.png') }}" alt="LocalHub Logo" class="logo">
-            <a href="{{ path('app_home') }}">Accueil</a>
-        </div>
+            <a class="nav-item" href="{{ path('app_home') }}">Accueil</a>
+    </div>
+
 
         {% else %}
         {# Menu adapté pour un utilisateur connecté, en fonction de son rôle #}
-        <div class="nav-item">
+        <div class="nav-container">
             <img src="{{ asset('img/Logo.png') }}" alt="LocalHub Logo" class="logo">
 
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('admin_home') }}">Accueil</a>
+                <a class="nav-item" href="{{ path('admin_home') }}">Accueil</a>
             {% elseif is_granted('ROLE_ARTISTE') %}
                 <a href="{{ path('artiste_home') }}">Accueil</a>
             {% else %}

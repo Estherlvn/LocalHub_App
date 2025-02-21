@@ -5,15 +5,20 @@
 {% block body %}
 
 <div class="main">
+<div class="accueil">
+    <img src="{{ asset('img/background.jpg') }}" alt="Image d'illustration avec foule dans un concert festival" class="background">
+
     <div class="page-title">
         <h1>LocalHub, faites rayonner la scène locale</h1>
         <h2>Rejoignez-nous dès maintenant pour célébrer la musique de votre région</h2>
     </div>
 
-        <div class="auth-buttons">
+    <div class="auth-buttons">
             <a href="{{ path('app_register') }}" class="btn-log">S'inscrire</a>
             <a href="{{ path('app_login') }}" class="btn-log">Se connecter</a>
-        </div>
+    </div>
+
+</div>  
 
 
     <div class="container">

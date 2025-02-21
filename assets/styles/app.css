@@ -9,8 +9,8 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Mulish', sans-serif;
-    background-color: #F3F3F1; 
-    color: #333; 
+    background-color: #03030D; 
+    color: #F3F3F1; 
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -28,60 +28,101 @@ ul {
 /**** Navigation ****/
 
 .nav-top {
-    background-color: #333;
+    background-color: #03030D;
+}
+
+.nav-item {
+    color: #F3F3F1;
 }
 
 
-/****** Conteneur principal *****/
-
+/**** Conteneur principal *****/
 .main {
     display: flex;
     flex-direction: column;
 }
 
+
+
+/**** SECTION ACCUEIL (Avec image en arrière-plan) *****/
+
+.accueil {
+    position: relative; /* Permet aux éléments enfants absolus de s'aligner */
+    width: 100%;
+    height: 100vh; /* Plein écran */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+/**** Image de fond *****/
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Remplit tout l’espace sans déformation */
+    z-index: 0; /* En arrière-plan */
+}
+
+/**** Titre et Boutons au-dessus de l'image *****/
+.page-title,
+.auth-buttons {
+    position: relative;
+    z-index: 2; /* Au-dessus de l'image */
+    color: #F3F3F1;
+}
+
+/**** Styliser le titre *****/
 .page-title {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    padding: 20px;
 }
 
-
-.container {
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.page-title h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
 }
 
-
-
-/****** Boutons *****/
-
-button {
-    border: solid 2px #DEA732;
-
+.page-title h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
 }
+
+/**** Boutons *****/
 .auth-buttons {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 100px;
-    margin: 30px;
+    gap: 40px; /* Espace entre les boutons */
+    margin-top: 20px;
 }
 
 .btn-log {
-    border: solid black 2px;
+    color: #DEA732;
+    border: 2px solid #DEA732;
     border-radius: 2px;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
 }
 
-a.btn-log {
-    padding: 10px;
-    width: 150px;
-    color: black;
-    text-align: center;
-    font-weight: 700;
+.btn-log:hover {
+    background-color: #eec263;
+}
+
+a.btn-log:hover {
+    color:#03030D;
 }
 
 
