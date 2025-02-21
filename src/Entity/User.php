@@ -55,6 +55,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Playlist::class, mappedBy: 'likedBy')]
     private Collection $likedPlaylists;
 
+    #[ORM\Column(length: 255)]
+    private ?string $departement = null;
+
 
     
     public function __construct()
@@ -238,6 +241,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->likedPlaylists->removeElement($likedPlaylist)) {
             $likedPlaylist->removeLikedBy($this);
         }
+
+        return $this;
+    }
+
+    public function getDepartement(): ?string
+    {
+        return $this->departement;
+    }
+
+    public function setDepartement(string $departement): static
+    {
+        $this->departement = $departement;
 
         return $this;
     }

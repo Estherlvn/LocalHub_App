@@ -51,16 +51,20 @@
         </div>
 
         <div>
-            <h2>Les artistes par région</h2>
-                <ul>
-                    {% for track in latestTracks %}
-                        <li>
-                            {{ track.trackName }}
-                        </li>
-                    {% else %}
-                        <li>Aucun morceau disponible.</li>
-                    {% endfor %}
-                </ul>
+            <h1>Artistes par Région</h1>
+            <ul>
+                {% for region in regions %}
+                    <li>
+                        <strong>{{ region.region }}</strong>  
+                        (Département : {{ region.departement }} - {{ region.total_artistes }} artistes)
+                        <a href="{{ path('artistes_par_region', {'departement': region.departement}) }}">
+                            Voir les artistes
+                        </a>
+                    </li>
+                {% else %}
+                    <li>Aucun artiste trouvé.</li>
+                {% endfor %}
+            </ul>
         </div>
 
     </div>
