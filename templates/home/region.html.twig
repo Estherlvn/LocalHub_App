@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Artistes du département {{ departement }}{% endblock %}
+{% block title %}Artistes de la région {{ region }}{% endblock %}
 
 {% block body %}
 
-<h1>Artistes du département {{ departement }}</h1>
+<h1>Artistes de la région {{ region }}</h1>
 
 <ul>
     {% for artiste in artistes %}
         <li>{{ artiste.pseudo }}</li>
     {% else %}
-        <li>Aucun artiste trouvé dans ce département.</li>
+        <li>Aucun artiste trouvé dans cette région.</li>
     {% endfor %}
 </ul>
 

@@ -132,7 +132,7 @@ a#nav-log:hover {
 .page-title h1 {
     font-size: 2.2rem;
     font-weight: bold;
-    color:  black;
+    color:#03030D;
     margin-right: 400px;
     margin-bottom: 220px;
 }
@@ -154,12 +154,11 @@ a#nav-log:hover {
 .btn-log {
     width: 100px;
     color: #e3c992;
-    border: 2px solid #e3c992;
+    border: 1px solid #e3c992;
     border-radius: 2px;
-    padding: 10px 22px;
+    padding: 15px 25px;
     text-decoration: none;
     font-size: 16px;
-    font-weight: bold;
     transition: background 0.3s ease-in-out;
 }
 
@@ -215,7 +214,7 @@ img.prom-picture {
     justify-content: center;
     align-items: center;
     margin-bottom: 150px;
-    width: 60%;
+    width: 50%;
 }
 
 .presentation p {
@@ -231,7 +230,7 @@ img.prom-picture {
   
   @supports (-webkit-background-clip: text) {
     .presentation p {
-      background-image: linear-gradient(90deg, #e5e59b, #ff959d);
+      background-image: linear-gradient(90deg, #e5e59b, #FF9367);
       -webkit-text-fill-color: transparent;
       -webkit-background-clip: text;
       background-clip: text;
@@ -242,23 +241,93 @@ img.prom-picture {
 /**** CONTENEUR principal *****/
  .container {
     min-width: 50%;
+    height: 100vh;
  }
 
  .wrapper {
+    margin-top: 50px;
     margin-bottom: 100px;
     display: flex;
     flex-direction: row;
     gap: 50px
  }
 
- .artist-link {
-    border: solid 1px #ff959d;
-    padding: 20px;
- }
- 
- a.artist-link {
-    color:  #ff959d;;
- }
+/******** STYLE ARTISTE & TRACKS **********/
+.artist-link {
+    display: inline-block;
+    border: solid 1px #7f7fb4; 
+    padding: 12px 20px;
+    min-width: 150px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 400;
+    transition: all 0.3s ease-in-out;
+    color: #7f7fb4; 
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Dégradé sur le texte au repos */
+@supports (-webkit-background-clip: text) {
+    .artist-link {
+        background-image: linear-gradient(90deg, #a5c3c8, #7f7fb4);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+}
+
+/* Effet de background dégradé au hover */
+.artist-link:hover {
+    background-image: linear-gradient(90deg, #a5c3c8, #7f7fb4);
+    color: #03030D;
+    -webkit-text-fill-color: unset;
+    background-clip: border-box;
+    border-color: transparent;
+}
+
+/******** STYLE REGION **********/
+.region-link {
+    display: inline-block;
+    border: solid 1px #FF9367; 
+    border-radius: 5px;
+    padding: 12px 20px;
+    min-width: 150px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 400;
+    transition: all 0.3s ease-in-out;
+    color: #FF9367;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Dégradé sur le texte au repos */
+@supports (-webkit-background-clip: text) {
+    .region-link {
+        background-image: linear-gradient(90deg, #e5e59b, #FF9367);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+}
+
+/* Effet de background dégradé au hover */
+.region-link:hover {
+    background-image: linear-gradient(90deg, #e5e59b, #FF9367);
+    color: #03030D;
+    -webkit-text-fill-color: unset;
+    background-clip: border-box;
+    border-color: transparent;
+}
+
+
+
+
 
 
 /* Header */

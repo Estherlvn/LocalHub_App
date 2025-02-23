@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
 
-    // Afficher tous les artistes de la BDD et les derniers titres ajoutés
+    // Afficher tous les artistes de la BDD, les derniers titres ajoutés, les artistes triés par régions
     #[Route('/home', name: 'app_home')]
     public function index(UserRepository $userRepository, TrackRepository $trackRepository): Response
     {
@@ -21,9 +21,8 @@ class HomeController extends AbstractController
         // Récupérer les derniers morceaux ajoutés (5 par défaut)
         $latestTracks = $trackRepository->findLatestTracks();
 
-        // Récupérer les artistes groupés par région
-        $regions = $userRepository->findArtistsGroupedByRegion(); // Voir méthode dans UserRepository
-    
+        // Récupérer les régions contenant des artistes
+        $regions = $userRepository->findRegionsWithArtists(); 
 
         return $this->render('home/index.html.twig', [
             'artistes' => $artistes,
@@ -31,25 +30,33 @@ class HomeController extends AbstractController
             'regions' => $regions, // Envoi des régions à la vue
         ]);
     }
-    
+
 
     // Afficher les artistes par région
-    #[Route('/artistes/{departement}', name: 'artistes_par_region')]
-    public function artistsByRegion(UserRepository $userRepository, string $departement): Response
+    #[Route('/artistes/{region}', name: 'artistes_par_region')]
+    public function artistsByRegion(UserRepository $userRepository, string $region): Response
     {
-        // Vérifier que le département est valide (01-95)
-        if (!preg_match('/^(0[1-9]|[1-8][0-9]|9[0-5])$/', $departement)) {
-            throw $this->createNotFoundException("Le département spécifié n'est pas valide.");
+        // Vérifier que la région est valide en cherchant si elle existe dans la liste des départements
+        $departements = [];
+        foreach (\App\Service\RegionHelper::getDepartementsRegions() as $departement => $regionName) {
+            if ($regionName === $region) {
+                $departements[] = $departement;
+            }
         }
-
-        // Récupérer les artistes de cette région
-        $artistes = $userRepository->findArtistsByRegion($departement);
-
+    
+        if (empty($departements)) {
+            throw $this->createNotFoundException("La région spécifiée n'existe pas.");
+        }
+    
+        // Récupérer les artistes appartenant aux départements de cette région
+        $artistes = $userRepository->findArtistsByRegion($region);
+    
         return $this->render('home/region.html.twig', [
-            'departement' => $departement,
+            'region' => $region,
             'artistes' => $artistes,
         ]);
     }
+    
 
 
     // Afficher les détails d'un artiste (User avec ID sélectionné)

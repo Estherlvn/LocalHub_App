@@ -37,8 +37,15 @@ class RegionHelper
         '93' => 'Ile-de-France', '94' => 'Ile-de-France', '95' => 'Ile-de-France',
     ];
 
+    public static function getDepartementsRegions(): array
+    {
+        return self::$departementsRegions;
+    }
+
     public static function getRegionByDepartement(string $departement): ?string
     {
         return self::$departementsRegions[$departement] ?? null;
     }
 }
+
+

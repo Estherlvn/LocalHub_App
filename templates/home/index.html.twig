@@ -44,7 +44,7 @@
 
         <section class="presentation">
             {# <img src="{{ asset('img/blue-light.svg') }}" alt="effet décoratif lumiere bleue" class="blue-light"> #}
-            <p>Découvrez LocalHub, une plateforme dédiée aux artistes locaux et aux passionnés de musique.
+            <p>Découvrez LocalHub, une plateforme dédiée aux artistes locaux et aux passionnés de musique. <br>
                 Amis musicien, et fidèles auditeurs, Profitez d'un espace gratuit pour partager votre musique,
                 découvrir de nouveaux talents et suivre l’actualité de la scène locale.
                 Ici, la musique prend vie près de chez vous : écoutez des morceaux en streaming,
@@ -67,28 +67,26 @@
             <h2>Derniers Titres ajoutés</h2>
             <div class="wrapper">
                         {% for track in latestTracks %}
+                        <a href="" class="artist-link">
                                 {{ track.trackName }}
+                        </a>        
                         {% else %}
                             Aucun morceau disponible.
                         {% endfor %}
             </div>
 
-            {# <div>
-                <h1>Artistes par Région</h1>
-                <ul>
-                    {% for region in regions %}
-                        <li>
-                            <strong>{{ region.region }}</strong>  
-                            (Département : {{ region.departement }} - {{ region.total_artistes }} artistes)
-                            <a href="{{ path('artistes_par_region', {'departement': region.departement}) }}">
-                                Voir les artistes
-                            </a>
-                        </li>
-                    {% else %}
-                        <li>Aucun artiste trouvé.</li>
-                    {% endfor %}
-                </ul>
-            </div> #}
+            
+            <h2>Artistes par Région</h2>
+            <div class="wrapper">
+                {% for region in regions %}        
+                        <a href="{{ path('artistes_par_region', {'region': region.region}) }}" class="region-link">
+                            {{ region.region }} 
+                            ({{ region.total_artistes }} artistes)
+                        </a>
+                {% else %}
+                    Aucun artiste trouvé.
+                {% endfor %}
+            </ul>
 
             </div>
         </div>

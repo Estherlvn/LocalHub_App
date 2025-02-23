@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Service\RegionHelper;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -16,46 +17,68 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    /**
-     * Récupère la liste des départements avec le nombre d'artistes par département
-     * et associe chaque département à sa région correspondante.
-     *
-     * @return array Un tableau contenant les départements, le nombre d'artistes, et la région associée.
-     */
-    public function findArtistsGroupedByRegion(): array
-    {
-        // Création du QueryBuilder pour sélectionner les artistes groupés par département
-        $qb = $this->createQueryBuilder('u')
-            ->select('u.departement, COUNT(u.id) as total_artistes') // Sélectionne le département et le nombre d'artistes
-            ->where('u.role = :role') // Filtre uniquement les utilisateurs ayant le rôle "artiste"
-            ->setParameter('role', 'artiste') // Définit la valeur du paramètre ":role" à "artiste"
-            ->groupBy('u.departement') // Groupe les résultats par département
-            ->orderBy('u.departement', 'ASC'); // Trie les départements dans l'ordre croissant
 
-        // Exécution de la requête et récupération des résultats
+ // Afficher la liste des régions contenant des artistes
+        public function findRegionsWithArtists(): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.departement, COUNT(u.id) as total_artistes')
+            ->where('u.role = :role')
+            ->setParameter('role', 'artiste')
+            ->groupBy('u.departement')
+            ->orderBy('u.departement', 'ASC');
+
         $results = $qb->getQuery()->getResult();
 
-        // Parcourt chaque département récupéré pour y ajouter la région correspondante
-        foreach ($results as &$result) {
-            $result['region'] = \App\Service\RegionHelper::getRegionByDepartement($result['departement']);
-            // Utilise la méthode statique de RegionHelper pour récupérer la région correspondant au département
+        // Tableau associatif pour stocker les régions uniques
+        $regionsWithArtists = [];
+
+        // Ajouter la région associée et éviter les doublons
+        foreach ($results as $result) {
+            $region = \App\Service\RegionHelper::getRegionByDepartement($result['departement']);
+
+            if (!isset($regionsWithArtists[$region])) {
+                $regionsWithArtists[$region] = [
+                    'region' => $region,
+                    'total_artistes' => 0
+                ];
+            }
+
+            // Additionner le nombre total d'artistes pour chaque région
+            $regionsWithArtists[$region]['total_artistes'] += $result['total_artistes'];
         }
 
-        return $results; // Retourne les résultats enrichis avec la région associée
+        return array_values($regionsWithArtists);
     }
 
-    public function findArtistsByRegion(string $departement): array
+
+
+// Trouve tous les départements appartenant à la région donné
+// Récupère les artistes ayant un département correspondant
+    public function findArtistsByRegion(string $region): array
     {
-        return $this->createQueryBuilder('u')
+        $qb = $this->createQueryBuilder('u')
             ->where('u.role = :role')
-            ->andWhere('u.departement = :departement')
-            ->setParameter('role', 'artiste')
-            ->setParameter('departement', $departement)
-            ->orderBy('u.pseudo', 'ASC')
-            ->getQuery()
-            ->getResult();
+            ->setParameter('role', 'artiste');
+
+        $departements = [];
+
+        // Accéder aux départements via la méthode statique
+        foreach (RegionHelper::getDepartementsRegions() as $departement => $regionName) {
+            if ($regionName === $region) {
+                $departements[] = $departement;
+            }
+        }
+
+        if (!empty($departements)) {
+            $qb->andWhere('u.departement IN (:departements)')
+                ->setParameter('departements', $departements);
+        }
+
+        return $qb->orderBy('u.pseudo', 'ASC')->getQuery()->getResult();
     }
 
+    
 
 
 }
