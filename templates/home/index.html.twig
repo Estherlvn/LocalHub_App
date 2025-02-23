@@ -42,40 +42,35 @@
             </div>
         </section>
 
-        <section class="introduction">
-            <p>Découvrez notre plateforme dédiée aux artistes locaux et aux passionnés de musique. <br>
-                Que vous soyez musicien indépendant, groupe émergent ou simple auditeur, <br>LocalHub vous offre un espace pour partager votre musique,
-                découvrir de nouveaux talents et suivre l’actualité de la scène locale. <br>
+        <section class="presentation">
+            {# <img src="{{ asset('img/blue-light.svg') }}" alt="effet décoratif lumiere bleue" class="blue-light"> #}
+            <p>Découvrez LocalHub, une plateforme dédiée aux artistes locaux et aux passionnés de musique.
+                Amis musicien, et fidèles auditeurs, Profitez d'un espace gratuit pour partager votre musique,
+                découvrir de nouveaux talents et suivre l’actualité de la scène locale.
                 Ici, la musique prend vie près de chez vous : écoutez des morceaux en streaming,
-                soutenez vos artistes favoris, et participez aux événements qui font vibrer votre région.</p>
-        </section>
+                soutenez vos artistes favoris, et participez aux événements de votre région.</p>
+            </section>
 
         <div class="container">
-            <div>
-                <h2>Les Artistes à la Une</h2>
-                    <ul>
-                        {% for artiste in artistes %}
-                            <li>
-                                {{ artiste.pseudo }} -
-                                <a href="{{ path('artiste_detail', { 'id': artiste.id }) }}">Voir détail</a>
-                            </li>
-                        {% else %}
-                            <li>Aucun artiste trouvé.</li>
-                        {% endfor %}
-                    </ul>
+            <h2>Les Artistes à la Une</h2>
+            <div class="wrapper">
+                {% for artiste in artistes %}
+                    <a href="{{ path('artiste_detail', { 'id': artiste.id }) }}" class="artist-link">
+                        {{ artiste.pseudo }}
+                    </a>
+                {% else %}
+                    Aucun artiste trouvé.
+                {% endfor %}
             </div>
 
-            <div>
-                <h2>Derniers Titres ajoutés</h2>
-                    <ul>
+
+            <h2>Derniers Titres ajoutés</h2>
+            <div class="wrapper">
                         {% for track in latestTracks %}
-                            <li>
                                 {{ track.trackName }}
-                            </li>
                         {% else %}
-                            <li>Aucun morceau disponible.</li>
+                            Aucun morceau disponible.
                         {% endfor %}
-                    </ul>
             </div>
 
             {# <div>

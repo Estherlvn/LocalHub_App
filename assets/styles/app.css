@@ -130,7 +130,7 @@ a#nav-log:hover {
 }
 
 .page-title h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: bold;
     color:  black;
     margin-right: 400px;
@@ -153,8 +153,8 @@ a#nav-log:hover {
 
 .btn-log {
     width: 100px;
-    color: #DEA732;
-    border: 2px solid #DEA732;
+    color: #e3c992;
+    border: 2px solid #e3c992;
     border-radius: 2px;
     padding: 10px 22px;
     text-decoration: none;
@@ -175,7 +175,6 @@ a.btn-log:hover {
 
 
 .introduction {
-    width: 50%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -197,6 +196,11 @@ a.btn-log:hover {
     align-items: center;
 }
 
+
+.prom-section h4 {
+    font-weight: 300;
+}
+
 img.prom-picture {
     width: 50px;
     height: auto;
@@ -204,12 +208,57 @@ img.prom-picture {
 
 
 
+.presentation {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 150px;
+    width: 60%;
+}
+
+.presentation p {
+    color:#F3F3F1;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.blue-light {
+    position: absolute;
+}
+
+  
+  @supports (-webkit-background-clip: text) {
+    .presentation p {
+      background-image: linear-gradient(90deg, #e5e59b, #ff959d);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+  }
+
+
 /**** CONTENEUR principal *****/
  .container {
-    margin-top: 80px;
+    min-width: 50%;
  }
 
+ .wrapper {
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: row;
+    gap: 50px
+ }
 
+ .artist-link {
+    border: solid 1px #ff959d;
+    padding: 20px;
+ }
+ 
+ a.artist-link {
+    color:  #ff959d;;
+ }
 
 
 /* Header */
