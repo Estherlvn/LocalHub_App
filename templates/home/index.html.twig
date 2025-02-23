@@ -4,70 +4,100 @@
 
 {% block body %}
 
-<div class="main">
 
-<div class="accueil">
-    <img src="{{ asset('img/background.jpg') }}" alt="Image d'illustration avec foule dans un concert festival" class="background">
+    <div class="accueil">
+        <img src="{{ asset('img/background1.jpg') }}" alt="Image d'illustration avec foule dans un concert festival" class="background">
 
-    <div class="page-title">
-        <h1>LocalHub, faites rayonner la scène locale</h1>
-        <h2>Rejoignez-nous dès maintenant pour célébrer la musique de votre région</h2>
+        <div class="page-title">
+            <h1>LocalHub, faites rayonner la scène locale</h1>
+            <h2>Rejoignez-nous dès maintenant pour célébrer la musique de votre région</h2>
+        </div>
+
+        <div class="auth-buttons">
+                <a href="{{ path('app_register') }}" class="btn-log">S'inscrire</a>
+                <a href="{{ path('app_login') }}" class="btn-log">Se connecter</a>
+        </div>
     </div>
 
-    <div class="auth-buttons">
-            <a href="{{ path('app_register') }}" class="btn-log">S'inscrire</a>
-            <a href="{{ path('app_login') }}" class="btn-log">Se connecter</a>
-    </div>
 
-</div>  
+    
+    <div class="main">
 
+        <section class="introduction">
+            <div class="prom-section">
+                <img src="{{ asset('img/headphone.svg')}}" alt="Image casque audio représente streaming" class="prom-picture">
+                <h4>Streaming Illimité</h4>
+            </div>
+            <div class="prom-section">
+                <img src="{{ asset('img/cloud.svg')}}" alt="Image cloud représente upload audio" class="prom-picture">
+                <h4>Upload gratuit</h4>
+            </div>
+            <div class="prom-section">
+                <img src="{{ asset('img/concert.svg')}}" alt="Image concert représente les évents du site" class="prom-picture">
+                <h4>Evenements</h4>
+            </div>
+            <div class="prom-section">
+                <img src="{{ asset('img/message.svg')}}" alt="Image bulle de conversation représente la communauté" class="prom-picture">
+                <h4>Communauté interactive</h4>
+            </div>
+        </section>
 
-    <div class="container">
-        <div>
-            <h2>Les Artistes à la Une</h2>
+        <section class="introduction">
+            <p>Découvrez notre plateforme dédiée aux artistes locaux et aux passionnés de musique. <br>
+                Que vous soyez musicien indépendant, groupe émergent ou simple auditeur, <br>LocalHub vous offre un espace pour partager votre musique,
+                découvrir de nouveaux talents et suivre l’actualité de la scène locale. <br>
+                Ici, la musique prend vie près de chez vous : écoutez des morceaux en streaming,
+                soutenez vos artistes favoris, et participez aux événements qui font vibrer votre région.</p>
+        </section>
+
+        <div class="container">
+            <div>
+                <h2>Les Artistes à la Une</h2>
+                    <ul>
+                        {% for artiste in artistes %}
+                            <li>
+                                {{ artiste.pseudo }} -
+                                <a href="{{ path('artiste_detail', { 'id': artiste.id }) }}">Voir détail</a>
+                            </li>
+                        {% else %}
+                            <li>Aucun artiste trouvé.</li>
+                        {% endfor %}
+                    </ul>
+            </div>
+
+            <div>
+                <h2>Derniers Titres ajoutés</h2>
+                    <ul>
+                        {% for track in latestTracks %}
+                            <li>
+                                {{ track.trackName }}
+                            </li>
+                        {% else %}
+                            <li>Aucun morceau disponible.</li>
+                        {% endfor %}
+                    </ul>
+            </div>
+
+            {# <div>
+                <h1>Artistes par Région</h1>
                 <ul>
-                    {% for artiste in artistes %}
+                    {% for region in regions %}
                         <li>
-                            {{ artiste.pseudo }} -
-                            <a href="{{ path('artiste_detail', { 'id': artiste.id }) }}">Voir détail</a>
+                            <strong>{{ region.region }}</strong>  
+                            (Département : {{ region.departement }} - {{ region.total_artistes }} artistes)
+                            <a href="{{ path('artistes_par_region', {'departement': region.departement}) }}">
+                                Voir les artistes
+                            </a>
                         </li>
                     {% else %}
                         <li>Aucun artiste trouvé.</li>
                     {% endfor %}
                 </ul>
-        </div>
+            </div> #}
 
-        <div>
-            <h2>Derniers Titres ajoutés</h2>
-                <ul>
-                    {% for track in latestTracks %}
-                        <li>
-                            {{ track.trackName }}
-                        </li>
-                    {% else %}
-                        <li>Aucun morceau disponible.</li>
-                    {% endfor %}
-                </ul>
+            </div>
         </div>
-
-        <div>
-            <h1>Artistes par Région</h1>
-            <ul>
-                {% for region in regions %}
-                    <li>
-                        <strong>{{ region.region }}</strong>  
-                        (Département : {{ region.departement }} - {{ region.total_artistes }} artistes)
-                        <a href="{{ path('artistes_par_region', {'departement': region.departement}) }}">
-                            Voir les artistes
-                        </a>
-                    </li>
-                {% else %}
-                    <li>Aucun artiste trouvé.</li>
-                {% endfor %}
-            </ul>
-        </div>
-
     </div>
-</div>
 
 {% endblock %}
+

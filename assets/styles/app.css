@@ -16,6 +16,14 @@ body {
     min-height: 100vh;
 }
 
+.main {
+    background-color:#03030D;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 a {
     text-decoration: none;
 }
@@ -83,7 +91,7 @@ a#nav-log:hover {
 .accueil {
     position: relative; /* Permet aux éléments enfants absolus de s'aligner */
     width: 100%;
-    height: 100vh; /* Plein écran */
+    height: 75vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -98,7 +106,7 @@ a#nav-log:hover {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     object-fit: cover; /* Remplit tout l’espace sans déformation */
     z-index: 0; /* En arrière-plan */
 }
@@ -126,7 +134,7 @@ a#nav-log:hover {
     font-weight: bold;
     color:  black;
     margin-right: 400px;
-    margin-bottom: 200px;
+    margin-bottom: 220px;
 }
 
 .page-title h2 {
@@ -141,7 +149,6 @@ a#nav-log:hover {
     align-items: center;
     gap: 80px; /* Espace entre les boutons */
     margin-top: 50px;
-    margin-bottom: 80px;
 }
 
 .btn-log {
@@ -164,15 +171,42 @@ a.btn-log:hover {
     color:#03030D;
 }
 
+/********* Section Introduction **********/
 
 
-/**** CONTENEUR principal *****/
- .container {
-    width: 80%;
+.introduction {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    margin-bottom: 150px;
+}
+
+.introduction p {
+    font-size: 1.3em;
+    text-align: center;
+}
+
+
+.prom-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+img.prom-picture {
+    width: 50px;
+    height: auto;
+}
+
+
+
+/**** CONTENEUR principal *****/
+ .container {
+    margin-top: 80px;
  }
 
 
