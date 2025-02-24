@@ -8,8 +8,12 @@
 
 .tracks {
     margin-top: 50px;
+    margin-bottom: 100px;
 }
 
+.tracks h2 {
+    margin-bottom: 20px;
+}
 
 th, td {
     padding: 12px 100px; /* Augmente l'espace entre les colonnes */
