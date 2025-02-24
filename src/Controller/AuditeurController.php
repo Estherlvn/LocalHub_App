@@ -12,15 +12,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class AuditeurController extends AbstractController
 {
-    // Afficher les morceaux de la bdd
+
+    // AFFICHER les titres de la BDD et les titres FAVORIS de l'auditeur connecté
         #[Route('/auditeur/home', name: 'auditeur_home')]
+        #[IsGranted('ROLE_AUDITEUR')]
             public function index(TrackRepository $trackRepository): Response
             {
+                $user = $this->getUser(); // Récupérer l'utilisateur connecté
+
                 // Récupérer tous les morceaux de la BDD
                 $tracks = $trackRepository->findAll();
-
+        
+                // Récupérer les morceaux favoris de l'utilisateur connecté
+                $favoriteTracks = $user->getFavoris();
+        
                 return $this->render('auditeur/home.html.twig', [
                     'tracks' => $tracks,
+                    'favoriteTracks' => $favoriteTracks,
                 ]);
             }
 
@@ -49,7 +57,13 @@ final class AuditeurController extends AbstractController
         
                 return $this->redirectToRoute('auditeur_home'); // Redirection après l'action
             }
-        }
+
+    // Afficher les titres favoris d'un auditeur
+        
+
+
+
+}
     
 
 

@@ -11,18 +11,55 @@
 {% block body %}
 
 
-<div class="main">
+<div class="tracklists">
 
-    <h1>Tous les morceaux disponibles</h1>
-
-        <div class="container">
+        <div class="tracks">
+            <h1>Titres coup de coeur</h1>
             <table>
                 <thead>
                     <tr>
-                        <th>Morceau</th>
+                        <th>Titre</th>
                         <th>Artiste</th>
                         <th>Durée</th>
-                        <th>Favoris</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for track in favoriteTracks %}
+                        <tr>
+                            <td>{{ track.trackName }}</td>
+                            <td>{{ track.user.pseudo }}</td>
+                            <td>{{ track.duration // 60 }}:{{ (track.duration % 60)|number_format(0, '0', '') }}</td>
+                            <td>
+                                <a href="{{ path('like_track', {'id': track.id}) }}">
+                                    {% if track in app.user.favoris %}
+                                    <img src="{{ asset('img/like.svg')}}" alt="coeur rempli pour indiquer un morceau en favoris" class="img-heart">
+                             
+                                    {% else %}
+                                    <img src="{{ asset('img/unlike.svg')}}" alt="coeur vide pour indiquer un morceau non favoris" class="img-heart">
+                                    {% endif %}
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>Aucun titre en favoris pour l'instant.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="tracks">
+            <h1>Tous les titres disponibles</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Artiste</th>
+                        <th>Durée</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,23 +71,21 @@
                             <td>
                                 <a href="{{ path('like_track', {'id': track.id}) }}">
                                     {% if track in app.user.favoris %}
-                                    <img src="{{ asset('img/like.svg')}}" alt="coeur rempli pour ajouter un morceau en favoris" class="">
+                                    <img src="{{ asset('img/like.svg')}}" alt="coeur rempli pour indiquer un morceau en favoris" class="img-heart">
                              
                                     {% else %}
-                                    <img src="{{ asset('img/unlike.svg')}}" alt="coeur vide pour retirer un morceau des favoris" class="">
+                                    <img src="{{ asset('img/unlike.svg')}}" alt="coeur vide pour indiquer un morceau non favoris" class="img-heart">
                                     {% endif %}
                                 </a>
                             </td>
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="4">Aucun morceau disponible.</td>
+                            <td>Aucun morceau disponible.</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            
-
         </div>
 
 </div>
