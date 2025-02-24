@@ -1,10 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page d'accueil Auditeur{% endblock %}
+{% block title %}Accueil Auditeur{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/auditeur.css') }}">
+{% endblock %}
+
+
 
 {% block body %}
 
 
+<div class="main">
 
+    <h1>Tous les morceaux disponibles</h1>
+
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Morceau</th>
+                        <th>Artiste</th>
+                        <th>Durée</th>
+                 
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for track in tracks %}
+                        <tr>
+                            <td>{{ track.trackName }}</td>
+                            <td>{{ track.user.pseudo }}</td>
+                            <td>{{ (track.duration // 60)|number_format(0) }}:{{ (track.duration % 60)|date("s") }}</td>
+                   
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>Aucun morceau disponible.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+</div>
 
 {% endblock %}
