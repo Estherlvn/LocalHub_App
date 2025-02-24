@@ -57,7 +57,7 @@ class RegistrationFormType extends AbstractType
                 'choices' => [
                     'Auditeur' => 'auditeur',
                     'Artiste'  => 'artiste',
-                    'Admin'    => 'admin',
+                    // 'Admin'    => 'admin',
                 ],
                 'expanded' => false, // dropdown
                 'multiple' => false,

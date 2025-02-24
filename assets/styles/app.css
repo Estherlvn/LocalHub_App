@@ -292,7 +292,7 @@ img.prom-picture {
 .region-link {
     display: inline-block;
     border: solid 1px #FF9367; 
-    border-radius: 5px;
+    border-radius: 2px;
     padding: 12px 20px;
     min-width: 150px;
     text-align: center;

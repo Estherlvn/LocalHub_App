@@ -58,6 +58,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $departement = null;
 
+    /**
+     * @var Collection<int, Track>
+     */
+    #[ORM\ManyToMany(targetEntity: Track::class, inversedBy: 'users')]
+    private Collection $favoris;
+
 
     
     public function __construct()
@@ -65,6 +71,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->tracks = new ArrayCollection();
         $this->playlists = new ArrayCollection();
         $this->likedPlaylists = new ArrayCollection();
+        $this->favoris = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -253,6 +260,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDepartement(string $departement): static
     {
         $this->departement = $departement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Track>
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Track $favori): static
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris->add($favori);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Track $favori): static
+    {
+        $this->favoris->removeElement($favori);
 
         return $this;
     }
