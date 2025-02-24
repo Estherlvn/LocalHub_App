@@ -27,9 +27,7 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table bddlocalhub.doctrine_migration_versions : ~2 rows (environ)
-INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-	('DoctrineMigrations\\Version20250214132233', '2025-02-14 13:22:50', 2686);
+-- Listage des données de la table bddlocalhub.doctrine_migration_versions : ~0 rows (environ)
 
 -- Listage de la structure de table bddlocalhub. event
 CREATE TABLE IF NOT EXISTS `event` (
@@ -49,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `genre` (
   `id` int NOT NULL AUTO_INCREMENT,
   `genre_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table bddlocalhub.genre : ~0 rows (environ)
 INSERT INTO `genre` (`id`, `genre_name`) VALUES
@@ -199,31 +197,50 @@ INSERT INTO `track_genre` (`track_id`, `genre_id`) VALUES
 -- Listage de la structure de table bddlocalhub. user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `pseudo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pseudo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_verified` tinyint(1) NOT NULL,
   `role` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `departement` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table bddlocalhub.user : ~3 rows (environ)
-INSERT INTO `user` (`id`, `email`, `password`, `pseudo`, `is_verified`, `role`) VALUES
-	(1, 'liam.shadow@email.com', 'password_hashed', 'Liam Shadow', 1, 'artiste'),
-	(2, 'nova.sky@email.com', 'password_hashed', 'Nova Sky', 1, 'artiste'),
-	(3, 'axel.storm@email.com', 'password_hashed', 'Axel Storm', 1, 'artiste'),
-	(4, 'serena.moon@email.com', 'password_hashed', 'Serena Moon', 1, 'artiste'),
-	(5, 'drake.orion@email.com', 'password_hashed', 'Drake Orion', 1, 'artiste'),
-	(8, 'admin@localhub.com', '$2y$13$MmT6R9jCPKJWeiEQf8F0QOVyZE0vEMi/3XliU50bf9z3ULcD0hWHy', 'Admin', 1, 'admin'),
-	(9, 'seif@auditeur.com', '$2y$13$0nsRyjAO3gd1GyhrTMt0t.9S4FnUvwk8OaPdsrSDwsQaqe4IlQBTy', 'Seif', 1, 'auditeur'),
-	(10, 'simon@auditeur.com', '$2y$13$tgkmdAA3F/3f9cqdXjBQNuaq6vql011oAD0hy.cu8a7TOQwRCI2jG', 'Simon', 1, 'auditeur'),
-	(11, 'ines@auditeur.com', '$2y$13$HWLCBt3Wmcwcl7boucmh3egFhIpzZgg0yXeroGEcU1f7z6KCR2dE6', 'Ines', 1, 'auditeur'),
-	(13, 'rozenn@auditeur.com', '$2y$13$45lOoN30d6jCv06FGe6HPu/DJAG5oW7DNXn1vn0gnO.jtE/kcgTY2', 'Rozenn', 0, 'auditeur'),
-	(14, 'marie@auditeur.com', '$2y$13$fvZWD5ac0GoyRGV0J4noReDfuT9Ve5zZ7QktbUORRkH/vxsDwzyKO', 'Marie', 0, 'auditeur'),
-	(15, 'alexandre@auditeur.com', '$2y$13$v85CwxcZU5Pi4Pd/FQIOJuUBH5F/hAqqvqxRmBW4daY8QDYm5F3pS', 'Alexandre', 0, 'auditeur'),
-	(16, 'laury@auditeur.com', '$2y$13$9D4pY21WqTZEUbFwpSAh6u841K3eBz4eRT2gnzK2oFAQv1CrtB.qi', 'Laury', 0, 'auditeur'),
-	(18, 'aymeric@auditeur.com', '$2y$13$2B4Dg0yxF9ybDt9nRU7kR.jHDPSVCe7gca2svXrKEAOChGx/tuG12', 'Aymeric', 1, 'auditeur');
+INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `is_verified`, `role`, `departement`) VALUES
+	(1, 'Liam Shadow', 'liam.shadow@email.com', 'password_hashed', 1, 'artiste', '35'),
+	(2, 'Nova Sky', 'nova.sky@email.com', 'password_hashed', 1, 'artiste', '22'),
+	(3, 'Axel Storm', 'axel.storm@email.com', 'password_hashed', 1, 'artiste', '95'),
+	(4, 'Serena Moon', 'serena.moon@email.com', 'password_hashed', 1, 'artiste', '67'),
+	(5, 'Drake Orion', 'drake.orion@email.com', 'password_hashed', 1, 'artiste', '93'),
+	(8, 'Admin', 'admin@localhub.com', '$2y$13$MmT6R9jCPKJWeiEQf8F0QOVyZE0vEMi/3XliU50bf9z3ULcD0hWHy', 1, 'admin', '35'),
+	(9, 'Seif', 'seif@auditeur.com', '$2y$13$0nsRyjAO3gd1GyhrTMt0t.9S4FnUvwk8OaPdsrSDwsQaqe4IlQBTy', 1, 'auditeur', '93'),
+	(10, 'Simon', 'simon@auditeur.com', '$2y$13$tgkmdAA3F/3f9cqdXjBQNuaq6vql011oAD0hy.cu8a7TOQwRCI2jG', 1, 'auditeur', '22'),
+	(11, 'Ines', 'ines@auditeur.com', '$2y$13$HWLCBt3Wmcwcl7boucmh3egFhIpzZgg0yXeroGEcU1f7z6KCR2dE6', 1, 'auditeur', '35'),
+	(13, 'Rozenn', 'rozenn@auditeur.com', '$2y$13$45lOoN30d6jCv06FGe6HPu/DJAG5oW7DNXn1vn0gnO.jtE/kcgTY2', 0, 'auditeur', '67'),
+	(14, 'Marie', 'marie@auditeur.com', '$2y$13$fvZWD5ac0GoyRGV0J4noReDfuT9Ve5zZ7QktbUORRkH/vxsDwzyKO', 0, 'auditeur', '67'),
+	(15, 'Alexandre', 'alexandre@auditeur.com', '$2y$13$v85CwxcZU5Pi4Pd/FQIOJuUBH5F/hAqqvqxRmBW4daY8QDYm5F3pS', 0, 'auditeur', '22'),
+	(16, 'Laury', 'laury@auditeur.com', '$2y$13$9D4pY21WqTZEUbFwpSAh6u841K3eBz4eRT2gnzK2oFAQv1CrtB.qi', 0, 'auditeur', '67'),
+	(18, 'Aymeric', 'aymeric@auditeur.com', '$2y$13$2B4Dg0yxF9ybDt9nRU7kR.jHDPSVCe7gca2svXrKEAOChGx/tuG12', 1, 'auditeur', '44');
+
+-- Listage de la structure de table bddlocalhub. user_track
+CREATE TABLE IF NOT EXISTS `user_track` (
+  `user_id` int NOT NULL,
+  `track_id` int NOT NULL,
+  PRIMARY KEY (`user_id`,`track_id`),
+  KEY `IDX_342103FEA76ED395` (`user_id`),
+  KEY `IDX_342103FE5ED23C43` (`track_id`),
+  CONSTRAINT `FK_342103FE5ED23C43` FOREIGN KEY (`track_id`) REFERENCES `track` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_342103FEA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Listage des données de la table bddlocalhub.user_track : ~0 rows (environ)
+INSERT INTO `user_track` (`user_id`, `track_id`) VALUES
+	(9, 2),
+	(9, 3),
+	(9, 6),
+	(9, 9);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
