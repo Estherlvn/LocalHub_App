@@ -24,3 +24,7 @@ th, td {
     width: 20px;
     height: auto;
 }
+
+.img-heart:hover {
+    cursor: pointer;
+}

@@ -24,6 +24,7 @@
                     <th>Durée</th>
                     <th>Date d'upload</th>
                     <th>Nombre de vues</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,14 @@
                         <td>{{ track.duration // 60 }}:{{ (track.duration % 60)|number_format(0, '0', '') }}</td>
                         <td>{{ track.uploadDate|date('d/m/Y') }}</td>
                         <td>{{ track.viewCount}}</td>
+                        <td>
+                            <form action="{{ path('remove_track', {'id': track.id}) }}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce morceau ?');">
+                                <button type="submit" style="border: none; background: none; cursor: pointer;">
+                                    <img src="{{ asset('img/cancel.svg')}}" alt="Supprimer ce morceau" class="img-heart">
+                                </button>
+                            </form>
+                        </td>
+                        
                     </tr>
                 {% else %}
                     <tr>
