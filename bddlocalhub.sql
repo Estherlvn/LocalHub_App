@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `genre` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bddlocalhub.genre : ~0 rows (environ)
+-- Listage des données de la table bddlocalhub.genre : ~5 rows (environ)
 INSERT INTO `genre` (`id`, `genre_name`) VALUES
 	(1, 'Electro'),
 	(2, 'Rock'),
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `playlist_user` (
 CREATE TABLE IF NOT EXISTS `track` (
   `id` int NOT NULL AUTO_INCREMENT,
   `track_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `audio_file` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `audio_file` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `duration` int NOT NULL,
   `upload_date` datetime DEFAULT NULL,
   `view_count` int DEFAULT NULL,
@@ -125,19 +125,15 @@ CREATE TABLE IF NOT EXISTS `track` (
   PRIMARY KEY (`id`),
   KEY `IDX_D6E3F8A6A76ED395` (`user_id`),
   CONSTRAINT `FK_D6E3F8A6A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bddlocalhub.track : ~0 rows (environ)
+-- Listage des données de la table bddlocalhub.track : ~21 rows (environ)
 INSERT INTO `track` (`id`, `track_name`, `audio_file`, `duration`, `upload_date`, `view_count`, `user_id`) VALUES
-	(1, 'Neon Pulse', NULL, 210, '2025-01-20 17:10:12', 7800, 1),
-	(2, 'Echo Waves', NULL, 190, '2025-01-20 17:13:14', 7852, 1),
 	(3, 'Synthetic Dreams', NULL, 230, '2025-02-20 18:00:00', 1350, 1),
 	(4, 'Night Drive', NULL, 200, '2025-01-20 17:13:21', 1300, 1),
 	(5, 'Cyber Mirage', NULL, 220, '2025-02-20 17:13:21', 1200, 1),
-	(6, 'Retro Love', NULL, 215, '2025-02-10 17:13:22', 755, 2),
 	(7, 'Midnight Lights', NULL, 205, '2025-01-20 17:13:23', 785, 2),
 	(8, 'Neon Glow', NULL, 240, '2024-02-20 17:13:23', 4580, 2),
-	(9, 'Echoed Memories', NULL, 195, '2024-02-08 17:13:24', 5200, 2),
 	(10, 'Skyline Drive', NULL, 225, '2025-02-12 17:13:24', 5000, 2),
 	(11, 'Electric Road', NULL, 250, '2025-01-09 17:13:25', 250, 3),
 	(12, 'Last Sunset', NULL, 220, '2025-01-20 17:13:26', 200, 3),
@@ -166,17 +162,13 @@ CREATE TABLE IF NOT EXISTS `track_genre` (
   CONSTRAINT `FK_F3A7915F5ED23C43` FOREIGN KEY (`track_id`) REFERENCES `track` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bddlocalhub.track_genre : ~0 rows (environ)
+-- Listage des données de la table bddlocalhub.track_genre : ~21 rows (environ)
 INSERT INTO `track_genre` (`track_id`, `genre_id`) VALUES
-	(1, 1),
-	(2, 1),
 	(3, 1),
 	(4, 1),
 	(5, 1),
-	(6, 5),
 	(7, 5),
 	(8, 5),
-	(9, 5),
 	(10, 5),
 	(11, 2),
 	(12, 2),
@@ -202,18 +194,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_verified` tinyint(1) NOT NULL,
   `role` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `departement` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `departement` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`),
+  UNIQUE KEY `UNIQ_8D93D64986CC499D` (`pseudo`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bddlocalhub.user : ~3 rows (environ)
+-- Listage des données de la table bddlocalhub.user : ~16 rows (environ)
 INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `is_verified`, `role`, `departement`) VALUES
-	(1, 'Liam Shadow', 'liam.shadow@email.com', 'password_hashed', 1, 'artiste', '35'),
-	(2, 'Nova Sky', 'nova.sky@email.com', 'password_hashed', 1, 'artiste', '22'),
-	(3, 'Axel Storm', 'axel.storm@email.com', 'password_hashed', 1, 'artiste', '95'),
-	(4, 'Serena Moon', 'serena.moon@email.com', 'password_hashed', 1, 'artiste', '67'),
-	(5, 'Drake Orion', 'drake.orion@email.com', 'password_hashed', 1, 'artiste', '93'),
+	(1, 'Liam Shadow', 'liam.shadow@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '35'),
+	(2, 'Nova Sky', 'nova.sky@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '22'),
+	(3, 'Axel Storm', 'axel.storm@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '95'),
+	(4, 'Serena Moon', 'serena.moon@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '67'),
+	(5, 'Drake Orion', 'drake.orion@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '93'),
 	(8, 'Admin', 'admin@localhub.com', '$2y$13$MmT6R9jCPKJWeiEQf8F0QOVyZE0vEMi/3XliU50bf9z3ULcD0hWHy', 1, 'admin', '35'),
 	(9, 'Seif', 'seif@auditeur.com', '$2y$13$0nsRyjAO3gd1GyhrTMt0t.9S4FnUvwk8OaPdsrSDwsQaqe4IlQBTy', 1, 'auditeur', '93'),
 	(10, 'Simon', 'simon@auditeur.com', '$2y$13$tgkmdAA3F/3f9cqdXjBQNuaq6vql011oAD0hy.cu8a7TOQwRCI2jG', 1, 'auditeur', '22'),
@@ -222,7 +215,9 @@ INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `is_verified`, `role`, 
 	(14, 'Marie', 'marie@auditeur.com', '$2y$13$fvZWD5ac0GoyRGV0J4noReDfuT9Ve5zZ7QktbUORRkH/vxsDwzyKO', 0, 'auditeur', '67'),
 	(15, 'Alexandre', 'alexandre@auditeur.com', '$2y$13$v85CwxcZU5Pi4Pd/FQIOJuUBH5F/hAqqvqxRmBW4daY8QDYm5F3pS', 0, 'auditeur', '22'),
 	(16, 'Laury', 'laury@auditeur.com', '$2y$13$9D4pY21WqTZEUbFwpSAh6u841K3eBz4eRT2gnzK2oFAQv1CrtB.qi', 0, 'auditeur', '67'),
-	(18, 'Aymeric', 'aymeric@auditeur.com', '$2y$13$2B4Dg0yxF9ybDt9nRU7kR.jHDPSVCe7gca2svXrKEAOChGx/tuG12', 1, 'auditeur', '44');
+	(18, 'Aymeric', 'aymeric@auditeur.com', '$2y$13$2B4Dg0yxF9ybDt9nRU7kR.jHDPSVCe7gca2svXrKEAOChGx/tuG12', 1, 'auditeur', '44'),
+	(19, 'Test', 'test@artiste.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 0, 'artiste', '90'),
+	(20, 'Test2', 'test2@artiste.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 0, 'artiste', '35');
 
 -- Listage de la structure de table bddlocalhub. user_track
 CREATE TABLE IF NOT EXISTS `user_track` (
@@ -235,12 +230,11 @@ CREATE TABLE IF NOT EXISTS `user_track` (
   CONSTRAINT `FK_342103FEA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bddlocalhub.user_track : ~0 rows (environ)
+-- Listage des données de la table bddlocalhub.user_track : ~3 rows (environ)
 INSERT INTO `user_track` (`user_id`, `track_id`) VALUES
-	(9, 2),
 	(9, 3),
-	(9, 6),
-	(9, 9);
+	(9, 7),
+	(9, 14);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
