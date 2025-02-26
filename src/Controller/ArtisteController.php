@@ -3,6 +3,10 @@
 namespace App\Controller;
 
 
+use App\Repository\TrackRepository;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -10,23 +14,21 @@ class ArtisteController extends AbstractController
 {
 
 
-//     #[Route('/auditeur/home', name: 'auditeur_home')]
-//     #[IsGranted('ROLE_ARTISTE')]
-//             public function index(TrackRepository $trackRepository): Response
-//             {
-//                 $user = $this->getUser(); // Récupérer l'utilisateur connecté
+    #[Route('/artiste/home', name: 'artiste_home')]
+    #[IsGranted('ROLE_ARTISTE')]
+            public function index(TrackRepository $trackRepository): Response
+            {
+                $user = $this->getUser(); // Récupérer l'utilisateur connecté
 
-//                 // Récupérer tous les morceaux de la BDD
-//                 $tracks = $trackRepository->findAll();
+                // Récupérer les morceaux (tracks) de l'artiste connecté
+                $tracks = $trackRepository->findBy(['user' => $user]);
+
         
-//                 // Récupérer les morceaux favoris de l'utilisateur connecté
-//                 $favoriteTracks = $user->getFavoris();
-        
-//                 return $this->render('auditeur/home.html.twig', [
-//                     'tracks' => $tracks,
-//                     'favoriteTracks' => $favoriteTracks,
-//                 ]);
-//             }
+                return $this->render('artiste/home.html.twig', [
+                    'tracks' => $tracks,
+
+                ]);
+            }
 
 
 }

@@ -3,15 +3,16 @@
 {% block title %}Accueil Auditeur{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/auditeur.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/tracklist.css') }}">
 {% endblock %}
 
 
 
 {% block body %}
 
+<h1>Bienvenue {{ app.user.pseudo }}</h1>
 
-<div class="tracklists">
+    <div class="tracklists">
 
         <div class="tracks">
             <h2>Titres coup de coeur</h2>
@@ -88,6 +89,6 @@
             </table>
         </div>
 
-</div>
+    </div>
 
 {% endblock %}

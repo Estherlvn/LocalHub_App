@@ -1,14 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArtisteController!{% endblock %}
+{% block title %}Accueil Artiste{% endblock %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/tracklist.css') }}">
+{% endblock %}
+
+
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello Artiste✅ Bienvenue sur ta HomePage</h1>
+<h1>Bienvenue {{ app.user.pseudo }}</h1>
+
+    <div class="tracklists"></div>
+
+        <div class="tracks">
+        <h2>Vos morceaux</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Durée</th>
+                    <th>Date d'upload</th>
+                    <th>Nombre de vues</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for track in tracks %}
+                    <tr>
+                        <td>{{ track.trackName }}</td>
+                        <td>{{ track.duration // 60 }}:{{ (track.duration % 60)|number_format(0, '0', '') }}</td>
+                        <td>{{ track.uploadDate|date('d/m/Y') }}</td>
+                        <td>{{ track.viewCount}}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">Aucun titre importé, faites votre premier upload aujourd'hui!</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
 
 {% endblock %}
