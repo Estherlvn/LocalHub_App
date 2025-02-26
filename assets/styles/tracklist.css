@@ -28,3 +28,15 @@ th, td {
 .img-heart:hover {
     cursor: pointer;
 }
+
+/**
+FORM
+**/
+
+.action-btn {
+    color: #F3F3F1; 
+    border: solid 1px #F3F3F1;
+    border-radius: 2px;
+    width: 100px;
+    text-align: center;
+}

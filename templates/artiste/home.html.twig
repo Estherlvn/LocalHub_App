@@ -24,6 +24,7 @@
                     <th>Durée</th>
                     <th>Date d'upload</th>
                     <th>Nombre de vues</th>
+                    <th>Fichier</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -34,6 +35,7 @@
                         <td>{{ track.duration // 60 }}:{{ (track.duration % 60)|number_format(0, '0', '') }}</td>
                         <td>{{ track.uploadDate|date('d/m/Y') }}</td>
                         <td>{{ track.viewCount}}</td>
+                        <td>{{ track.audioFile}}</td>
                         <td>
                             <form action="{{ path('remove_track', {'id': track.id}) }}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce morceau ?');">
                                 <button type="submit" style="border: none; background: none; cursor: pointer;">
@@ -51,6 +53,10 @@
             </tbody>
         </table>
     </div>
+
+
+    <a href="{{ path('add_track') }}" class="action-btn">Ajouter un morceau</a>
+
 
 </div>
 

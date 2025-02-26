@@ -19,7 +19,7 @@ class Track
     #[ORM\Column(length: 50)]
     private ?string $trackName = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
+    #[ORM\Column(length: 250, nullable: true)]
     private ?string $audioFile = null;
 
     #[ORM\Column]

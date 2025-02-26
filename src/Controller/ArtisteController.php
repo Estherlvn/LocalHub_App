@@ -35,7 +35,6 @@ class ArtisteController extends AbstractController
 
     
 // Méthode pour supprimer un Track parmi la liste des pistes d'un artiste connecté
-    
     #[Route('/track/{id}/delete', name: 'remove_track', methods: ['POST', 'GET'])]
     #[IsGranted('ROLE_ARTISTE')]
         public function removeTrack(Track $track, EntityManagerInterface $entityManager): RedirectResponse

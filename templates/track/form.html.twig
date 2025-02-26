@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un morceau{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/tracklist.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<h2>Ajouter un morceau</h2>
+
+{{ form_start(form) }}
+    {{ form_row(form.trackName) }}
+    {{ form_row(form.duration) }}
+    {{ form_row(form.audioFile) }}
+
+    <button type="submit">Ajouter</button>
+{{ form_end(form) }}
+
+<a href="{{ path('artiste_home') }}" class="action-btn">Retour</a>
+{% endblock %}
