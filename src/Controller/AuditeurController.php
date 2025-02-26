@@ -58,10 +58,6 @@ final class AuditeurController extends AbstractController
                 return $this->redirectToRoute('auditeur_home'); // Redirection après l'action
             }
 
-    // Afficher les titres favoris d'un auditeur
-        
-
-
 
 }
     

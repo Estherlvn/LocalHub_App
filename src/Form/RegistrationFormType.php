@@ -5,15 +5,16 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\IsTrue;
-use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationFormType extends AbstractType
 {
@@ -22,6 +23,21 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email')
             ->add('pseudo')
+            ->add('departement', TextType::class, [
+                'label' => 'Département (01-95)',
+                'attr' => [
+                    'maxlength' => 2, // Empêche plus de 2 caractères
+                    'pattern' => '[0-9]{2}', // Bloque les saisies non numériques
+                    'placeholder' => 'Ex: 75',
+                ],
+                'constraints' => [
+                    new NotBlank(['message' => 'Le département est obligatoire.']),
+                    new Regex([
+                        'pattern' => '/^(0[1-9]|[1-8][0-9]|9[0-5])$/',
+                        'message' => 'Veuillez entrer un département valide entre 01 et 95.'
+                    ]),
+                ],
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

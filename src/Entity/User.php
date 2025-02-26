@@ -11,8 +11,15 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
+
+#[ORM\Table(name: '`user`', uniqueConstraints: [
+    new ORM\UniqueConstraint(name: 'UNIQ_USER_EMAIL', columns: ['email']),
+    new ORM\UniqueConstraint(name: 'UNIQ_USER_PSEUDO', columns: ['pseudo'])
+])]
 #[UniqueEntity(fields: ['email'], message: 'Un compte existe déjà avec cet email')]
+#[UniqueEntity(fields: ['pseudo'], message: 'Ce pseudo est déjà pris, veuillez en choisir un autre.')]
+
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -20,11 +27,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $pseudo = null;
 
     #[ORM\Column(length: 50, unique: true)]
     private ?string $email = null;
+
+    #[ORM\Column(length: 2)]
+    private ?string $departement = null;
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
@@ -54,9 +64,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\ManyToMany(targetEntity: Playlist::class, mappedBy: 'likedBy')]
     private Collection $likedPlaylists;
-
-    #[ORM\Column(length: 255)]
-    private ?string $departement = null;
 
     /**
      * @var Collection<int, Track>
@@ -100,6 +107,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->email = $email;
         return $this;
     }
+
+    
+
+    public function getDepartement(): ?string
+    {
+        return $this->departement;
+    }
+
+    public function setDepartement(string $departement): static
+    {
+        $this->departement = $departement;
+
+        return $this;
+    }
+
 
     public function getPassword(): ?string
     {
@@ -252,17 +274,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDepartement(): ?string
-    {
-        return $this->departement;
-    }
-
-    public function setDepartement(string $departement): static
-    {
-        $this->departement = $departement;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Track>
