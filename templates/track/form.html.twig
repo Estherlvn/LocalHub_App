@@ -3,20 +3,30 @@
 {% block title %}Ajouter un morceau{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/tracklist.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/form.css') }}">
 {% endblock %}
 
 {% block body %}
 
-<h2>Ajouter un morceau</h2>
+<div class="form-page">
 
+<div class="header">    
+<h2>Ajouter un morceau</h2>
+<a href="{{ path('artiste_home') }}" class="action-btn">Retour</a>
+</div>
+
+<div class="form">
 {{ form_start(form) }}
     {{ form_row(form.trackName) }}
     {{ form_row(form.duration) }}
+    {{ form_row(form.genres) }}
     {{ form_row(form.audioFile) }}
 
     <button type="submit">Ajouter</button>
 {{ form_end(form) }}
 
-<a href="{{ path('artiste_home') }}" class="action-btn">Retour</a>
+</div>
+
+</div>
+
 {% endblock %}
