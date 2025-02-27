@@ -1,42 +1,116 @@
-
-
-/******* TRACKLIST ********/
-
-.tracklists {
-    margin: 80px;
+/* ✅ Conteneur principal */
+body {
+    background-color: #1e1e2f;
+    color: white;
+    font-family: 'Arial', sans-serif;
 }
 
-.tracks {
-    margin-top: 50px;
-    margin-bottom: 100px;
-}
-
-.tracks h2 {
+/* ✅ Titre de bienvenue */
+h1 {
+    text-align: center;
+    font-size: 2.5em;
     margin-bottom: 20px;
 }
 
+/* ✅ Section des morceaux */
+.tracks {
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    background: #2e2e48;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ✅ Titre des morceaux */
+.tracks h2 {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+/* ✅ Tableau des morceaux */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #252540;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* ✅ En-tête du tableau */
+thead {
+    background: #ff9367;
+    color: white;
+}
+
 th, td {
-    padding: 12px 100px; /* Augmente l'espace entre les colonnes */
-    text-align: left;
+    padding: 12px;
+    text-align: center;
+}
+
+/* ✅ Style des lignes */
+tbody tr {
+    transition: background 0.3s ease-in-out;
+}
+
+tbody tr:hover {
+    background: rgba(255, 147, 103, 0.2);
+}
+
+/* ✅ Bouton supprimer */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .img-heart {
     width: 20px;
-    height: auto;
+    transition: transform 0.2s;
 }
 
 .img-heart:hover {
-    cursor: pointer;
+    transform: scale(1.2);
 }
 
-/**
-FORM
-**/
-
+/* ✅ Bouton Ajouter un morceau */
 .action-btn {
-    color: #F3F3F1; 
-    border: solid 1px #F3F3F1;
-    border-radius: 2px;
-    width: 100px;
+    display: block;
     text-align: center;
+    background: linear-gradient(90deg, #ff9367, #ff5e57);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    width: 250px;
+    margin: 30px auto;
+    transition: 0.3s ease-in-out;
+}
+
+.action-btn:hover {
+    background: linear-gradient(90deg, #ff5e57, #e54342);
+    transform: scale(1.05);
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    .tracks {
+        width: 95%;
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+
+    .action-btn {
+        width: 80%;
+    }
 }
