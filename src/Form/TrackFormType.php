@@ -13,6 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Validator\Constraints\File;
+
 
 class TrackFormType extends AbstractType
 {
@@ -36,8 +38,15 @@ class TrackFormType extends AbstractType
         ])
         ->add('audioFile', FileType::class, [
             'label' => 'Fichier audio',
-            'required' => false, // Rendre facultatif si besoin
-            'attr' => ['accept' => 'audio/*'], // Autorise uniquement les fichiers audio
+            'mapped' => false, // Indique que ce champ ne doit pas être stocké directement
+            'required' => true,
+            'constraints' => [
+                new File([
+                    'maxSize' => '10M',
+                    'mimeTypes' => ['audio/mpeg', 'audio/wav'],
+                        'mimeTypesMessage' => 'Veuillez uploader un fichier audio valide (MP3 ou WAV).',
+                ])
+            ],
 
         ]);
     }
