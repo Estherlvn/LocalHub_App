@@ -9,33 +9,52 @@
 
 {% block body %}
 
-<div>
+<div class="container">
 
-    <div>
+    <div class="header">
         <h1>Bienvenue {{ app.user.pseudo }}</h1>
-        <h2>Que souhaitez-vous faire ?</h2>
     </div>
 
-    <div class="cta-section">
-        <div class="cta-btn">
-           <a href="{{ path('track_collection') }}"><h3>Consulter la collection</h3></a>
+    <section>
+        <div class="title-section">
+            <h2>Votre biographie</h2>
         </div>
-        <div class="cta-btn">
-            <h3>Ajouter des nouveaux morceaux</h3>
+
+        <div>
+            <img src="" alt="">
         </div>
-        <div class="cta-btn">
-            <h3>Créer ou modifier un évènement</h3>
+        <div>
+            <p>Lorem Ipsum</p>
         </div>
-        <div class="cta-btn">
-            <h3>Consulter la collection</h3>
+    </section>
+
+
+    <section>
+        <div class="title-section">
+            <h2>Que souhaitez-vous faire ?</h2>
         </div>
-        <div class="cta-btn">
-            <h3>Ajouter des nouveaux morceaux</h3>
+
+        <div class="cta-section">
+            <div class="cta-btn">
+            <a href="{{ path('track_collection') }}"><h3>Consulter la collection</h3></a>
+            </div>
+            <div class="cta-btn">
+                <a href="{{ path('add_track') }}"><h3>Ajouter des nouveaux morceaux</h3></a>
+            </div>
+            <div class="cta-btn">
+                <h3>Créer ou modifier un évènement</h3>
+            </div>
+            <div class="cta-btn">
+                <h3>Consulter la collection</h3>
+            </div>
+            <div class="cta-btn">
+                <h3>Ajouter des nouveaux morceaux</h3>
+            </div>
+            <div class="cta-btn">
+                <h3>Créer ou modifier un évènement</h3>
+            </div>
         </div>
-        <div class="cta-btn">
-            <h3>Créer ou modifier un évènement</h3>
-        </div>
-    </div>
+    </section>
 
 </div>
 

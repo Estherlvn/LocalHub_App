@@ -2,7 +2,12 @@
 ARTISTE HOME SECTION
 ****/
 
-/* ✅ Conteneur principal */
+/* Container */
+.container {
+    margin : 40px;
+}
+
+/* Section principale */
 .cta-section {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 colonnes max */
@@ -13,7 +18,7 @@ ARTISTE HOME SECTION
     padding: 20px;
 }
 
-/* ✅ Style des boutons */
+/* Style des boutons */
 .cta-btn {
     background: linear-gradient(90deg, #ff9367, #ff5e57);
     color: #F3F3F1;
@@ -30,14 +35,14 @@ ARTISTE HOME SECTION
     background: linear-gradient(90deg, #ff5e57, #e54342);
 }
 
-/* ✅ Responsive : 2 colonnes sur tablette */
+/* Responsive : 2 colonnes sur tablette */
 @media (max-width: 900px) {
     .cta-section {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* ✅ Responsive : 1 colonne sur mobile */
+/* Responsive : 1 colonne sur mobile */
 @media (max-width: 600px) {
     .cta-section {
         grid-template-columns: repeat(1, 1fr);
