@@ -20,12 +20,46 @@ SECTION BIO
     margin-left: 50px;
 }
 
-.profile-pic {
+/* .profile-pic {
     width: 300px;
     height: auto;
     border-radius: 2px;
+} */
+
+.profile-container {
+    position: relative;
+    display: inline-block;
 }
 
+.profile-pic {
+    display: block;
+    width: 200px; 
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 50%;
+}
+
+.profile-container:hover .overlay {
+    opacity: 1;
+    cursor: pointer;
+}
 
 
 /*****

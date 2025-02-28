@@ -6,39 +6,60 @@
     <link rel="stylesheet" href="{{ asset('styles/artiste.css') }}">
 {% endblock %}
 
-
 {% block body %}
-
 <div class="container">
-
     <div class="header">
         <h1>Bienvenue {{ app.user.pseudo }}</h1>
     </div>
 
-
-    <section>
-        <div class="title-section">
-            <h2>Votre biographie</h2>
-        </div>
-        <div class="bio">
-            {% if app.user.profilePicture %}
-                <img src="{{ asset('uploads/' ~ app.user.profilePicture) }}" class="profile-pic" alt="Photo de profil Artiste">
-            {% else %}
-                <img src="{{ asset('images/default_profile.png') }}" class="profile-pic" alt="Photo par défaut">
-            {% endif %}
+    <section class="artist-profile">
+        {% if form is defined %}
+            {# Affichage du formulaire pour modifier le profil #}
+            {{ form_start(form, {'attr': {'id': 'profileForm'}}) }}
             
-           <p> {{ app.user.bio }} </p>
-
-        </div>
+            <div class="profile-container">
+                <label for="artiste_profile_profilePicture">
+                    {% if app.user.profilePicture %}
+                        <img src="{{ asset('uploads/' ~ app.user.profilePicture) }}" class="profile-pic" alt="Photo de profil Artiste">
+                    {% else %}
+                        <img src="{{ asset('images/default_profile.png') }}" class="profile-pic" alt="Photo par défaut">
+                    {% endif %}
+                    <div class="overlay">
+                        <span>Modifier</span>
+                    </div>
+                </label>
+                {{ form_widget(form.profilePicture, {
+                    'attr': {
+                        'id': 'artiste_profile_profilePicture',
+                        'style': 'display:none;',
+                        'accept': 'image/*'
+                    }
+                }) }}
+            </div>
+        
+            <div class="bio">
+                {{ form_row(form.bio) }}
+            </div>
+        
+            <button type="submit">Mettre à jour</button>
+        
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
+        {% else %}
+            {# Affichage en lecture seule (aucune modification possible) #}
+            <div class="profile-container">
+                {% if app.user.profilePicture %}
+                    <img src="{{ asset('uploads/' ~ app.user.profilePicture) }}" class="profile-pic" alt="Photo de profil Artiste">
+                {% else %}
+                    <img src="{{ asset('images/default_profile.png') }}" class="profile-pic" alt="Photo par défaut">
+                {% endif %}
+            </div>
+            <div class="bio">
+                {{ app.user.bio }}
+            </div>
+        {% endif %}
     </section>
-
-    {# <div class="form-page">
-        {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }} 
-            {{ form_row(form.profilePicture) }}
-            <button type="submit">Mettre à jour le profil</button>
-        {{ form_end(form) }}
-    </div> #}
-
+    
     <section>
         <div class="title-section">
             <h2>Que souhaitez-vous faire ?</h2>
@@ -46,7 +67,7 @@
 
         <div class="cta-section">
             <div class="cta-btn">
-            <a href="{{ path('track_collection') }}"><h3>Consulter la collection</h3></a>
+                <a href="{{ path('track_collection') }}"><h3>Consulter la collection</h3></a>
             </div>
             <div class="cta-btn">
                 <a href="{{ path('add_track') }}"><h3>Ajouter des nouveaux morceaux</h3></a>
@@ -65,7 +86,13 @@
             </div>
         </div>
     </section>
-
 </div>
 
+{% if form is defined %}
+    <script>
+        document.getElementById('artiste_profile_profilePicture').addEventListener('change', function(){
+            document.getElementById('profileForm').submit();
+        });
+    </script>
+{% endif %}
 {% endblock %}
