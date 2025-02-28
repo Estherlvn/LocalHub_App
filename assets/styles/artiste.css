@@ -7,7 +7,30 @@ ARTISTE HOME SECTION
     margin : 40px;
 }
 
-/* Section principale */
+
+/*****
+SECTION BIO
+*****/
+.bio {
+    display: flex;
+    flex-direction: row;
+}
+
+.bio p {
+    margin-left: 50px;
+}
+
+.profile-pic {
+    width: 300px;
+    height: auto;
+    border-radius: 2px;
+}
+
+
+
+/*****
+SECTION CTA
+*****/
 .cta-section {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 colonnes max */

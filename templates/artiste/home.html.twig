@@ -15,19 +15,29 @@
         <h1>Bienvenue {{ app.user.pseudo }}</h1>
     </div>
 
+
     <section>
         <div class="title-section">
             <h2>Votre biographie</h2>
         </div>
+        <div class="bio">
+            {% if app.user.profilePicture %}
+                <img src="{{ asset('uploads/' ~ app.user.profilePicture) }}" class="profile-pic" alt="Photo de profil Artiste">
+            {% else %}
+                <img src="{{ asset('images/default_profile.png') }}" class="profile-pic" alt="Photo par défaut">
+            {% endif %}
+            
+           <p> {{ app.user.bio }} </p>
 
-        <div>
-            <img src="" alt="">
-        </div>
-        <div>
-            <p>Lorem Ipsum</p>
         </div>
     </section>
 
+    {# <div class="form-page">
+        {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }} 
+            {{ form_row(form.profilePicture) }}
+            <button type="submit">Mettre à jour le profil</button>
+        {{ form_end(form) }}
+    </div> #}
 
     <section>
         <div class="title-section">
