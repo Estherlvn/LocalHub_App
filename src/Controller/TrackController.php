@@ -105,12 +105,12 @@ class TrackController extends AbstractController
                     // Message flash de confirmation
                     $this->addFlash('success', 'Morceau ajouté avec succès !');
 
-                    return $this->redirectToRoute('track_collection'); // Redirection vers le formulaire
-                
+                    return $this->redirectToRoute('track_collection');
+                }
 
                 return $this->render('track/add.html.twig', [
                     'form' => $form->createView(),
                 ]);
             }
 }
-}
+

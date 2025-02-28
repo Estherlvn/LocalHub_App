@@ -1,18 +1,18 @@
-/* ✅ Conteneur principal */
+/* Conteneur principal */
 body {
     background-color: #1e1e2f;
     color: white;
     font-family: 'Arial', sans-serif;
 }
 
-/* ✅ Titre de bienvenue */
+/* Titre de bienvenue */
 h1 {
     text-align: center;
     font-size: 2.5em;
     margin-bottom: 20px;
 }
 
-/* ✅ Section des morceaux */
+/* Section des morceaux */
 .tracks {
     width: 90%;
     max-width: 1000px;
@@ -23,14 +23,14 @@ h1 {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ✅ Titre des morceaux */
+/* Titre des morceaux */
 .tracks h2 {
     text-align: center;
     font-size: 1.8em;
     margin-bottom: 15px;
 }
 
-/* ✅ Tableau des morceaux */
+/* Tableau des morceaux */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -39,7 +39,7 @@ table {
     overflow: hidden;
 }
 
-/* ✅ En-tête du tableau */
+/* En-tête du tableau */
 thead {
     background: #ff9367;
     color: white;
@@ -50,7 +50,7 @@ th, td {
     text-align: center;
 }
 
-/* ✅ Style des lignes */
+/* Style des lignes */
 tbody tr {
     transition: background 0.3s ease-in-out;
 }
@@ -59,7 +59,7 @@ tbody tr:hover {
     background: rgba(255, 147, 103, 0.2);
 }
 
-/* ✅ Bouton supprimer */
+/* Bouton supprimer */
 button {
     background: none;
     border: none;
@@ -75,7 +75,7 @@ button {
     transform: scale(1.2);
 }
 
-/* ✅ Bouton Ajouter un morceau */
+/* Bouton Ajouter un morceau */
 .action-btn {
     display: block;
     text-align: center;
@@ -96,7 +96,11 @@ button {
     transform: scale(1.05);
 }
 
-/* ✅ Responsive */
+.back-btn {
+    color: white;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
     h1 {
         font-size: 2em;

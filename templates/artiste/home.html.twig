@@ -2,11 +2,41 @@
 
 {% block title %}HomePage Artiste{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/artiste.css') }}">
+{% endblock %}
+
+
 {% block body %}
 
+<div>
 
-<h1>Bienvenue {{ app.user.pseudo }}</h1>
+    <div>
+        <h1>Bienvenue {{ app.user.pseudo }}</h1>
+        <h2>Que souhaitez-vous faire ?</h2>
+    </div>
 
+    <div class="cta-section">
+        <div class="cta-btn">
+           <a href="{{ path('track_collection') }}"><h3>Consulter la collection</h3></a>
+        </div>
+        <div class="cta-btn">
+            <h3>Ajouter des nouveaux morceaux</h3>
+        </div>
+        <div class="cta-btn">
+            <h3>Créer ou modifier un évènement</h3>
+        </div>
+        <div class="cta-btn">
+            <h3>Consulter la collection</h3>
+        </div>
+        <div class="cta-btn">
+            <h3>Ajouter des nouveaux morceaux</h3>
+        </div>
+        <div class="cta-btn">
+            <h3>Créer ou modifier un évènement</h3>
+        </div>
+    </div>
 
+</div>
 
 {% endblock %}
