@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `track` (
   PRIMARY KEY (`id`),
   KEY `IDX_D6E3F8A6A76ED395` (`user_id`),
   CONSTRAINT `FK_D6E3F8A6A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table bddlocalhub.track : ~21 rows (environ)
 INSERT INTO `track` (`id`, `track_name`, `audio_file`, `duration`, `upload_date`, `view_count`, `user_id`) VALUES
@@ -149,7 +149,10 @@ INSERT INTO `track` (`id`, `track_name`, `audio_file`, `duration`, `upload_date`
 	(22, 'Hustle Hard', NULL, 210, '2025-02-12 17:13:32', 4500, 5),
 	(23, 'No Sleep', NULL, 190, '2025-02-18 17:13:32', 4555, 5),
 	(24, 'Fast Lane', NULL, 205, '2025-02-20 17:13:31', 2300, 5),
-	(25, 'Dream Chaser', NULL, 215, '2025-02-20 17:13:31', 3200, 5);
+	(25, 'Dream Chaser', NULL, 215, '2025-02-20 17:13:31', 3200, 5),
+	(29, 'Chill Future', 'lean-on-inspiring-future-beat-283957-67c16a494edac.mp3', 150, NULL, NULL, 1),
+	(30, 'Chill Future', 'lean-on-inspiring-future-beat-283957-67c18e44abeb0.mp3', 180, NULL, NULL, 1),
+	(31, 'Chill Future', 'paper-planes-chill-future-beat-283956-67c18fa311171.mp3', 180, NULL, NULL, 1);
 
 -- Listage de la structure de table bddlocalhub. track_genre
 CREATE TABLE IF NOT EXISTS `track_genre` (
@@ -162,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `track_genre` (
   CONSTRAINT `FK_F3A7915F5ED23C43` FOREIGN KEY (`track_id`) REFERENCES `track` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bddlocalhub.track_genre : ~21 rows (environ)
+-- Listage des données de la table bddlocalhub.track_genre : ~25 rows (environ)
 INSERT INTO `track_genre` (`track_id`, `genre_id`) VALUES
 	(3, 1),
 	(4, 1),
@@ -184,7 +187,13 @@ INSERT INTO `track_genre` (`track_id`, `genre_id`) VALUES
 	(22, 4),
 	(23, 4),
 	(24, 4),
-	(25, 4);
+	(25, 4),
+	(29, 1),
+	(29, 2),
+	(30, 4),
+	(30, 5),
+	(31, 1),
+	(31, 2);
 
 -- Listage de la structure de table bddlocalhub. user
 CREATE TABLE IF NOT EXISTS `user` (
@@ -195,29 +204,31 @@ CREATE TABLE IF NOT EXISTS `user` (
   `is_verified` tinyint(1) NOT NULL,
   `role` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `departement` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profile_picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bio` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`),
   UNIQUE KEY `UNIQ_8D93D64986CC499D` (`pseudo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table bddlocalhub.user : ~16 rows (environ)
-INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `is_verified`, `role`, `departement`) VALUES
-	(1, 'Liam Shadow', 'liam.shadow@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '35'),
-	(2, 'Nova Sky', 'nova.sky@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '22'),
-	(3, 'Axel Storm', 'axel.storm@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '95'),
-	(4, 'Serena Moon', 'serena.moon@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '67'),
-	(5, 'Drake Orion', 'drake.orion@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '93'),
-	(8, 'Admin', 'admin@localhub.com', '$2y$13$MmT6R9jCPKJWeiEQf8F0QOVyZE0vEMi/3XliU50bf9z3ULcD0hWHy', 1, 'admin', '35'),
-	(9, 'Seif', 'seif@auditeur.com', '$2y$13$0nsRyjAO3gd1GyhrTMt0t.9S4FnUvwk8OaPdsrSDwsQaqe4IlQBTy', 1, 'auditeur', '93'),
-	(10, 'Simon', 'simon@auditeur.com', '$2y$13$tgkmdAA3F/3f9cqdXjBQNuaq6vql011oAD0hy.cu8a7TOQwRCI2jG', 1, 'auditeur', '22'),
-	(11, 'Ines', 'ines@auditeur.com', '$2y$13$HWLCBt3Wmcwcl7boucmh3egFhIpzZgg0yXeroGEcU1f7z6KCR2dE6', 1, 'auditeur', '35'),
-	(13, 'Rozenn', 'rozenn@auditeur.com', '$2y$13$45lOoN30d6jCv06FGe6HPu/DJAG5oW7DNXn1vn0gnO.jtE/kcgTY2', 0, 'auditeur', '67'),
-	(14, 'Marie', 'marie@auditeur.com', '$2y$13$fvZWD5ac0GoyRGV0J4noReDfuT9Ve5zZ7QktbUORRkH/vxsDwzyKO', 0, 'auditeur', '67'),
-	(15, 'Alexandre', 'alexandre@auditeur.com', '$2y$13$v85CwxcZU5Pi4Pd/FQIOJuUBH5F/hAqqvqxRmBW4daY8QDYm5F3pS', 0, 'auditeur', '22'),
-	(16, 'Laury', 'laury@auditeur.com', '$2y$13$9D4pY21WqTZEUbFwpSAh6u841K3eBz4eRT2gnzK2oFAQv1CrtB.qi', 0, 'auditeur', '67'),
-	(18, 'Aymeric', 'aymeric@auditeur.com', '$2y$13$2B4Dg0yxF9ybDt9nRU7kR.jHDPSVCe7gca2svXrKEAOChGx/tuG12', 1, 'auditeur', '44'),
-	(19, 'Test', 'test@artiste.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 0, 'artiste', '90'),
-	(20, 'Test2', 'test2@artiste.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 0, 'artiste', '35');
+INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `is_verified`, `role`, `departement`, `profile_picture`, `bio`) VALUES
+	(1, 'Liam Shadow', 'liam.shadow@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '35', NULL, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy'),
+	(2, 'Nova Sky', 'nova.sky@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '22', NULL, NULL),
+	(3, 'Axel Storm', 'axel.storm@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '95', NULL, NULL),
+	(4, 'Serena Moon', 'serena.moon@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '67', NULL, NULL),
+	(5, 'Drake Orion', 'drake.orion@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '93', NULL, NULL),
+	(8, 'Admin', 'admin@localhub.com', '$2y$13$MmT6R9jCPKJWeiEQf8F0QOVyZE0vEMi/3XliU50bf9z3ULcD0hWHy', 1, 'admin', '35', NULL, NULL),
+	(9, 'Seif', 'seif@auditeur.com', '$2y$13$0nsRyjAO3gd1GyhrTMt0t.9S4FnUvwk8OaPdsrSDwsQaqe4IlQBTy', 1, 'auditeur', '93', NULL, NULL),
+	(10, 'Simon', 'simon@auditeur.com', '$2y$13$tgkmdAA3F/3f9cqdXjBQNuaq6vql011oAD0hy.cu8a7TOQwRCI2jG', 1, 'auditeur', '22', NULL, NULL),
+	(11, 'Ines', 'ines@auditeur.com', '$2y$13$HWLCBt3Wmcwcl7boucmh3egFhIpzZgg0yXeroGEcU1f7z6KCR2dE6', 1, 'auditeur', '35', NULL, NULL),
+	(13, 'Rozenn', 'rozenn@auditeur.com', '$2y$13$45lOoN30d6jCv06FGe6HPu/DJAG5oW7DNXn1vn0gnO.jtE/kcgTY2', 0, 'auditeur', '67', NULL, NULL),
+	(14, 'Marie', 'marie@auditeur.com', '$2y$13$fvZWD5ac0GoyRGV0J4noReDfuT9Ve5zZ7QktbUORRkH/vxsDwzyKO', 0, 'auditeur', '67', NULL, NULL),
+	(15, 'Alexandre', 'alexandre@auditeur.com', '$2y$13$v85CwxcZU5Pi4Pd/FQIOJuUBH5F/hAqqvqxRmBW4daY8QDYm5F3pS', 0, 'auditeur', '22', NULL, NULL),
+	(16, 'Laury', 'laury@auditeur.com', '$2y$13$9D4pY21WqTZEUbFwpSAh6u841K3eBz4eRT2gnzK2oFAQv1CrtB.qi', 0, 'auditeur', '67', NULL, NULL),
+	(18, 'Aymeric', 'aymeric@auditeur.com', '$2y$13$2B4Dg0yxF9ybDt9nRU7kR.jHDPSVCe7gca2svXrKEAOChGx/tuG12', 1, 'auditeur', '44', NULL, NULL),
+	(19, 'Test', 'test@artiste.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 0, 'artiste', '90', NULL, NULL),
+	(20, 'Test2', 'test2@artiste.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 0, 'artiste', '35', NULL, NULL);
 
 -- Listage de la structure de table bddlocalhub. user_track
 CREATE TABLE IF NOT EXISTS `user_track` (
