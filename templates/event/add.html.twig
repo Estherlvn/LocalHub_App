@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un évènement{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/form.css') }}">
+{% endblock %}
+
+{% block body %}
+
+{# {% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+ #}
+
+<div class="form-page">
+
+    <div class="header">    
+    <h2>Ajouter un évènement</h2>
+    {# <a href="{{ path('event_list') }}" class="action-btn">Retour</a> #}
+    </div>
+
+        <div class="form">
+            {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }} 
+            {{ form_row(form.eventTitle) }}
+            {{ form_row(form.eventDate) }}
+            {{ form_row(form.eventLocation) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.eventPicture) }}
+
+
+            <button type="submit">Ajouter</button>
+        {{ form_end(form) }}
+
+        </div>
+
+</div>
+
+{% endblock %}

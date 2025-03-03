@@ -29,6 +29,9 @@ class Event
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $eventPicture = null;
 
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class Event
     public function setEventPicture(?string $eventPicture): static
     {
         $this->eventPicture = $eventPicture;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
