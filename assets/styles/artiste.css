@@ -2,64 +2,188 @@
 ARTISTE HOME SECTION
 ****/
 
-/* Container */
 .container {
-    margin : 40px;
+    margin: 50px;
 }
 
-
-/*****
-SECTION BIO
-*****/
-.bio {
+/* ✅ Conteneur principal */
+.artist-profile {
+    width: 90%;
+    margin: 40px auto;
+    background: #2e2e48; /* Fond sombre élégant */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-align: center;
     display: flex;
-    flex-direction: row;
 }
 
-.bio p {
-    margin-left: 50px;
-}
-
-/* .profile-pic {
-    width: 300px;
-    height: auto;
-    border-radius: 2px;
-} */
-
+/* ✅ Conteneur de la photo de profil */
 .profile-container {
     position: relative;
-    display: inline-block;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
+/* ✅ Photo de profil */
 .profile-pic {
-    display: block;
-    width: 200px; 
+    width: 200px;
     height: 200px;
     object-fit: cover;
     border-radius: 50%;
+    border: 3px solid #ff9367;
+    transition: transform 0.3s ease-in-out;
 }
 
+.profile-container:hover .profile-pic {
+    transform: scale(1.1);
+}
+
+/* ✅ Input file superposé */
+#artiste_profile_profilePicture {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    opacity: 0; /* Rend l'input invisible mais cliquable */
+    z-index: 2;
+}
+
+/* ✅ Overlay superposé exactement sur la photo */
 .overlay {
     position: absolute;
     top: 0;
-    bottom: 0;
     left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 18px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-}
-
-.profile-container:hover .overlay {
-    opacity: 1;
+    background: rgba(0, 0, 0, 0.5); /* Assombrit légèrement */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, background 0.3s ease-in-out;
     cursor: pointer;
 }
+
+/* ✅ Affichage de l'overlay au survol */
+.profile-container:hover .overlay {
+    opacity: 1;
+}
+
+/* ✅ Effet au survol du bouton de changement */
+#artiste_profile_profilePicture:hover + .profile-pic {
+    transform: scale(1.1);
+}
+
+/* ✅ Animation de l'overlay */
+.overlay:hover {
+    background: rgba(255, 147, 103, 0.7);
+}
+
+/* ✅ Responsive : ajustement pour petits écrans */
+@media (max-width: 768px) {
+    .artist-profile {
+        width: 95%;
+    }
+
+    .profile-container {
+        width: 180px;
+        height: 180px;
+    }
+
+    .profile-pic,
+    #artiste_profile_profilePicture {
+        width: 180px;
+        height: 180px;
+    }
+
+    .overlay {
+        font-size: 0.8em;
+        height: 40px;
+        line-height: 40px;
+    }
+}
+
+/* ✅ Cacher l'input file
+.overlay input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+} */
+
+/* ✅ Biographie */
+.bio {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+/* ✅ Style du textarea */
+.bio textarea {
+    width: 100%;
+    height: 60%;
+    padding: 20px;
+    border: 1px solid #ff9367;
+    border-radius: 5px;
+    background: #2e2e48;
+    color: white;
+    resize: none;
+    margin-top: 15px;
+    margin-left: 50px;
+}
+
+.bio textarea:focus {
+    outline: none;
+    box-shadow: 0 0 5px #ff9367;
+}
+
+/* ✅ Bouton Mettre à jour */
+button {
+    margin-top: 300px;
+    height: 50px;
+    width: 150px;
+    background: linear-gradient(90deg, #ff9367, #ff5e57);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #ff5e57, #e54342);
+    transform: scale(1.05);
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+    .artist-profile {
+        width: 95%;
+    }
+
+    .profile-pic {
+        width: 120px;
+        height: 120px;
+    }
+
+    .bio textarea {
+        font-size: 0.9em;
+    }
+}
+
 
 
 /*****
@@ -105,3 +229,6 @@ SECTION CTA
         grid-template-columns: repeat(1, 1fr);
     }
 }
+
+
+

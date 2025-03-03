@@ -11,16 +11,16 @@ class ArtisteController extends AbstractController
 
 
     //Récupérer le membre connecté (getUser)
-    #[Route('/artiste/home', name: 'artiste_home')]
-        public function index(): Response
-        {
+    // #[Route('/artiste/profile', name: 'artiste_profile')]
+    //     public function index(): Response
+    //     {
 
-            $user = $this->getUser();
+    //         $user = $this->getUser();
 
-            return $this->render('artiste/home.html.twig', [
-                'controller_name' => 'ArtisteController',
-            ]);
-        }
+    //         return $this->render('artiste/profile.html.twig', [
+    //             'controller_name' => 'ArtisteController',
+    //         ]);
+    //     }
 
 
     // Permettre à un membre Artiste de modifier son profil (dont upload de sa photo)

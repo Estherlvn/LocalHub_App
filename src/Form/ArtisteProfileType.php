@@ -15,7 +15,7 @@ class ArtisteProfileType extends AbstractType
     {
         $builder
             ->add('bio', TextareaType::class, [
-                'label' => 'Votre bio',
+                'label' => 'Biographie',
                 'required' => false,
                 'attr' => ['placeholder' => 'Ajoutez une description...'],
             ])

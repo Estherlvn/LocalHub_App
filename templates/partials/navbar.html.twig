@@ -13,7 +13,7 @@
             {% if is_granted('ROLE_ADMIN') %}
                 <a class="nav-menu" href="{{ path('admin_home') }}">Accueil</a>
             {% elseif is_granted('ROLE_ARTISTE') %}
-                <a class="nav-menu" href="{{ path('artiste_home') }}">Accueil</a>
+                <a class="nav-menu" href="{{ path('artiste_profile') }}">Accueil</a>
             {% else %}
                 <a class="nav-menu" href="{{ path('auditeur_home') }}">Accueil</a>
             {% endif %}

@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bien{% endblock %}
-
+{% block title %}Bienvenue{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('styles/artiste.css') }}">
@@ -9,61 +8,65 @@
 
 {% block body %}
 <div class="container">
+    <!-- Section de bienvenue -->
     <div class="header">
         <h1>Bienvenue {{ app.user.pseudo }}</h1>
     </div>
 
+    <!-- Flash messages -->
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">{{ message }}</div>
     {% endfor %}
 
+    <!-- Formulaire de modification du profil -->
     {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
 
-    <div class="profile-container">
-        <label for="profile_picture_input">
-            {% if app.user.profilePicture %}
-                <img src="{{ asset('uploads/' ~ app.user.profilePicture) }}" class="profile-pic" alt="Votre photo de profil">
-            {% else %}
-                <img src="{{ asset('images/default_profile.png') }}" class="profile-pic" alt="Photo par défaut">
-            {% endif %}
-            <div class="overlay">
-                {{ form_widget(form.profilePicture, {'attr': {'id': 'profile_picture_input'}}) }}
-            </div>
-        </label>
+    <section class="artist-profile">
+        <div class="profile-container">
+            <label for="profile_picture_input">
+                <div class="overlay">
+                    {{ form_widget(form.profilePicture, {'attr': {'id': 'profile_picture_input'}}) }}
+                </div>
+                {% if app.user.profilePicture %}
+                    <img src="{{ asset('uploads/' ~ app.user.profilePicture) }}" class="profile-pic" alt="Votre photo de profil">
+                {% else %}
+                    <img src="{{ asset('images/default_profile.png') }}" class="profile-pic" alt="Photo par défaut">
+                {% endif %}
 
-    </div>
+            </label>
+        </div>
+        
+        <div class="bio mb-3">
+            {{ form_label(form.bio, 'Votre biographie', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.bio, {'attr': {'class': 'form-control', 'rows': '5', 'placeholder': 'Ajoutez une description...'}}) }}
+        </div>
 
-    <div class="bio">
-        {{ form_row(form.bio) }}
-    </div>
-
-    <button type="submit">Mettre à jour</button>
-
+        <button type="submit">Actualiser</button>
+        
     {{ form_end(form) }}
-</div>
 
- 
-<section>
-    <div class="title-section">
-        <h2>Que souhaitez-vous faire ?</h2>
-    </div>
-
-    <div class="cta-section">
-        <div class="cta-btn">
-            <a href="{{ path('track_collection') }}"><h3>Consulter la collection</h3></a>
-        </div>
-        <div class="cta-btn">
-            <a href="{{ path('add_track') }}"><h3>Ajouter des nouveaux morceaux</h3></a>
-        </div>
-        <div class="cta-btn">
-            <h3>Créer ou modifier un évènement</h3>
-        </div>
-    </div>
 </section>
 
+
+
+
+    <!-- Section des actions -->
+    <section class="actions">
+        <div class="title-section">
+            <h2>Que souhaitez-vous faire ?</h2>
+        </div>
+
+        <div class="cta-section">
+            <div class="cta-btn">
+                <a href="{{ path('track_collection') }}"><h3>Consulter la collection</h3></a>
+            </div>
+            <div class="cta-btn">
+                <a href="{{ path('add_track') }}"><h3>Ajouter des nouveaux morceaux</h3></a>
+            </div>
+            <div class="cta-btn">
+                <h3>Créer ou modifier un évènement</h3>
+            </div>
+        </div>
+    </section>
 </div>
-
-
-
-
 {% endblock %}
