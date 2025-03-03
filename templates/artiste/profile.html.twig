@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon profil{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Modifier votre profil</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+
+    <div class="profile-container">
+        <label for="profile_picture_input">
+            {% if app.user.profilePicture %}
+                <img src="{{ asset('uploads/profile_pictures/' ~ app.user.profilePicture) }}" class="profile-pic" alt="Votre photo de profil">
+            {% else %}
+                <img src="{{ asset('images/default_profile.png') }}" class="profile-pic" alt="Photo par défaut">
+            {% endif %}
+            <div class="overlay">
+                <span>Modifier</span>
+            </div>
+        </label>
+        {{ form_widget(form.profilePicture, {'attr': {'id': 'profile_picture_input', 'style': 'display:none;'}}) }}
+    </div>
+
+    <div class="bio">
+        {{ form_row(form.bio) }}
+    </div>
+
+    <button type="submit">Mettre à jour</button>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}
