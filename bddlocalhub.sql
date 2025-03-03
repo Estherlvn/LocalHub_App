@@ -37,10 +37,16 @@ CREATE TABLE IF NOT EXISTS `event` (
   `event_location` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `event_picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_3BAE0AA7A76ED395` (`user_id`),
+  CONSTRAINT `FK_3BAE0AA7A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table bddlocalhub.event : ~0 rows (environ)
+INSERT INTO `event` (`id`, `event_title`, `event_date`, `event_location`, `description`, `event_picture`, `user_id`) VALUES
+	(1, 'test event', '2025-06-06 00:00:00', 'Rennes', 'Concert', 'studio-electro-67c5cc235192f.jpg', 1),
+	(2, 'test event', '0025-06-04 00:00:00', 'Rennes', 'concert', 'studio-electro-67c5ccc3d86db.jpg', 1);
 
 -- Listage de la structure de table bddlocalhub. genre
 CREATE TABLE IF NOT EXISTS `genre` (
@@ -125,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `track` (
   PRIMARY KEY (`id`),
   KEY `IDX_D6E3F8A6A76ED395` (`user_id`),
   CONSTRAINT `FK_D6E3F8A6A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table bddlocalhub.track : ~21 rows (environ)
 INSERT INTO `track` (`id`, `track_name`, `audio_file`, `duration`, `upload_date`, `view_count`, `user_id`) VALUES
@@ -152,7 +158,8 @@ INSERT INTO `track` (`id`, `track_name`, `audio_file`, `duration`, `upload_date`
 	(25, 'Dream Chaser', NULL, 215, '2025-02-20 17:13:31', 3200, 5),
 	(29, 'Chill Future', 'lean-on-inspiring-future-beat-283957-67c16a494edac.mp3', 150, NULL, NULL, 1),
 	(30, 'Chill Future', 'lean-on-inspiring-future-beat-283957-67c18e44abeb0.mp3', 180, NULL, NULL, 1),
-	(31, 'Chill Future', 'paper-planes-chill-future-beat-283956-67c18fa311171.mp3', 180, NULL, NULL, 1);
+	(31, 'Chill Future', 'paper-planes-chill-future-beat-283956-67c18fa311171.mp3', 180, NULL, NULL, 1),
+	(32, 'Chill Future', 'lean-on-inspiring-future-beat-283957-67c5b45d3aae2.mp3', 180, NULL, NULL, 1);
 
 -- Listage de la structure de table bddlocalhub. track_genre
 CREATE TABLE IF NOT EXISTS `track_genre` (
@@ -193,7 +200,9 @@ INSERT INTO `track_genre` (`track_id`, `genre_id`) VALUES
 	(30, 4),
 	(30, 5),
 	(31, 1),
-	(31, 2);
+	(31, 2),
+	(32, 1),
+	(32, 2);
 
 -- Listage de la structure de table bddlocalhub. user
 CREATE TABLE IF NOT EXISTS `user` (
@@ -213,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 -- Listage des données de la table bddlocalhub.user : ~16 rows (environ)
 INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `is_verified`, `role`, `departement`, `profile_picture`, `bio`) VALUES
-	(1, 'Liam Shadow', 'liam.shadow@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '35', NULL, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy'),
+	(1, 'Liam Shadow', 'liam.shadow@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '35', 'studio-electro-67c5afd0dbe53.jpg', 'Lorem ipsum TEST BIO'),
 	(2, 'Nova Sky', 'nova.sky@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '22', NULL, NULL),
 	(3, 'Axel Storm', 'axel.storm@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '95', NULL, NULL),
 	(4, 'Serena Moon', 'serena.moon@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '67', NULL, NULL),
@@ -244,6 +253,7 @@ CREATE TABLE IF NOT EXISTS `user_track` (
 -- Listage des données de la table bddlocalhub.user_track : ~3 rows (environ)
 INSERT INTO `user_track` (`user_id`, `track_id`) VALUES
 	(9, 3),
+	(9, 4),
 	(9, 7),
 	(9, 14);
 
