@@ -13,11 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use App\Service\GeolocationService;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class EventController extends AbstractController
 {
 
-
+    // Afficher les évènements à venir (accessible au public)
     #[Route('/event/public', name: 'event_public')]
     public function showPublicEvents(EventRepository $eventRepository): Response
     {
@@ -29,6 +31,7 @@ final class EventController extends AbstractController
         ]);
     }
 
+    // Afficher le détail d'un event accessible au public
     #[Route('/event/{id}', name: 'event_detail', requirements: ['id' => '\d+'])]
     public function showEventDetail(int $id, EventRepository $eventRepository): Response
     {
@@ -45,6 +48,25 @@ final class EventController extends AbstractController
         ]);
     }
 
+    // Méthode pour utiliser le service GeolocationService.php en cas d'appel direct à l'API Nominatim
+    #[Route('/event/get-coordinates', name: 'get_event_coordinates', methods: ['POST'])]
+    public function getEventCoordinates(Request $request, GeolocationService $geolocationService): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+        $address = $data['address'] ?? null;
+
+        if (!$address) {
+            return new JsonResponse(['error' => 'Adresse manquante'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $coordinates = $geolocationService->getCoordinates($address);
+
+        if (!$coordinates) {
+            return new JsonResponse(['error' => 'Adresse introuvable'], Response::HTTP_NOT_FOUND);
+        }
+
+        return new JsonResponse($coordinates);
+    }
 
 
     // Afficher les événements d'un artiste (sans tri)
