@@ -68,6 +68,20 @@ final class EventController extends AbstractController
         return new JsonResponse($coordinates);
     }
 
+    // Récupération des coordonnées dans une méthode privée setEventCoordinates()
+    private function setEventCoordinates(Event $event, GeolocationService $geolocationService): void
+    {
+        // Vérifie si l'événement a déjà des coordonnées GPS
+        if (!$event->getLatitude() || !$event->getLongitude()) {
+            $coordinates = $geolocationService->getCoordinates($event->getEventLocation());
+
+            if ($coordinates) {
+                $event->setLatitude($coordinates['latitude']);
+                $event->setLongitude($coordinates['longitude']);
+            }
+        }
+    }
+
 
     // Afficher les événements d'un artiste (sans tri)
     #[Route('/event/list', name: 'event_list')]
@@ -87,19 +101,23 @@ final class EventController extends AbstractController
     // Ajouter un événement
     #[Route('/event/add', name: 'add_event')]
     #[IsGranted('ROLE_USER')] // Seuls les utilisateurs connectés peuvent ajouter un événement
-    public function addEvent(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
-    {
+    public function addEvent(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        FileUploader $fileUploader,
+        GeolocationService $geolocationService
+    ): Response {
         $event = new Event();
         $event->setUser($this->getUser());
-
+    
         // Création du formulaire
         $form = $this->createForm(EventFormType::class, $event);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile|null $eventPicture */
             $eventPicture = $form->get('eventPicture')->getData();
-
+    
             if ($eventPicture) {
                 try {
                     $fileName = $fileUploader->upload($eventPicture);
@@ -109,17 +127,21 @@ final class EventController extends AbstractController
                     return $this->redirectToRoute('add_event');
                 }
             }
-
+    
+            // 🔹 Récupération des coordonnées via la méthode privée
+            $this->setEventCoordinates($event, $geolocationService);
+    
             $entityManager->persist($event);
             $entityManager->flush();
-
+    
             $this->addFlash('success', 'Votre événement a été créé avec succès !');
-
-            return $this->redirectToRoute('event_list'); 
+    
+            return $this->redirectToRoute('event_list');
         }
-
+    
         return $this->render('event/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }
+    
 }

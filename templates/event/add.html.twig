@@ -8,36 +8,60 @@
 
 {% block body %}
 
-{# {% for label, messages in app.flashes %}
-    {% for message in messages %}
-        <div class="alert alert-{{ label }}">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endfor %}
- #}
-
 <div class="form-page">
-
     <div class="header">    
-    <h2>Ajouter un évènement</h2>
-    {# <a href="{{ path('event_list') }}" class="action-btn">Retour</a> #}
+        <h2>Ajouter un évènement</h2>
     </div>
 
-        <div class="form">
-            {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }} 
-            {{ form_row(form.eventTitle) }}
-            {{ form_row(form.eventDate) }}
-            {{ form_row(form.eventLocation) }}
-            {{ form_row(form.eventDescription) }}
-            {{ form_row(form.eventPicture) }}
+    <div class="form">
+        {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }} 
+        {{ form_row(form.eventTitle) }}
+        {{ form_row(form.eventDate) }}
+        {{ form_row(form.eventLocation) }}
+        {{ form_row(form.eventDescription) }}
+        {{ form_row(form.eventPicture) }}
 
+        {# Ajout des champs cachés pour latitude et longitude #}
+        {{ form_row(form.latitude) }}
+        {{ form_row(form.longitude) }}
 
-            <button type="submit">Ajouter</button>
+        <button type="submit">Ajouter</button>
         {{ form_end(form) }}
-
-        </div>
-
+    </div>
 </div>
 
+{% block javascripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let addressInput = document.getElementById("event_form_eventLocation");
+            let latitudeInput = document.getElementById("event_form_latitude");
+            let longitudeInput = document.getElementById("event_form_longitude");
+
+            addressInput.addEventListener("blur", function() {
+                let address = addressInput.value.trim();
+
+                if (address !== "") {
+                    fetch("{{ path('get_event_coordinates') }}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ address: address })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.latitude && data.longitude) {
+                            latitudeInput.value = data.latitude;
+                            longitudeInput.value = data.longitude;
+                            console.log("Coordonnées trouvées :", data.latitude, data.longitude);
+                        } else {
+                            console.error("Adresse introuvable.");
+                        }
+                    })
+                    .catch(error => console.error("Erreur API Nominatim :", error));
+                }
+            });
+        });
+    </script>
+{% endblock %}
 {% endblock %}

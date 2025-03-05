@@ -5,12 +5,13 @@ namespace App\Form;
 use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Validator\Constraints\File;
 
 class EventFormType extends AbstractType
 {
@@ -27,13 +28,20 @@ class EventFormType extends AbstractType
                 'attr' => ['placeholder' => 'Sélectionnez une date'],
             ])
             ->add('eventLocation', TextType::class, [
-                'label' => 'Adresse du lieu de l\'évènement',
-                'attr' => ['placeholder' => 'Entrez une adresse valide'],
+                'label' => 'Adresse complète de l\'événement',
+                'attr' => [
+                    'placeholder' => 'Ex: 10 rue de Paris, 75001 Paris, France']
             ])
             ->add('eventDescription', TextareaType::class, [
                 'label' => 'Description de l\'événement',
                 'required' => false,
                 'attr' => ['placeholder' => 'Ajoutez une description...'],
+            ])
+            ->add('latitude', HiddenType::class, [
+                'required' => false
+            ])
+            ->add('longitude', HiddenType::class, [
+                'required' => false
             ])
             ->add('eventPicture', FileType::class, [
                 'label' => 'Image de l\'événement',
