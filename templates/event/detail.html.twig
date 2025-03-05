@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de l'événement{% endblock %}
+
+{% block stylesheets %}
+    <!-- ✅ Feuille de style Leaflet (Recommandée par Leaflet.js) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+    <link rel="stylesheet" href="{{ asset('styles/event.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{ event.eventTitle }}</h1>
+
+    <div class="event-detail-card">
+        {% if event.eventPicture %}
+            <img src="{{ asset('uploads/' ~ event.eventPicture) }}" class="event-image" alt="Image de {{ event.eventTitle }}">
+        {% else %}
+            <img src="{{ asset('images/default_event.png') }}" class="event-image" alt="Image par défaut">
+        {% endif %}
+
+        <div class="event-info">
+            <p class="event-date">📅 Date : {{ event.eventDate|date('d/m/Y') }}</p>
+            <p class="event-description">{{ event.eventDescription }}</p>
+            <p class="event-location">📍 Lieu : {{ event.eventLocation }}</p>
+        </div>
+    </div>
+
+    <a href="{{ path('event_public') }}" class="btn">Retour à la liste</a>
+
+    <h2>Localisation de l’événement</h2>
+    <div id="map"></div> <!-- ✅ La carte sera stylée par `event.css` -->
+</div>
+
+{% block javascripts %}
+    <!-- ✅ Script Leaflet (Doit être chargé après le CSS) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let latitude = {{ event.latitude|default(0) }};
+            let longitude = {{ event.longitude|default(0) }};
+            let address = "{{ event.eventLocation }}"; 
+
+            if (latitude !== 0 && longitude !== 0) {
+                let map = L.map('map').setView([latitude, longitude], 13);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+
+                L.marker([latitude, longitude]).addTo(map)
+                    .bindPopup("<b>" + address + "</b>")
+                    .openPopup();
+            } else {
+                document.getElementById('map').innerHTML = "<p class='error-message'>Coordonnées GPS indisponibles pour cet événement.</p>";
+            }
+        });
+    </script>
+{% endblock %}
+{% endblock %}

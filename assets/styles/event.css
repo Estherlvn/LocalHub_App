@@ -100,6 +100,14 @@ h1 {
     transform: scale(1.05);
 }
 
+
+/**CARTE INTERACTIVE****/
+#map {
+    height: 400px;
+    width: auto
+}
+
+
 /* ✅ Responsive */
 @media (max-width: 768px) {
     .events-container {

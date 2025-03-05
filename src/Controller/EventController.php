@@ -16,7 +16,38 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class EventController extends AbstractController
 {
-    // ✅ Afficher les événements d'un artiste (sans tri)
+
+
+    #[Route('/event/public', name: 'event_public')]
+    public function showPublicEvents(EventRepository $eventRepository): Response
+    {
+        // Récupérer les événements à venir depuis le repository
+        $events = $eventRepository->findUpcomingEvents();
+
+        return $this->render('event/public.html.twig', [
+            'events' => $events,
+        ]);
+    }
+
+    #[Route('/event/{id}', name: 'event_detail', requirements: ['id' => '\d+'])]
+    public function showEventDetail(int $id, EventRepository $eventRepository): Response
+    {
+        // Récupérer l'événement par son ID
+        $event = $eventRepository->find($id);
+
+        // Si l'événement n'existe pas, afficher une erreur 404
+        if (!$event) {
+            throw $this->createNotFoundException('Événement introuvable.');
+        }
+
+        return $this->render('event/detail.html.twig', [
+            'event' => $event,
+        ]);
+    }
+
+
+
+    // Afficher les événements d'un artiste (sans tri)
     #[Route('/event/list', name: 'event_list')]
     #[IsGranted('ROLE_ARTISTE')]
     public function index(EventRepository $eventRepository): Response
@@ -27,11 +58,11 @@ final class EventController extends AbstractController
         $events = $eventRepository->findBy(['user' => $user]);
 
         return $this->render('event/list.html.twig', [
-            'events' => $events, // ✅ Correction de la variable
+            'events' => $events,
         ]);
     }
 
-    // ✅ Ajouter un événement
+    // Ajouter un événement
     #[Route('/event/add', name: 'add_event')]
     #[IsGranted('ROLE_USER')] // Seuls les utilisateurs connectés peuvent ajouter un événement
     public function addEvent(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
@@ -62,7 +93,7 @@ final class EventController extends AbstractController
 
             $this->addFlash('success', 'Votre événement a été créé avec succès !');
 
-            return $this->redirectToRoute('event_list'); // ✅ Redirection vers la liste des événements
+            return $this->redirectToRoute('event_list'); 
         }
 
         return $this->render('event/add.html.twig', [
