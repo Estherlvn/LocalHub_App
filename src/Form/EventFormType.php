@@ -27,8 +27,8 @@ class EventFormType extends AbstractType
                 'attr' => ['placeholder' => 'Sélectionnez une date'],
             ])
             ->add('eventLocation', TextType::class, [
-                'label' => 'Lieu de l\'événement',
-                'attr' => ['placeholder' => 'Entrez un lieu pour l\'événement'],
+                'label' => 'Adresse du lieu de l\'évènement',
+                'attr' => ['placeholder' => 'Entrez une adresse valide'],
             ])
             ->add('eventDescription', TextareaType::class, [
                 'label' => 'Description de l\'événement',
