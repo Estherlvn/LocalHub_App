@@ -27,7 +27,9 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table bddlocalhub.doctrine_migration_versions : ~0 rows (environ)
+-- Listage des données de la table bddlocalhub.doctrine_migration_versions : ~1 rows (environ)
+INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
+	('DoctrineMigrations\\Version20250214132233', '2025-02-14 13:22:50', 2686);
 
 -- Listage de la structure de table bddlocalhub. event
 CREATE TABLE IF NOT EXISTS `event` (
@@ -35,25 +37,28 @@ CREATE TABLE IF NOT EXISTS `event` (
   `event_title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `event_date` datetime NOT NULL,
   `event_location` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `event_description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `event_picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_id` int DEFAULT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_3BAE0AA7A76ED395` (`user_id`),
   CONSTRAINT `FK_3BAE0AA7A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bddlocalhub.event : ~0 rows (environ)
-INSERT INTO `event` (`id`, `event_title`, `event_date`, `event_location`, `description`, `event_picture`, `user_id`) VALUES
-	(1, 'test event', '2025-06-06 00:00:00', 'Rennes', 'Concert', 'studio-electro-67c5cc235192f.jpg', 1),
-	(2, 'test event', '0025-06-04 00:00:00', 'Rennes', 'concert', 'studio-electro-67c5ccc3d86db.jpg', 1);
+-- Listage des données de la table bddlocalhub.event : ~3 rows (environ)
+INSERT INTO `event` (`id`, `event_title`, `event_date`, `event_location`, `event_description`, `event_picture`, `user_id`, `latitude`, `longitude`) VALUES
+	(1, 'test event', '2025-06-06 00:00:00', 'Rennes', 'Lorem ipsum', 'background-67c80c42aba5f.png', 1, 48.117266, -1.6777926),
+	(2, 'TEST POUR GEOLOC', '2025-08-08 00:00:00', '1 Esp. Charles de Gaulle, 35000 Rennes', 'test test test', NULL, 1, 48.10690725, -1.6768673810896),
+	(3, 'concert event test', '2025-07-25 00:00:00', '25 boulevard du Président Wilson 67000 STRASBOURG', 'test concert', 'degrade-bleu-dore-67c8d4df42388.jpg', 1, 48.5895347, 7.7402653);
 
 -- Listage de la structure de table bddlocalhub. genre
 CREATE TABLE IF NOT EXISTS `genre` (
   `id` int NOT NULL AUTO_INCREMENT,
   `genre_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table bddlocalhub.genre : ~5 rows (environ)
 INSERT INTO `genre` (`id`, `genre_name`) VALUES
@@ -131,15 +136,18 @@ CREATE TABLE IF NOT EXISTS `track` (
   PRIMARY KEY (`id`),
   KEY `IDX_D6E3F8A6A76ED395` (`user_id`),
   CONSTRAINT `FK_D6E3F8A6A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bddlocalhub.track : ~21 rows (environ)
+-- Listage des données de la table bddlocalhub.track : ~27 rows (environ)
 INSERT INTO `track` (`id`, `track_name`, `audio_file`, `duration`, `upload_date`, `view_count`, `user_id`) VALUES
+	(2, 'Echo Waves', NULL, 190, '2025-01-20 17:13:14', 7852, 1),
 	(3, 'Synthetic Dreams', NULL, 230, '2025-02-20 18:00:00', 1350, 1),
 	(4, 'Night Drive', NULL, 200, '2025-01-20 17:13:21', 1300, 1),
 	(5, 'Cyber Mirage', NULL, 220, '2025-02-20 17:13:21', 1200, 1),
+	(6, 'Retro Love', NULL, 215, '2025-02-10 17:13:22', 755, 2),
 	(7, 'Midnight Lights', NULL, 205, '2025-01-20 17:13:23', 785, 2),
 	(8, 'Neon Glow', NULL, 240, '2024-02-20 17:13:23', 4580, 2),
+	(9, 'Echoed Memories', NULL, 195, '2024-02-08 17:13:24', 5200, 2),
 	(10, 'Skyline Drive', NULL, 225, '2025-02-12 17:13:24', 5000, 2),
 	(11, 'Electric Road', NULL, 250, '2025-01-09 17:13:25', 250, 3),
 	(12, 'Last Sunset', NULL, 220, '2025-01-20 17:13:26', 200, 3),
@@ -156,10 +164,9 @@ INSERT INTO `track` (`id`, `track_name`, `audio_file`, `duration`, `upload_date`
 	(23, 'No Sleep', NULL, 190, '2025-02-18 17:13:32', 4555, 5),
 	(24, 'Fast Lane', NULL, 205, '2025-02-20 17:13:31', 2300, 5),
 	(25, 'Dream Chaser', NULL, 215, '2025-02-20 17:13:31', 3200, 5),
-	(29, 'Chill Future', 'lean-on-inspiring-future-beat-283957-67c16a494edac.mp3', 150, NULL, NULL, 1),
-	(30, 'Chill Future', 'lean-on-inspiring-future-beat-283957-67c18e44abeb0.mp3', 180, NULL, NULL, 1),
-	(31, 'Chill Future', 'paper-planes-chill-future-beat-283956-67c18fa311171.mp3', 180, NULL, NULL, 1),
-	(32, 'Chill Future', 'lean-on-inspiring-future-beat-283957-67c5b45d3aae2.mp3', 180, NULL, NULL, 1);
+	(28, 'test ajout track', 'summer-joint-hip-hop-for-youtube-298900-67c08a1640dd8.mp3', 150, NULL, NULL, 1),
+	(29, 'Positive HipHop', 'bon-bro-positive-hip-hop-295911-67c08ec69c72c.mp3', 150, NULL, NULL, 1),
+	(31, 'test ajout track', 'bon-bro-positive-hip-hop-295911-67c09c6b2b7e1.mp3', 150, NULL, NULL, 1);
 
 -- Listage de la structure de table bddlocalhub. track_genre
 CREATE TABLE IF NOT EXISTS `track_genre` (
@@ -172,13 +179,16 @@ CREATE TABLE IF NOT EXISTS `track_genre` (
   CONSTRAINT `FK_F3A7915F5ED23C43` FOREIGN KEY (`track_id`) REFERENCES `track` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bddlocalhub.track_genre : ~25 rows (environ)
+-- Listage des données de la table bddlocalhub.track_genre : ~30 rows (environ)
 INSERT INTO `track_genre` (`track_id`, `genre_id`) VALUES
+	(2, 1),
 	(3, 1),
 	(4, 1),
 	(5, 1),
+	(6, 5),
 	(7, 5),
 	(8, 5),
+	(9, 5),
 	(10, 5),
 	(11, 2),
 	(12, 2),
@@ -195,21 +205,19 @@ INSERT INTO `track_genre` (`track_id`, `genre_id`) VALUES
 	(23, 4),
 	(24, 4),
 	(25, 4),
-	(29, 1),
-	(29, 2),
-	(30, 4),
-	(30, 5),
-	(31, 1),
-	(31, 2),
-	(32, 1),
-	(32, 2);
+	(28, 1),
+	(28, 2),
+	(29, 3),
+	(29, 4),
+	(31, 3),
+	(31, 4);
 
 -- Listage de la structure de table bddlocalhub. user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pseudo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_verified` tinyint(1) NOT NULL,
   `role` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `departement` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -218,26 +226,23 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`),
   UNIQUE KEY `UNIQ_8D93D64986CC499D` (`pseudo`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bddlocalhub.user : ~16 rows (environ)
-INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `is_verified`, `role`, `departement`, `profile_picture`, `bio`) VALUES
-	(1, 'Liam Shadow', 'liam.shadow@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '35', 'studio-electro-67c5afd0dbe53.jpg', 'Lorem ipsum TEST BIO'),
-	(2, 'Nova Sky', 'nova.sky@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '22', NULL, NULL),
-	(3, 'Axel Storm', 'axel.storm@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '95', NULL, NULL),
-	(4, 'Serena Moon', 'serena.moon@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '67', NULL, NULL),
-	(5, 'Drake Orion', 'drake.orion@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 1, 'artiste', '93', NULL, NULL),
-	(8, 'Admin', 'admin@localhub.com', '$2y$13$MmT6R9jCPKJWeiEQf8F0QOVyZE0vEMi/3XliU50bf9z3ULcD0hWHy', 1, 'admin', '35', NULL, NULL),
-	(9, 'Seif', 'seif@auditeur.com', '$2y$13$0nsRyjAO3gd1GyhrTMt0t.9S4FnUvwk8OaPdsrSDwsQaqe4IlQBTy', 1, 'auditeur', '93', NULL, NULL),
-	(10, 'Simon', 'simon@auditeur.com', '$2y$13$tgkmdAA3F/3f9cqdXjBQNuaq6vql011oAD0hy.cu8a7TOQwRCI2jG', 1, 'auditeur', '22', NULL, NULL),
-	(11, 'Ines', 'ines@auditeur.com', '$2y$13$HWLCBt3Wmcwcl7boucmh3egFhIpzZgg0yXeroGEcU1f7z6KCR2dE6', 1, 'auditeur', '35', NULL, NULL),
-	(13, 'Rozenn', 'rozenn@auditeur.com', '$2y$13$45lOoN30d6jCv06FGe6HPu/DJAG5oW7DNXn1vn0gnO.jtE/kcgTY2', 0, 'auditeur', '67', NULL, NULL),
-	(14, 'Marie', 'marie@auditeur.com', '$2y$13$fvZWD5ac0GoyRGV0J4noReDfuT9Ve5zZ7QktbUORRkH/vxsDwzyKO', 0, 'auditeur', '67', NULL, NULL),
-	(15, 'Alexandre', 'alexandre@auditeur.com', '$2y$13$v85CwxcZU5Pi4Pd/FQIOJuUBH5F/hAqqvqxRmBW4daY8QDYm5F3pS', 0, 'auditeur', '22', NULL, NULL),
-	(16, 'Laury', 'laury@auditeur.com', '$2y$13$9D4pY21WqTZEUbFwpSAh6u841K3eBz4eRT2gnzK2oFAQv1CrtB.qi', 0, 'auditeur', '67', NULL, NULL),
-	(18, 'Aymeric', 'aymeric@auditeur.com', '$2y$13$2B4Dg0yxF9ybDt9nRU7kR.jHDPSVCe7gca2svXrKEAOChGx/tuG12', 1, 'auditeur', '44', NULL, NULL),
-	(19, 'Test', 'test@artiste.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 0, 'artiste', '90', NULL, NULL),
-	(20, 'Test2', 'test2@artiste.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 0, 'artiste', '35', NULL, NULL);
+-- Listage des données de la table bddlocalhub.user : ~13 rows (environ)
+INSERT INTO `user` (`id`, `email`, `password`, `pseudo`, `is_verified`, `role`, `departement`, `profile_picture`, `bio`) VALUES
+	(1, 'liam.shadow@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 'Liam Shadow', 1, 'artiste', '67', 'degrade-bleu-dore-67c8d5b04bf80.jpg', NULL),
+	(2, 'nova.sky@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 'Nova Sky', 1, 'artiste', '56', NULL, NULL),
+	(3, 'axel.storm@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 'Axel Storm', 1, 'artiste', '95', NULL, NULL),
+	(4, 'serena.moon@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 'Serena Moon', 1, 'artiste', '35', NULL, NULL),
+	(5, 'drake.orion@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 'Drake Orion', 1, 'artiste', '22', NULL, NULL),
+	(8, 'admin@localhub.com', '$2y$13$MmT6R9jCPKJWeiEQf8F0QOVyZE0vEMi/3XliU50bf9z3ULcD0hWHy', 'Admin', 1, 'admin', '', NULL, NULL),
+	(9, 'seif@auditeur.com', '$2y$13$0nsRyjAO3gd1GyhrTMt0t.9S4FnUvwk8OaPdsrSDwsQaqe4IlQBTy', 'Seif', 1, 'auditeur', '', NULL, NULL),
+	(10, 'simon@auditeur.com', '$2y$13$tgkmdAA3F/3f9cqdXjBQNuaq6vql011oAD0hy.cu8a7TOQwRCI2jG', 'Simon', 1, 'auditeur', '', NULL, NULL),
+	(11, 'ines@auditeur.com', '$2y$13$HWLCBt3Wmcwcl7boucmh3egFhIpzZgg0yXeroGEcU1f7z6KCR2dE6', 'Ines', 1, 'auditeur', '', NULL, NULL),
+	(13, 'rozenn@auditeur.com', '$2y$13$45lOoN30d6jCv06FGe6HPu/DJAG5oW7DNXn1vn0gnO.jtE/kcgTY2', 'Rozenn', 0, 'auditeur', '', NULL, NULL),
+	(14, 'marie@auditeur.com', '$2y$13$fvZWD5ac0GoyRGV0J4noReDfuT9Ve5zZ7QktbUORRkH/vxsDwzyKO', 'Marie', 0, 'auditeur', '', NULL, NULL),
+	(15, 'alexandre@auditeur.com', '$2y$13$v85CwxcZU5Pi4Pd/FQIOJuUBH5F/hAqqvqxRmBW4daY8QDYm5F3pS', 'Alexandre', 0, 'auditeur', '', NULL, NULL),
+	(18, 'aymeric@auditeur.com', '$2y$13$2B4Dg0yxF9ybDt9nRU7kR.jHDPSVCe7gca2svXrKEAOChGx/tuG12', 'Aymeric', 1, 'auditeur', '', NULL, NULL);
 
 -- Listage de la structure de table bddlocalhub. user_track
 CREATE TABLE IF NOT EXISTS `user_track` (
@@ -252,10 +257,9 @@ CREATE TABLE IF NOT EXISTS `user_track` (
 
 -- Listage des données de la table bddlocalhub.user_track : ~3 rows (environ)
 INSERT INTO `user_track` (`user_id`, `track_id`) VALUES
-	(9, 3),
 	(9, 4),
-	(9, 7),
-	(9, 14);
+	(9, 5),
+	(9, 11);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
