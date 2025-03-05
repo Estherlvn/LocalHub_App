@@ -24,7 +24,7 @@ class Event
     private ?string $eventLocation = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $Description = null;
+    private ?string $eventDescription = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $eventPicture = null;
@@ -73,14 +73,14 @@ class Event
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getEventDescription(): ?string
     {
-        return $this->Description;
+        return $this->eventDescription;
     }
 
-    public function setDescription(string $Description): static
+    public function setEventDescription(string $eventDescription): static
     {
-        $this->Description = $Description;
+        $this->eventDescription = $eventDescription;
 
         return $this;
     }

@@ -23,6 +23,7 @@
 
     <section class="artist-profile">
         <div class="profile-container">
+           
             <label for="profile_picture_input">
                 <div class="overlay">
                     {{ form_widget(form.profilePicture, {'attr': {'id': 'profile_picture_input'}}) }}
@@ -32,8 +33,8 @@
                 {% else %}
                     <img src="{{ asset('images/default_profile.png') }}" class="profile-pic" alt="Photo par défaut">
                 {% endif %}
-
             </label>
+            <div id="edit"><p>editer</p></div>
         </div>
         
         <div class="bio mb-3">

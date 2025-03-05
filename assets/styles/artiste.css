@@ -22,12 +22,11 @@ ARTISTE HOME SECTION
 /* ✅ Conteneur de la photo de profil */
 .profile-container {
     position: relative;
-    width: 220px;
-    height: 220px;
+    width: 345px;
+    height: 280px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 /* ✅ Photo de profil */
@@ -38,6 +37,22 @@ ARTISTE HOME SECTION
     border-radius: 50%;
     border: 3px solid #ff9367;
     transition: transform 0.3s ease-in-out;
+}
+
+#edit {
+    position: absolute;
+    margin-left: 170px;
+    cursor: pointer;
+    margin-top: 100px;
+    margin-right: 18px;
+}
+
+#edit p {
+    border: solid 1px #ff9367;
+    background-color: #ff9367;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: #2e2e48;
 }
 
 .profile-container:hover .profile-pic {
@@ -57,8 +72,6 @@ ARTISTE HOME SECTION
 /* ✅ Overlay superposé exactement sur la photo */
 .overlay {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -66,10 +79,6 @@ ARTISTE HOME SECTION
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    font-size: 1em;
-    font-weight: bold;
-    text-align: center;
     opacity: 0;
     transition: opacity 0.3s ease-in-out, background 0.3s ease-in-out;
     cursor: pointer;

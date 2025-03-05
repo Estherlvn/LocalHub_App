@@ -30,7 +30,7 @@ class EventFormType extends AbstractType
                 'label' => 'Lieu de l\'événement',
                 'attr' => ['placeholder' => 'Entrez un lieu pour l\'événement'],
             ])
-            ->add('description', TextareaType::class, [
+            ->add('eventDescription', TextareaType::class, [
                 'label' => 'Description de l\'événement',
                 'required' => false,
                 'attr' => ['placeholder' => 'Ajoutez une description...'],
