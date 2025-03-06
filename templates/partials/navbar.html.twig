@@ -1,27 +1,20 @@
 <nav class="nav-top">
     <img src="{{ asset('img/logo.svg') }}" alt="LocalHub Logo" class="logo">
 
-
     <div class="nav-menu-container">
 
-        {% if not app.user %}
             <a class="nav-menu" href="{{ path('app_home') }}">Accueil</a>
             <a class="nav-menu" href="{{ path('artiste_index') }}">Artistes</a>
             <a class="nav-menu" href="{{ path('event_public') }}">Evenements</a>
-            
+        
+        {% if not app.user %}
+
         <a class="nav-menu" href="{{ path('app_login') }}" >Connexion</a>
         <a href="{{ path('app_register') }}" id="nav-log">Inscription</a>
+        
         {% else %}
-            {% if is_granted('ROLE_ADMIN') %}
-                <a class="nav-menu" href="{{ path('admin_home') }}">Accueil</a>
-            {% elseif is_granted('ROLE_ARTISTE') %}
-                <a class="nav-menu" href="{{ path('artiste_profile') }}">Accueil</a>
-            {% else %}
-                <a class="nav-menu" href="{{ path('auditeur_home') }}">Accueil</a>
-            {% endif %}
             <a class="nav-menu" href="{{ path('app_logout') }}">Se déconnecter</a>
         {% endif %}
-
 
     </div>
 </nav>
