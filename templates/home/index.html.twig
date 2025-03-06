@@ -2,8 +2,13 @@
 
 {% block title %}HomePage{% endblock %}
 
-{% block body %}
 
+{% block navbar %}
+    {% include 'partials/navtop.html.twig' %}
+{% endblock %}
+
+
+{% block body %}
 
     <div class="accueil">
         <img src="{{ asset('img/background1.jpg') }}" alt="Image d'illustration avec foule dans un concert festival" class="background">

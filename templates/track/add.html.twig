@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="{{ asset('styles/form.css') }}">
 {% endblock %}
 
+{% block navbar %}
+    {% include 'partials/navleft.html.twig' %}
+{% endblock %}
+
 {% block body %}
 
 {# {% for label, messages in app.flashes %}

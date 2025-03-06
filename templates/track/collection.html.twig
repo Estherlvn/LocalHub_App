@@ -7,16 +7,17 @@
 {% endblock %}
 
 
+{% block navbar %}
+    {% include 'partials/navleft.html.twig' %}
+{% endblock %}
+
 {% block body %}
 
 
+{# 
+    <a href="{{ path('artiste_profile') }}" class="back-btn">Retour au profil</a> #}
 
-<a href="{{ path('artiste_profile') }}" class="back-btn">Retour à l'accueil</a>
-
-
-
-    <div class="tracklists"></div>
-
+    <div class="tracklists">
         <div class="tracks">
         <h2>Vos morceaux</h2>
         <table>

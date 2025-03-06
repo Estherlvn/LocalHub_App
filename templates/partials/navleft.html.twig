@@ -1,0 +1,51 @@
+{# partials/navleft.html.twig #}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+{% endblock %}
+
+
+{# Navigation supérieure fixe #}
+<nav class="nav-top">
+    <img src="{{ asset('img/logo.svg') }}" alt="LocalHub Logo" class="logo">
+    <div class="nav-menu-container">
+        {% if not app.user %}
+            <a class="nav-menu" href="{{ path('app_home') }}">Accueil</a>
+            <a class="nav-menu" href="{{ path('artiste_index') }}">Artistes</a>
+            <a class="nav-menu" href="{{ path('event_public') }}">Evenements</a>
+            <a class="nav-menu" href="{{ path('app_login') }}">Connexion</a>
+            <a class="nav-menu" href="{{ path('app_register') }}" id="nav-log">Inscription</a>
+        {% else %}
+            <a class="nav-menu" href="{{ path('app_logout') }}">Se déconnecter</a>
+        {% endif %}
+    </div>
+</nav>
+
+{# Barre de navigation latérale selon le rôle du membre connecté #}
+{% if app.user %}
+    {% if is_granted('ROLE_ARTISTE') %}
+        <nav class="nav-left artist">
+            <ul>
+                <li><a href="{{ path('artiste_profile') }}">Mon Profil</a></li>
+                <li><a href="{{ path('add_track') }}">Upload</a></li>
+                <li><a href="{{ path('track_collection') }}">Collection</a></li>
+                <li><a href="{{ path('event_list') }}">Evenements</a></li>
+            </ul>
+        </nav>
+    {% elseif is_granted('ROLE_AUDITEUR') %}
+        <nav class="nav-left auditeur">
+            <ul>
+                <li><a href="{{ path('auditeur_profile') }}">Mon Profil</a></li>
+                <li><a href="{{ path('auditeur_favoris') }}">Favoris</a></li>
+                <li><a href="{{ path('event_public') }}">Evenements</a></li>
+            </ul>
+        </nav>
+    {% endif %}
+{% endif %}
+
+
+{% block body %}{% endblock %}
+
+
+{% block javascripts %}{% endblock %}

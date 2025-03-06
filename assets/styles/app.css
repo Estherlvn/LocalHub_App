@@ -34,13 +34,6 @@ ul {
 }
 
 
-/* Le contenu principal prend en compte l'espace de la nav latérale */
-.main-content {
-    margin-left: 220px; /* Doit correspondre à la largeur de la nav */
-    padding: 20px;
-    width: calc(100% - 220px);
-}
-
 /****   NAVIGATION   ****/
 /*****   NAV-TOP   *****/
 nav.nav-top {
@@ -97,7 +90,7 @@ a#nav-log:hover {
     left: 0;
     width: 220px;
     height: 100%;
-    background-color: #f2f2f2;
+    background-color: #F3F3F1;
     padding: 20px;
 }
 
@@ -114,6 +107,12 @@ a#nav-log:hover {
     text-decoration: none;
     color: #333;
     font-weight: bold;
+}
+/* Le contenu principal prend en compte l'espace de la nav latérale */
+.main-content {
+    margin-left: 220px; /* Doit correspondre à la largeur de la nav */
+    padding: 20px;
+    width: calc(100% - 220px);
 }
 
 
@@ -273,6 +272,11 @@ img.prom-picture {
  .container {
     min-width: 50%;
     height: 100vh;
+ }
+
+.dashboard-content {
+    margin-left: 380px;
+    margin-top: 30px;
  }
 
  .wrapper {

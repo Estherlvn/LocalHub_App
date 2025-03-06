@@ -6,12 +6,16 @@
     <link rel="stylesheet" href="{{ asset('styles/artiste.css') }}">
 {% endblock %}
 
+{% block navbar %}
+    {% include 'partials/navleft.html.twig' %}
+{% endblock %}
+
 {% block body %}
-<div class="container">
-    <!-- Section de bienvenue -->
+<div class="dashboard-content">
+
     <div class="header">
         <h1>Bienvenue {{ app.user.pseudo }}</h1>
     </div>
 
-
+</div>
 {% endblock %}

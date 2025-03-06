@@ -2,6 +2,10 @@
 
 {% block title %}Inscription{% endblock %}
 
+{% block navbar %}
+    {% include 'partials/navtop.html.twig' %}
+{% endblock %}
+
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>

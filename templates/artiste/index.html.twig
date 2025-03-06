@@ -2,8 +2,11 @@
 
 {% block title %}Page des Artistes{% endblock %}
 
-{% block body %}
+{% block navbar %}
+    {% include 'partials/navtop.html.twig' %}
+{% endblock %}
 
+{% block body %}
     
     <div class="main">
 
@@ -19,7 +22,6 @@
                 {% endfor %}
             </div>
 
-
             <h2>Derniers Titres ajoutés</h2>
             <div class="wrapper">
                         {% for track in latestTracks %}
@@ -31,7 +33,6 @@
                         {% endfor %}
             </div>
 
-            
             <h2>Artistes par Région</h2>
             <div class="wrapper">
                 {% for region in regions %}        

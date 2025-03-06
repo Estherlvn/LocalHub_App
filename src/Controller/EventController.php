@@ -82,8 +82,7 @@ final class EventController extends AbstractController
         }
     }
 
-
-    // Afficher les événements d'un artiste (sans tri)
+    // Afficher les événements d'un artiste
     #[Route('/event/list', name: 'event_list')]
     #[IsGranted('ROLE_ARTISTE')]
     public function index(EventRepository $eventRepository): Response
@@ -97,6 +96,23 @@ final class EventController extends AbstractController
             'events' => $events,
         ]);
     }
+
+
+    // Afficher les événements d'un auditeur // ATTENTION => Mettre en place le systeme de "save event" pour un auditeur
+    #[Route('/event/auditeur', name: 'event_auditeur')]
+    #[IsGranted('ROLE_ARTISTE')]
+    public function eventAuditeur(EventRepository $eventRepository): Response
+    {
+        $user = $this->getUser(); // Récupérer l'utilisateur connecté
+
+        // Récupérer les événements de l'artiste connecté
+        $events = $eventRepository->findBy(['user' => $user]);
+
+        return $this->render('event/auditeur.html.twig', [
+            'events' => $events,
+        ]);
+    }
+
 
     // Ajouter un événement
     #[Route('/event/add', name: 'add_event')]
@@ -143,5 +159,7 @@ final class EventController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    
+
+
+
 }
