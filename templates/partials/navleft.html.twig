@@ -17,6 +17,7 @@
             <a class="nav-menu" href="{{ path('app_login') }}">Connexion</a>
             <a class="nav-menu" href="{{ path('app_register') }}" id="nav-log">Inscription</a>
         {% else %}
+            <a class="nav-menu" href="{{ path('app_home') }}">Accueil</a>
             <a class="nav-menu" href="{{ path('app_logout') }}">Se déconnecter</a>
         {% endif %}
     </div>
@@ -26,6 +27,7 @@
 {% if app.user %}
     {% if is_granted('ROLE_ARTISTE') %}
         <nav class="nav-left artist">
+            <img src="{{ asset('img/logo.svg') }}" alt="LocalHub Logo" class="logo">
             <ul>
                 <li><a href="{{ path('artiste_profile') }}">Mon Profil</a></li>
                 <li><a href="{{ path('add_track') }}">Upload</a></li>
@@ -35,6 +37,7 @@
         </nav>
     {% elseif is_granted('ROLE_AUDITEUR') %}
         <nav class="nav-left auditeur">
+            <img src="{{ asset('img/logo.svg') }}" alt="LocalHub Logo" class="logo">
             <ul>
                 <li><a href="{{ path('auditeur_profile') }}">Mon Profil</a></li>
                 <li><a href="{{ path('auditeur_favoris') }}">Favoris</a></li>
