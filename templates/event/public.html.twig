@@ -17,10 +17,10 @@
             {% for event in events %}
                 <div class="event-card">
                     {% if event.eventPicture %}
-                    <img src="{{ asset('uploads/' ~ event.eventPicture) }}" class="event-image" alt="Image de {{ event.eventTitle }}>
-                {% else %}
-                    <img src="{{ asset('images/default_event.png') }}" class="event-image" alt="Image concert">
-                {% endif %}
+                        <img src="{{ asset('uploads/' ~ event.eventPicture) }}" class="event-image" alt="Image de {{ event.eventTitle }}">
+                    {% else %}
+                        <img src="{{ asset('images/default_event.png') }}" class="event-image" alt="Image concert">
+                    {% endif %}
                     <div class="event-details">
                         <h2>{{ event.eventTitle }}</h2>
                         <p class="event-date">📅 {{ event.eventDate|date('d/m/Y') }}</p>

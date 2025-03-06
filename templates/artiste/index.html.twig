@@ -1,20 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArtisteController!{% endblock %}
+{% block title %}Page des Artistes{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    
+    <div class="main">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/laragon/www/LocalHub_App/src/Controller/ArtisteController.php</code></li>
-        <li>Your template at <code>C:/laragon/www/LocalHub_App/templates/artiste/index.html.twig</code></li>
-    </ul>
-</div>
+        <div class="container">
+            <h2>Les Artistes à la Une</h2>
+            <div class="wrapper">
+                {% for artiste in artistes %}
+                    <a href="{{ path('artiste_detail', { 'id': artiste.id }) }}" class="artist-link">
+                        {{ artiste.pseudo }}
+                    </a>
+                {% else %}
+                    Aucun artiste trouvé.
+                {% endfor %}
+            </div>
+
+
+            <h2>Derniers Titres ajoutés</h2>
+            <div class="wrapper">
+                        {% for track in latestTracks %}
+                        <a href="" class="artist-link">
+                                {{ track.trackName }}
+                        </a>        
+                        {% else %}
+                            Aucun morceau disponible.
+                        {% endfor %}
+            </div>
+
+            
+            <h2>Artistes par Région</h2>
+            <div class="wrapper">
+                {% for region in regions %}        
+                        <a href="{{ path('artistes_par_region', {'region': region.region}) }}" class="region-link">
+                            {{ region.region }} 
+                            ({{ region.total_artistes }} artistes)
+                        </a>
+                {% else %}
+                    Aucun artiste trouvé.
+                {% endfor %}
+            </ul>
+
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
+
