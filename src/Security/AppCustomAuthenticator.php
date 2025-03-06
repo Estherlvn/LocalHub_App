@@ -69,7 +69,7 @@ class AppCustomAuthenticator extends AbstractAuthenticator
         } elseif (in_array('ROLE_ARTISTE', $roles, true)) {
             $targetUrl = $this->urlGenerator->generate('artiste_profile');
         } else {
-            $targetUrl = $this->urlGenerator->generate('auditeur_home');
+            $targetUrl = $this->urlGenerator->generate('auditeur_profile');
         }
     
         return new RedirectResponse($targetUrl);
