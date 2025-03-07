@@ -9,14 +9,14 @@ ARTISTE HOME SECTION
 /* ✅ Conteneur principal */
 .artist-profile {
     width: 90%;
-    margin: 40px auto;
-    background: #2e2e48; /* Fond sombre élégant */
+    background: linear-gradient(90deg, #2e2e48, #03030D);
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 2px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     color: white;
     text-align: center;
     display: flex;
+    margin-bottom: 60px;
 }
 
 /* ✅ Conteneur de la photo de profil */
@@ -142,7 +142,7 @@ ARTISTE HOME SECTION
 
 /* ✅ Style du textarea */
 .bio textarea {
-    width: 100%;
+    width: 60%;
     height: 60%;
     padding: 20px;
     border: 1px solid #ff9367;
@@ -159,8 +159,50 @@ ARTISTE HOME SECTION
     box-shadow: 0 0 5px #ff9367;
 }
 
-/* ✅ Bouton Mettre à jour */
-button {
+/* Bouton Actualiser*/
+/* CSS */
+.button-8 {
+  background-color: #5dc7b4;
+  border-radius: 3px;
+  border: 1px solid #5dc7b4;
+  box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #131d24;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin-top: 12px;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.button-8:hover,
+.button-8:focus {
+  background-color: #b3d3ea;
+  color: #2c5777;
+}
+
+.button-8:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button-8:active {
+  background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
+}
+/* button {
     margin-top: 300px;
     height: 50px;
     width: 150px;
@@ -175,7 +217,7 @@ button {
 button:hover {
     background: linear-gradient(90deg, #ff5e57, #e54342);
     transform: scale(1.05);
-}
+} */
 
 /* ✅ Responsive */
 @media (max-width: 768px) {
@@ -194,30 +236,69 @@ button:hover {
 }
 
 
-
 /*****
 SECTION CTA
 *****/
 .cta-section {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes max */
-    gap: 20px; /* Espacement entre les boutons */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 65px;;
     justify-content: center;
     max-width: 1300px;
-    margin: 40px auto; /* Centrage de la section */
-    padding: 20px;
+    margin-top: 45px;
 }
 
 /* Style des boutons */
-.cta-btn {
-    background: linear-gradient(90deg, #ff9367, #ff5e57);
-    color: #F3F3F1;
-    padding: 25px;
+/* .cta-btn {
+    background: linear-gradient(61deg, #ff9367, #94cbc3); */
+    /* background-color: #2e2e48; */
+    /* color: #2e2e48;
+    padding: 18px;
     text-align: center;
-    border-radius: 5px;
-    font-size: 0.8em;
+    border-radius: 3px;
+    font-size: 0.9em;
     transition: transform 0.3s ease-in-out;
     cursor: pointer;
+} */
+
+/* CSS */
+.button-52 {
+  font-size: 12px;
+  font-weight: 100;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 1px solid #ff9367;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-52:after {
+  content: "";
+  background-color: #2E2E48;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.button-52:hover:after {
+  top: 0px;
+  left: 0px;
+}
+
+
+@media (min-width: 768px) {
+  .button-52 {
+    padding: 13px 50px 13px;
+  }
 }
 
 .cta-btn:hover {

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue{% endblock %}
+{% block title %}Bienvenue cher(e) Artiste{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('styles/artiste.css') }}">
@@ -15,7 +15,7 @@
 <div class="dashboard-content">
     <!-- Section de bienvenue -->
     <div class="header">
-        <h1>Bienvenue {{ app.user.pseudo }}</h1>
+        <h1>Bienvenue à bord, {{ app.user.pseudo }}</h1>
     </div>
 
     <!-- Flash messages -->
@@ -36,21 +36,18 @@
                 {% if app.user.profilePicture %}
                     <img src="{{ asset('uploads/' ~ app.user.profilePicture) }}" class="profile-pic" alt="Votre photo de profil">
                 {% else %}
-                    <img src="{{ asset('images/vinyle.png') }}" class="profile-pic" alt="Photo par défaut">
+                    <img src="{{ asset('images/music_share.png') }}" class="profile-pic" alt="Photo par défaut">
                 {% endif %}
             </label>
-            <div id="edit"><p>editer</p></div>
+            <div id="edit"><p>Editer</p></div>
         </div>
         
         <div class="bio mb-3">
             {{ form_label(form.bio, 'Votre biographie', {'label_attr': {'class': 'form-label'}}) }}
             {{ form_widget(form.bio, {'attr': {'class': 'form-control', 'rows': '5', 'placeholder': 'Ajoutez une description...'}}) }}
+            <button class="button-8" role="button">Actualiser</button>
         </div>
-
-        <button type="submit">Actualiser</button>
-        
     {{ form_end(form) }}
-
 </section>
 
     <!-- Section des actions -->
@@ -60,13 +57,13 @@
         </div>
 
         <div class="cta-section">
-            <div class="cta-btn">
+            <div class="button-52">
                 <a href="{{ path('track_collection') }}"><h3>Consulter ma collection</h3></a>
             </div>
-            <div class="cta-btn">
+            <div class="button-52">
                 <a href="{{ path('add_track') }}"><h3>Ajouter des titres</h3></a>
             </div>
-            <div class="cta-btn">
+            <div class="button-52">
                 <a href="{{ path('add_event') }}"><h3>Créer un évènement</h3></a>
             </div>
         </div>
