@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\EventRepository;
+use App\Entity\User;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EventRepository;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event
@@ -151,29 +153,30 @@ class Event
     }
 
 
-     // Récupérer les utilisateurs qui ont enregistré l'événement
-     public function getSavedByUsers(): Collection
-     {
-         return $this->savedByUsers;
-     }
- 
-     // Ajouter un utilisateur qui enregistre cet événement
-     public function addSavedByUser(User $user): self
-     {
-         if (!$this->savedByUsers->contains($user)) {
-             $this->savedByUsers->add($user);
-             $user->saveEvent($this); // Assurer la relation bidirectionnelle
-         }
-         return $this;
-     }
- 
-     // Supprimer un utilisateur de la liste des favoris
-     public function removeSavedByUser(User $user): self
-     {
-         if ($this->savedByUsers->contains($user)) {
-             $this->savedByUsers->removeElement($user);
-             $user->removeEvent($this); // Assurer la relation bidirectionnelle
-         }
-         return $this;
-     }
+    /**
+     * @return Collection<int, User>
+     */
+    public function getSavedByUsers(): Collection
+    {
+        return $this->savedByUsers;
+    }
+
+    public function addSavedByUser(User $user): self
+    {
+        if (!$this->savedByUsers->contains($user)) {
+            $this->savedByUsers->add($user);
+            $user->saveEvent($this); // Assurer la relation bidirectionnelle
+        }
+
+        return $this;
+    }
+
+    public function removeSavedByUser(User $user): self
+    {
+        if ($this->savedByUsers->removeElement($user)) {
+            $user->removeSavedEvent($this); // Supprimer aussi côté User
+        }
+
+        return $this;
+    }
 }

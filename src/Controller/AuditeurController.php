@@ -83,50 +83,7 @@ final class AuditeurController extends AbstractController
         }
 
 
-    // AJOUTER et RETIRER un event des events enregistrés
-    #[Route('/event/save/{id}', name: 'save_event')]
-    #[IsGranted('ROLE_AUDITEUR')]
-        public function saveEvent(Event $event, EntityManagerInterface $entityManager): RedirectResponse
-        {
-            $user = $this->getUser();
-            
-            // Vérifier si l'événement est déjà enregistré
-            if ($user->getSavedEvents()->contains($event)) {
-                $user->removeSavedEvent($event);
-                $message = 'Événement retiré.';
-            } else {
-                $user->saveEvent($event);
-                $message = 'Événement enregistré !';
-            }
-
-            // Sauvegarder les modifications
-            $entityManager->flush();
-
-            // Ajouter un message flash pour l'utilisateur
-            $this->addFlash('success', $message);
-
-            // Redirection vers la liste des événements favoris
-            return $this->redirectToRoute('event_auditeur');
-        }
-
-    // AFFICHER les events + events enregistrés de l'auditeur
-    #[Route('/event/auditeur', name: 'event_auditeur')]
-    #[IsGranted('ROLE_AUDITEUR')]
-        public function showEvent(EventRepository $eventRepository): Response
-        {
-            $user = $this->getUser(); // Récupérer l'utilisateur connecté
-
-            // Récupérer tous les events de la BDD
-            $events = $eventRepository->findAll();
-            
-            // Récupérer les events favoris de l'utilisateur (évite le retour null)
-            $savedEvents = $user->getSavedEvents();
-
-            return $this->render('event/auditeur.html.twig', [
-                'events' => $events,
-                'savedEvents' => $savedEvents,
-            ]);
-        }
+    
 
         
 }
