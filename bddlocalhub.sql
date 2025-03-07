@@ -21,42 +21,40 @@ USE `bddlocalhub`;
 
 -- Listage de la structure de table bddlocalhub. doctrine_migration_versions
 CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
-  `version` varchar(191) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `version` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
   `execution_time` int DEFAULT NULL,
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table bddlocalhub.doctrine_migration_versions : ~1 rows (environ)
+-- Listage des données de la table bddlocalhub.doctrine_migration_versions : ~0 rows (environ)
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20250214132233', '2025-02-14 13:22:50', 2686);
 
 -- Listage de la structure de table bddlocalhub. event
 CREATE TABLE IF NOT EXISTS `event` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `event_title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `event_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `event_date` datetime NOT NULL,
-  `event_location` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `event_description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `event_picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_id` int DEFAULT NULL,
+  `event_location` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `event_description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `event_picture` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int NOT NULL,
   `latitude` double NOT NULL,
   `longitude` double NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_3BAE0AA7A76ED395` (`user_id`),
   CONSTRAINT `FK_3BAE0AA7A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table bddlocalhub.event : ~3 rows (environ)
 INSERT INTO `event` (`id`, `event_title`, `event_date`, `event_location`, `event_description`, `event_picture`, `user_id`, `latitude`, `longitude`) VALUES
-	(1, 'test event', '2025-06-06 00:00:00', 'Rennes', 'Lorem ipsum', 'background-67c80c42aba5f.png', 1, 48.117266, -1.6777926),
-	(2, 'TEST POUR GEOLOC', '2025-08-08 00:00:00', '1 Esp. Charles de Gaulle, 35000 Rennes', 'test test test', NULL, 1, 48.10690725, -1.6768673810896),
-	(3, 'concert event test', '2025-07-25 00:00:00', '25 boulevard du Président Wilson 67000 STRASBOURG', 'test concert', 'degrade-bleu-dore-67c8d4df42388.jpg', 1, 48.5895347, 7.7402653);
+	(4, 'Concert évènement', '2025-08-07 00:00:00', 'Esp. Charles de Gaulle 35000 Rennes', 'Assistez à notre concert évènement', 'image-concert-67cae82221999.jpg', 1, 48.1060231, -1.6764654318088);
 
 -- Listage de la structure de table bddlocalhub. genre
 CREATE TABLE IF NOT EXISTS `genre` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `genre_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `genre_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -71,9 +69,9 @@ INSERT INTO `genre` (`id`, `genre_name`) VALUES
 -- Listage de la structure de table bddlocalhub. messenger_messages
 CREATE TABLE IF NOT EXISTS `messenger_messages` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `body` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `headers` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue_name` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `headers` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue_name` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `available_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `delivered_at` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
@@ -88,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `messenger_messages` (
 -- Listage de la structure de table bddlocalhub. playlist
 CREATE TABLE IF NOT EXISTS `playlist` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `playlist_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `playlist_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `visibility` tinyint(1) DEFAULT NULL,
   `user_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -127,8 +125,8 @@ CREATE TABLE IF NOT EXISTS `playlist_user` (
 -- Listage de la structure de table bddlocalhub. track
 CREATE TABLE IF NOT EXISTS `track` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `track_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `audio_file` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `track_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `audio_file` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `duration` int NOT NULL,
   `upload_date` datetime DEFAULT NULL,
   `view_count` int DEFAULT NULL,
@@ -215,34 +213,49 @@ INSERT INTO `track_genre` (`track_id`, `genre_id`) VALUES
 -- Listage de la structure de table bddlocalhub. user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pseudo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pseudo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_verified` tinyint(1) NOT NULL,
-  `role` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `departement` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `profile_picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bio` longtext COLLATE utf8mb4_unicode_ci,
+  `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `departement` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profile_picture` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bio` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`),
   UNIQUE KEY `UNIQ_8D93D64986CC499D` (`pseudo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bddlocalhub.user : ~13 rows (environ)
+-- Listage des données de la table bddlocalhub.user : ~0 rows (environ)
 INSERT INTO `user` (`id`, `email`, `password`, `pseudo`, `is_verified`, `role`, `departement`, `profile_picture`, `bio`) VALUES
-	(1, 'liam.shadow@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 'Liam Shadow', 1, 'artiste', '67', 'degrade-bleu-dore-67c8d5b04bf80.jpg', NULL),
+	(1, 'liam.shadow@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 'Liam Shadow', 1, 'artiste', '67', 'music-file-67cad0d9b4c6a.png', NULL),
 	(2, 'nova.sky@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 'Nova Sky', 1, 'artiste', '56', NULL, NULL),
 	(3, 'axel.storm@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 'Axel Storm', 1, 'artiste', '95', NULL, NULL),
 	(4, 'serena.moon@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 'Serena Moon', 1, 'artiste', '35', NULL, NULL),
 	(5, 'drake.orion@email.com', '$2y$13$BiRGlJgui2aCBlQ5U/Fv.OfUL31E5ol59sX4hPB1evYRvXkCIax7e', 'Drake Orion', 1, 'artiste', '22', NULL, NULL),
 	(8, 'admin@localhub.com', '$2y$13$MmT6R9jCPKJWeiEQf8F0QOVyZE0vEMi/3XliU50bf9z3ULcD0hWHy', 'Admin', 1, 'admin', '', NULL, NULL),
-	(9, 'seif@auditeur.com', '$2y$13$0nsRyjAO3gd1GyhrTMt0t.9S4FnUvwk8OaPdsrSDwsQaqe4IlQBTy', 'Seif', 1, 'auditeur', '', NULL, NULL),
+	(9, 'seif@auditeur.com', '$2y$13$0nsRyjAO3gd1GyhrTMt0t.9S4FnUvwk8OaPdsrSDwsQaqe4IlQBTy', 'Seif', 1, 'auditeur', '', 'music-share-67caf6ab66b0b.png', 'Voici ma courte présentation en tant que Auditeur du site LocalHub !'),
 	(10, 'simon@auditeur.com', '$2y$13$tgkmdAA3F/3f9cqdXjBQNuaq6vql011oAD0hy.cu8a7TOQwRCI2jG', 'Simon', 1, 'auditeur', '', NULL, NULL),
 	(11, 'ines@auditeur.com', '$2y$13$HWLCBt3Wmcwcl7boucmh3egFhIpzZgg0yXeroGEcU1f7z6KCR2dE6', 'Ines', 1, 'auditeur', '', NULL, NULL),
 	(13, 'rozenn@auditeur.com', '$2y$13$45lOoN30d6jCv06FGe6HPu/DJAG5oW7DNXn1vn0gnO.jtE/kcgTY2', 'Rozenn', 0, 'auditeur', '', NULL, NULL),
 	(14, 'marie@auditeur.com', '$2y$13$fvZWD5ac0GoyRGV0J4noReDfuT9Ve5zZ7QktbUORRkH/vxsDwzyKO', 'Marie', 0, 'auditeur', '', NULL, NULL),
 	(15, 'alexandre@auditeur.com', '$2y$13$v85CwxcZU5Pi4Pd/FQIOJuUBH5F/hAqqvqxRmBW4daY8QDYm5F3pS', 'Alexandre', 0, 'auditeur', '', NULL, NULL),
 	(18, 'aymeric@auditeur.com', '$2y$13$2B4Dg0yxF9ybDt9nRU7kR.jHDPSVCe7gca2svXrKEAOChGx/tuG12', 'Aymeric', 1, 'auditeur', '', NULL, NULL);
+
+-- Listage de la structure de table bddlocalhub. user_saved_events
+CREATE TABLE IF NOT EXISTS `user_saved_events` (
+  `user_id` int NOT NULL,
+  `event_id` int NOT NULL,
+  PRIMARY KEY (`user_id`,`event_id`),
+  KEY `IDX_B74D5053A76ED395` (`user_id`),
+  KEY `IDX_B74D505371F7E88B` (`event_id`),
+  CONSTRAINT `FK_B74D505371F7E88B` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `FK_B74D5053A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Listage des données de la table bddlocalhub.user_saved_events : ~0 rows (environ)
+INSERT INTO `user_saved_events` (`user_id`, `event_id`) VALUES
+	(9, 4);
 
 -- Listage de la structure de table bddlocalhub. user_track
 CREATE TABLE IF NOT EXISTS `user_track` (
