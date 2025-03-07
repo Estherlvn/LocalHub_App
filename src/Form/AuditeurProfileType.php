@@ -15,7 +15,7 @@ class AuditeurProfileType extends AbstractType
     {
         $builder
             ->add('bio', TextareaType::class, [
-                'label' => 'Présentation',
+                'label' => 'Biographie',
                 'required' => false,
                 'attr' => ['placeholder' => 'Parlez nous un peu de vous :)'],
             ])

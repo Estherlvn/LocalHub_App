@@ -1,13 +1,13 @@
 /***
-ARTISTE HOME SECTION
+PROFILE SECTTION
 ****/
 
 .container {
     margin: 50px;
 }
 
-/* ✅ Conteneur principal */
-.artist-profile {
+/* Conteneur principal */
+.profile {
     width: 90%;
     background: linear-gradient(90deg, #2e2e48, #03030D);
     padding: 30px;
@@ -19,7 +19,7 @@ ARTISTE HOME SECTION
     margin-bottom: 60px;
 }
 
-/* ✅ Conteneur de la photo de profil */
+/* Conteneur de la photo de profil */
 .profile-container {
     position: relative;
     width: 345px;
@@ -29,7 +29,7 @@ ARTISTE HOME SECTION
     align-items: center;
 }
 
-/* ✅ Photo de profil */
+/* Photo de profil */
 .profile-pic {
     width: 200px;
     height: 200px;
@@ -59,7 +59,8 @@ ARTISTE HOME SECTION
     transform: scale(1.1);
 }
 
-/* ✅ Input file superposé */
+/* Input file superposé */
+#auditeur_profile_profilePicture,
 #artiste_profile_profilePicture {
     position: absolute;
     width: 200px;
@@ -69,7 +70,7 @@ ARTISTE HOME SECTION
     z-index: 2;
 }
 
-/* ✅ Overlay superposé exactement sur la photo */
+/* Overlay superposé exactement sur la photo */
 .overlay {
     position: absolute;
     width: 200px;
@@ -84,24 +85,30 @@ ARTISTE HOME SECTION
     cursor: pointer;
 }
 
-/* ✅ Affichage de l'overlay au survol */
+/* Affichage de l'overlay au survol */
 .profile-container:hover .overlay {
     opacity: 1;
 }
 
-/* ✅ Effet au survol du bouton de changement */
+/* Effet au survol du bouton de changement */
+#auditeur_profile_profilePicture:hover + .profile-pic {
+    transform: scale(1.1);
+}
+
+/* Effet au survol du bouton de changement */
 #artiste_profile_profilePicture:hover + .profile-pic {
     transform: scale(1.1);
 }
 
-/* ✅ Animation de l'overlay */
+
+/* Animation de l'overlay */
 .overlay:hover {
     background: rgba(255, 147, 103, 0.7);
 }
 
-/* ✅ Responsive : ajustement pour petits écrans */
+/* Responsive : ajustement pour petits écrans */
 @media (max-width: 768px) {
-    .artist-profile {
+    .profile {
         width: 95%;
     }
 
@@ -110,6 +117,11 @@ ARTISTE HOME SECTION
         height: 180px;
     }
 
+    .profile-pic,
+    #auditeur_profile_profilePicture {
+        width: 180px;
+        height: 180px;
+    }
     .profile-pic,
     #artiste_profile_profilePicture {
         width: 180px;
@@ -123,16 +135,7 @@ ARTISTE HOME SECTION
     }
 }
 
-/* ✅ Cacher l'input file
-.overlay input {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-} */
-
-/* ✅ Biographie */
+/* Biographie */
 .bio {
     width: 100%;
     display: flex;
@@ -140,7 +143,7 @@ ARTISTE HOME SECTION
     align-items: baseline;
 }
 
-/* ✅ Style du textarea */
+/* Style du textarea */
 .bio textarea {
     width: 60%;
     height: 60%;
@@ -202,26 +205,11 @@ ARTISTE HOME SECTION
   box-shadow: none;
   color: #2c5777;
 }
-/* button {
-    margin-top: 300px;
-    height: 50px;
-    width: 150px;
-    background: linear-gradient(90deg, #ff9367, #ff5e57);
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-}
 
-button:hover {
-    background: linear-gradient(90deg, #ff5e57, #e54342);
-    transform: scale(1.05);
-} */
 
-/* ✅ Responsive */
+/* Responsive */
 @media (max-width: 768px) {
-    .artist-profile {
+    .profile {
         width: 95%;
     }
 
@@ -235,7 +223,6 @@ button:hover {
     }
 }
 
-
 /*****
 SECTION CTA
 *****/
@@ -248,18 +235,6 @@ SECTION CTA
     margin-top: 45px;
 }
 
-/* Style des boutons */
-/* .cta-btn {
-    background: linear-gradient(61deg, #ff9367, #94cbc3); */
-    /* background-color: #2e2e48; */
-    /* color: #2e2e48;
-    padding: 18px;
-    text-align: center;
-    border-radius: 3px;
-    font-size: 0.9em;
-    transition: transform 0.3s ease-in-out;
-    cursor: pointer;
-} */
 
 /* CSS */
 .button-52 {

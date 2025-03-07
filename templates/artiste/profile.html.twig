@@ -3,7 +3,7 @@
 {% block title %}Bienvenue cher(e) Artiste{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/artiste.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/profile.css') }}">
 {% endblock %}
 
 {% block navbar %}
@@ -26,7 +26,7 @@
     <!-- Formulaire de modification du profil -->
     {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
 
-    <section class="artist-profile">
+    <section class="profile">
         <div class="profile-container">
            
             <label for="profile_picture_input">
