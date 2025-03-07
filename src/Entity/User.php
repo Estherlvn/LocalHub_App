@@ -82,7 +82,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var Collection<int, Event>
      */
     #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'user')]
-    private Collection $events;
+    private Collection $events; // Événements créés par l'utilisateur
+
+    #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'savedByUsers')]
+    #[ORM\JoinTable(name: 'user_saved_events')]
+    private Collection $savedEvents; // Événements enregistrés par un auditeur
 
 
     
@@ -93,6 +97,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->likedPlaylists = new ArrayCollection();
         $this->favoris = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->savedEvents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -337,33 +342,53 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
     /**
      * @return Collection<int, Event>
      */
-    public function getEvents(): Collection
-    {
-        return $this->events;
-    }
-
-    public function addEvent(Event $event): static
+   public function addEvent(Event $event): self
     {
         if (!$this->events->contains($event)) {
             $this->events->add($event);
             $event->setUser($this);
         }
-
         return $this;
     }
 
-    public function removeEvent(Event $event): static
+    public function removeEvent(Event $event): self
     {
         if ($this->events->removeElement($event)) {
-            // set the owning side to null (unless already changed)
             if ($event->getUser() === $this) {
                 $event->setUser(null);
             }
         }
-
         return $this;
     }
+
+    // Récupérer les événements enregistrés par l’auditeur
+    public function getSavedEvents(): Collection
+    {
+        return $this->savedEvents;
+    }
+
+    // Ajouter un événement aux évènements enregistrés
+    public function saveEvent(Event $event): self
+    {
+        if (!$this->savedEvents->contains($event)) {
+            $this->savedEvents->add($event);
+            $event->addSavedByUser($this); // Assurer la relation bidirectionnelle
+        }
+        return $this;
+    }
+
+    // Supprimer un événement des évènements enregistrés
+    public function removeSavedByUser(Event $event): self
+    {
+        if ($this->savedEvents->contains($event)) {
+            $this->savedEvents->removeElement($event);
+            $event->removeSavedByUser($this); // Supprimer aussi côté `Event`
+        }
+        return $this;
+    }
+
 }

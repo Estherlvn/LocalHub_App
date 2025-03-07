@@ -100,7 +100,7 @@ final class EventController extends AbstractController
 
     // Afficher les événements d'un auditeur // ATTENTION => Mettre en place le systeme de "save event" pour un auditeur
     #[Route('/event/auditeur', name: 'event_auditeur')]
-    #[IsGranted('ROLE_ARTISTE')]
+    #[IsGranted('ROLE_AUDITEUR')]
     public function eventAuditeur(EventRepository $eventRepository): Response
     {
         $user = $this->getUser(); // Récupérer l'utilisateur connecté
@@ -114,7 +114,7 @@ final class EventController extends AbstractController
     }
 
 
-    // Ajouter un événement
+    // Créer un événement
     #[Route('/event/add', name: 'add_event')]
     #[IsGranted('ROLE_USER')] // Seuls les utilisateurs connectés peuvent ajouter un événement
     public function addEvent(

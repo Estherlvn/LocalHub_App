@@ -29,8 +29,19 @@ class Event
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $eventPicture = null;
 
-    #[ORM\ManyToOne(inversedBy: 'events')]
-    private ?User $user = null;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'events')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null; // Propriétaire de l'événement (ex: artiste)
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'savedEvents')]
+    private Collection $savedByUsers; // Liste des utilisateurs qui ont enregistré cet événement
+
+
+    public function __construct()
+    {
+        $this->savedByUsers = new ArrayCollection();
+    }
+
 
     #[ORM\Column]
     private ?float $latitude = null;
@@ -138,4 +149,31 @@ class Event
 
         return $this;
     }
+
+
+     // Récupérer les utilisateurs qui ont enregistré l'événement
+     public function getSavedByUsers(): Collection
+     {
+         return $this->savedByUsers;
+     }
+ 
+     // Ajouter un utilisateur qui enregistre cet événement
+     public function addSavedByUser(User $user): self
+     {
+         if (!$this->savedByUsers->contains($user)) {
+             $this->savedByUsers->add($user);
+             $user->saveEvent($this); // Assurer la relation bidirectionnelle
+         }
+         return $this;
+     }
+ 
+     // Supprimer un utilisateur de la liste des favoris
+     public function removeSavedByUser(User $user): self
+     {
+         if ($this->savedByUsers->contains($user)) {
+             $this->savedByUsers->removeElement($user);
+             $user->removeEvent($this); // Assurer la relation bidirectionnelle
+         }
+         return $this;
+     }
 }
