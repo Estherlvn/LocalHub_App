@@ -19,27 +19,29 @@
     {% else %}
         <div class="events-container">
             {% for event in events %}
+
+            <div class="event-img">
                 <div class="event-card">
 
                     <div class="event-img">
                         {% if event.eventPicture %}
-                            <img src="{{ asset('uploads/' ~ event.eventPicture) }}" class="event-image" alt="Image de {{ event.eventTitle }}">
-                        {% else %}
-                            <img src="{{ asset('images/default_event.png') }}" class="event-image" alt="Image concert">
-                        {% endif %}
+                        <img src="{{ asset('uploads/' ~ event.eventPicture) }}" class="event-image" alt="Image de {{ event.eventTitle }}">
+                    {% else %}
+                        <img src="{{ asset('images/default_event.png') }}" class="event-image" alt="Image concert">
+                    {% endif %}
                     </div>
-
+            
                     <div class="event-details">
                             <h2>{{ event.eventTitle }}</h2>
                             <p class="event-date">📅 {{ event.eventDate|date('d/m/Y') }}</p>
                             <p class="event-location">📍 {{ event.eventLocation }}</p>
-                            <p class="event-description">{{ event.eventDescription|slice(0, 100) }}...</p>
-                            <a href="{{ path('event_detail', { 'id': event.id }) }}" class="btn">Voir plus</a>
+                            {# <p class="event-description">{{ event.eventDescription|slice(0, 100) }}...</p> #}
                     </div>
-{# 
+
                     <div class="event-action">
                             <a href="{{ path('event_detail', { 'id': event.id }) }}" class="btn">Participer</a>
-                    </div> #}
+                            <a href="{{ path('event_detail', { 'id': event.id }) }}" class="btn">Voir plus</a>
+                    </div>
                    
                 </div>
             {% endfor %}

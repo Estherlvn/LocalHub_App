@@ -10,28 +10,44 @@
     <link rel="stylesheet" href="{{ asset('styles/event.css') }}">
 {% endblock %}
 
+{% block navbar %}
+    {% include 'partials/navleft.html.twig' %}
+{% endblock %}
+
 {% block body %}
+
+
 <div class="container">
-    <h1>{{ event.eventTitle }}</h1>
-
-    <div class="event-detail-card">
-        {% if event.eventPicture %}
-            <img src="{{ asset('uploads/' ~ event.eventPicture) }}" class="event-image" alt="Image de {{ event.eventTitle }}">
-        {% else %}
-            <img src="{{ asset('images/default_event.png') }}" class="event-image" alt="Image par défaut">
-        {% endif %}
-
-        <div class="event-info">
-            <p class="event-date">📅 Date : {{ event.eventDate|date('d/m/Y') }}</p>
-            <p class="event-description">{{ event.eventDescription }}</p>
-            <p class="event-location">📍 Lieu : {{ event.eventLocation }}</p>
-        </div>
-    </div>
-
     <a href="{{ path('event_public') }}" class="btn">Retour à la liste</a>
 
-    <h2>Localisation de l’événement</h2>
-    <div id="map"></div> <!-- ✅ La carte sera stylée par `event.css` -->
+    <h1>{{ event.eventTitle }}</h1>
+
+    <div class="event-info">
+        <div class="event-img">
+            {% if event.eventPicture %}
+            <img src="{{ asset('uploads/' ~ event.eventPicture) }}" class="event-image" alt="Image de {{ event.eventTitle }}">
+        {% else %}
+            <img src="{{ asset('images/default_event.png') }}" class="event-image" alt="Image concert">
+        {% endif %}
+        </div>
+
+        <div class="event-description">
+        <p>{{ event.eventDescription }}</p>
+        </div>
+
+    </div>
+
+    <div>
+        <p class="event-date">📅 Date : {{ event.eventDate|date('d/m/Y') }}</p>
+        <p class="event-location">📍 Lieu : {{ event.eventLocation }}</p>
+    </div>
+
+  
+    <div class="map">
+        <h2>Localisation de l’événement</h2>
+        <div id="map"></div> <!-- La carte sera stylisée dans `event.css` -->
+    </div>
+
 </div>
 
 {% block javascripts %}

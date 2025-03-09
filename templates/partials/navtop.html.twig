@@ -11,15 +11,25 @@
     <img src="{{ asset('img/logo.svg') }}" alt="LocalHub Logo" class="logo">
     <div class="nav-menu-container">
         {% if not app.user %}
-            <a class="nav-menu" href="{{ path('app_home') }}">Accueil</a>
-            <a class="nav-menu" href="{{ path('artiste_index') }}">Artistes</a>
-            <a class="nav-menu" href="{{ path('event_public') }}">Evenements</a>
-            <a class="nav-menu" href="{{ path('app_login') }}">Connexion</a>
-            <a class="nav-menu" href="{{ path('app_register') }}" id="nav-log">Inscription</a>
-        {% else %}
-            <a class="nav-menu" href="{{ path('app_home') }}">Accueil</a>
-            <a class="nav-menu" href="{{ path('artiste_profile') }}">Mon Profil</a>
-            <a class="nav-menu" href="{{ path('app_logout') }}">Se déconnecter</a>
+        <a class="nav-menu" href="{{ path('app_home') }}">Accueil</a>
+        <a class="nav-menu" href="{{ path('artiste_index') }}">Artistes</a>
+        <a class="nav-menu" href="{{ path('event_public') }}">Evenements</a>
+        <a class="nav-menu" href="{{ path('app_login') }}">Connexion</a>
+        <a class="nav-menu" href="{{ path('app_register') }}" id="nav-log">Inscription</a>
+
+    {% elseif is_granted('ROLE_ARTISTE') %}
+        <a class="nav-menu" href="{{ path('app_home') }}">Accueil</a>
+        <a class="nav-menu" href="{{ path('artiste_index') }}">Artistes</a>
+        <a class="nav-menu" href="{{ path('event_public') }}">Evenements</a>
+        <a class="nav-menu" href="{{ path('artiste_profile') }}">Mon Profil</a>
+        <a class="nav-menu" href="{{ path('app_logout') }}">Se déconnecter</a>
+
+    {% elseif is_granted('ROLE_AUDITEUR') %}
+        <a class="nav-menu" href="{{ path('app_home') }}">Accueil</a>
+        <a class="nav-menu" href="{{ path('artiste_index') }}">Artistes</a>
+        <a class="nav-menu" href="{{ path('event_public') }}">Evenements</a>
+        <a class="nav-menu" href="{{ path('auditeur_profile') }}">Mon Profil</a>
+        <a class="nav-menu" href="{{ path('app_logout') }}">Se déconnecter</a>
         {% endif %}
     </div>
 </nav>

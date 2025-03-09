@@ -16,23 +16,41 @@
     <div class="container">
     <h2>⭐ Mes événements sauvegardés</h2>
     {% if savedEvents is empty %}
-        <p>Aucun événement enregistré.</p>
+    <p class="no-events">Aucun événement à venir pour l’instant.</p>
     {% else %}
         <div class="events-container">
             {% for event in savedEvents %}
-                <div class="event-card">
-                    <h3>{{ event.eventTitle }}</h3>
-                    <p>📍 {{ event.eventLocation }}</p>
-                    <p>📅 {{ event.eventDate|date('d/m/Y') }}</p>
 
-                    <form action="{{ path('save_event', { 'id': event.id }) }}" method="post">
-                        <button type="submit" class="btn-remove">❌ Retirer</button>
-                    </form>
+            <div class="event-card">
+
+                <div class="event-img">
+                    {% if event.eventPicture %}
+                    <img src="{{ asset('uploads/' ~ event.eventPicture) }}" class="event-image" alt="Image de {{ event.eventTitle }}">
+                {% else %}
+                    <img src="{{ asset('images/default_event.png') }}" class="event-image" alt="Image concert">
+                {% endif %}
                 </div>
-            {% endfor %}
-        </div>
-    {% endif %}
+
+                <div class="event-details">
+                    <h2>{{ event.eventTitle }}</h2>
+                    <p class="event-date">📅 {{ event.eventDate|date('d/m/Y') }}</p>
+                    <p class="event-location">📍 {{ event.eventLocation }}</p>
+                    <p class="event-description">{{ event.eventDescription|slice(0, 100) }}...</p>
+                    <a href="{{ path('event_detail', { 'id': event.id }) }}" class="btn">Voir plus</a>
+                </div>
+
+                
+                <form action="{{ path('save_event', { 'id': event.id }) }}" method="post">
+                    <button type="submit" class="btn-remove">❌ Retirer</button>
+                </form>
+
+                
+            </div>
+        {% endfor %}
     </div>
+{% endif %}
+</div>
+
 
     <h1>🎵 Tous les événements</h1>
 

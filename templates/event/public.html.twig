@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block navbar %}
-    {% include 'partials/navleft.html.twig' %}
+    {% include 'partials/navtop.html.twig' %}
 {% endblock %}
 
 {% block body %}
@@ -33,7 +33,7 @@
                             <h2>{{ event.eventTitle }}</h2>
                             <p class="event-date">📅 {{ event.eventDate|date('d/m/Y') }}</p>
                             <p class="event-location">📍 {{ event.eventLocation }}</p>
-                            <p class="event-description">{{ event.eventDescription|slice(0, 100) }}...</p>
+                            {# <p class="event-description">{{ event.eventDescription|slice(0, 100) }}...</p> #}
                             <a href="{{ path('event_detail', { 'id': event.id }) }}" class="btn">Voir plus</a>
                     </div>
 
