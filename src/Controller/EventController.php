@@ -85,7 +85,7 @@ final class EventController extends AbstractController
     }
 
     // Afficher les événements d'un artiste
-    #[Route('/event/list', name: 'event_list')]
+    #[Route('/event/artiste', name: 'event_artiste')]
     #[IsGranted('ROLE_ARTISTE')]
     public function index(EventRepository $eventRepository): Response
     {
@@ -94,7 +94,7 @@ final class EventController extends AbstractController
         // Récupérer les événements de l'artiste connecté
         $events = $eventRepository->findBy(['user' => $user]);
 
-        return $this->render('event/list.html.twig', [
+        return $this->render('event/artiste.html.twig', [
             'events' => $events,
         ]);
     }
@@ -154,7 +154,7 @@ final class EventController extends AbstractController
     
             $this->addFlash('success', 'Votre événement a été créé avec succès !');
     
-            return $this->redirectToRoute('event_list');
+            return $this->redirectToRoute('event_artiste');
         }
     
         return $this->render('event/add.html.twig', [

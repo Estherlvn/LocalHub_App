@@ -44,7 +44,7 @@
                 <li><a href="{{ path('artiste_profile') }}">Mon Profil</a></li>
                 <li><a href="{{ path('add_track') }}">Upload</a></li>
                 <li><a href="{{ path('track_collection') }}">Collection</a></li>
-                <li><a href="{{ path('event_list') }}">Evenements</a></li>
+                <li><a href="{{ path('event_artiste') }}">Evenements</a></li>
             </ul>
         </nav>
     {% elseif is_granted('ROLE_AUDITEUR') %}

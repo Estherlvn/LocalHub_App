@@ -18,7 +18,12 @@
 
 
 <div class="container">
-    <a href="{{ path('event_public') }}" class="btn">Retour à la liste</a>
+    {% if is_granted('ROLE_ARTISTE') %}
+    <a href="{{ path('event_artiste') }}" class="btn">Retour à la liste</a>
+    {% else %}
+    <a href="{{ path('event_auditeur') }}" class="btn">Retour à la liste</a>
+    {% endif %}
+    
 
     <h1>{{ event.eventTitle }}</h1>
 
