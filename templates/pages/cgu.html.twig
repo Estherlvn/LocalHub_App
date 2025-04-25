@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conditions Générales d’Utilisation{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/pages.css') }}">
+{% endblock %}
+
+{% block navbar %}
+    {% include 'partials/navtop.html.twig' %}
+{% endblock %}
+
+{% block body %}
+<div class="cgu-page">
+    <div class="container">
+        <h1>Conditions Générales d’Utilisation</h1>
+
+        <h2>1. Présentation du service</h2>
+        <p>LocalHub est une plateforme permettant aux artistes locaux de partager leur musique et d’organiser des événements, et aux auditeurs de découvrir, soutenir et suivre ces artistes.</p>
+
+        <h2>2. Obligations des utilisateurs</h2>
+        <p>Les utilisateurs s’engagent à :</p>
+        <ul>
+            <li>Ne pas publier de contenus offensants, discriminatoires ou illégaux.</li>
+            <li>Respecter les droits d’auteur sur les morceaux partagés.</li>
+            <li>Fournir des informations véridiques lors de l’inscription.</li>
+        </ul>
+
+        <h2>3. Propriété intellectuelle</h2>
+        <p>Les artistes conservent l’ensemble des droits sur les morceaux qu’ils publient. En publiant du contenu, l’utilisateur autorise LocalHub à le diffuser sur la plateforme.</p>
+
+        <h2>4. Données personnelles</h2>
+        <p>Les données personnelles sont collectées uniquement pour le bon fonctionnement du site. Aucune donnée ne sera vendue ou partagée sans consentement.</p>
+
+        <h2>5. Responsabilité</h2>
+        <p>LocalHub ne saurait être tenu responsable des contenus publiés par les utilisateurs. Tout manquement peut entraîner une suspension ou suppression de compte.</p>
+
+        <h2>6. Contact</h2>
+        <p>Pour toute question ou demande de retrait de contenu : contact@localhub.fr</p>
+    </div>
+</div>
+{% endblock %}

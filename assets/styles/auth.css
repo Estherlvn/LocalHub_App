@@ -1,0 +1,98 @@
+/* Styles pour la page de login */
+
+.page-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px); 
+    background: linear-gradient(135deg, #2e2e48, #ff9367);
+}
+
+.login-container {
+    width: 100%;
+    max-width: 25%;
+    background-color: #ffffff;
+    padding: 40px 60px;
+    border-radius: 2px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #2e2e48;
+}
+
+label {
+    font-weight: 600;
+    color: #333333;
+}
+
+input[type="email"],
+input[type="password"] {
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #ff9367;
+    box-shadow: 0 0 5px rgba(255, 147, 103, 0.5);
+}
+
+button[type="submit"] {
+    padding: 12px;
+    background: #ff9367;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 20px;
+    width: 45%;
+    align-self: center;
+}
+
+button[type="submit"]:hover {
+    background: #e67a50;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
+
+.connected {
+    background-color: #e0f7fa;
+    color: #00796b;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Pour que les inputs se placent sous les labels dans Register */
+.login-form div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Spécifique au champ agreeTerms */
+.login-form div:has(#registration_form_agreeTerms) {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+

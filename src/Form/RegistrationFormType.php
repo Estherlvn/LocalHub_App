@@ -39,13 +39,15 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'J’accepte les <a href="/conditions-utilisation" target="_blank">conditions générales d’utilisation de LocalHub</a>.',
+                'label_html' => true,
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'Vous devez accepter nos conditions d\'utilisation.',
+                        'message' => 'Vous devez accepter les conditions générales pour vous inscrire.',
                     ]),
                 ],
-            ])
+            ])            
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false, // ce champ n'est pas lié directement à l'entité

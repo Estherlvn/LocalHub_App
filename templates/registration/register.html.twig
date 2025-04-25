@@ -2,29 +2,40 @@
 
 {% block title %}Inscription{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/auth.css') }}">
+{% endblock %}
+
 {% block navbar %}
     {% include 'partials/navtop.html.twig' %}
 {% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+<div class="page-login">
+    <div class="login-container">
+        <form method="post" class="login-form">
+            <h1>Inscription</h1>
 
-    <h1>Inscription</h1>
+            {% for flash_error in app.flashes('verify_email_error') %}
+                <div class="error">{{ flash_error }}</div>
+            {% endfor %}
 
-    {{ form_errors(registrationForm) }}
+            {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.pseudo) }}
-        {{ form_row(registrationForm.departement) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.role) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">S'inscrire</button>
-    {{ form_end(registrationForm) }}
+            {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.pseudo) }}
+                {{ form_row(registrationForm.departement) }}
+                {{ form_row(registrationForm.plainPassword, { label: 'Mot de passe' }) }}
+                {{ form_row(registrationForm.role) }}
+                {{ form_row(registrationForm.agreeTerms, {
+                    label: 'J’accepte les <a href="' ~ path('cgu') ~ '" target="_blank">conditions générales d’utilisation de LocalHub</a>.',
+                    label_html: true
+                }) }}
+                
+                <button type="submit">S'inscrire</button>
+            {{ form_end(registrationForm) }}
+        </form>
+    </div>
+</div>
 {% endblock %}

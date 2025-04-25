@@ -29,6 +29,19 @@ a {
     color: #F3F3F1;
 }
 
+/* Appliquer un style aux liens dans les labels de formulaire */
+form label a {
+    color: #cd4a14;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+form label a:hover {
+    color: #832700;
+    text-decoration: none;
+}
+
+
 ul {
     list-style: none;
 }

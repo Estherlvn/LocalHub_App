@@ -1,0 +1,28 @@
+/* Styles pour les pages annexes */
+
+/* cgu */
+.cgu-page .container {
+    max-width: 60%;
+    margin: 50px auto;
+}
+
+.cgu-page h1 {
+    text-align: center;
+    color: #dadada;
+    margin: 85px;
+}
+
+.cgu-page h2 {
+    color: #ff9367;
+    margin-top: 45px;
+}
+
+.cgu-page p, .cgu-page ul {
+    line-height: 1.6;
+    font-size: 1.1em;
+}
+
+.cgu-page ul {
+    margin-left: 20px;
+}
+

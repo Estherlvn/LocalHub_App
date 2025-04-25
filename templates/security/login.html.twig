@@ -2,35 +2,47 @@
 
 {% block title %}Connexion{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/auth.css') }}">
+{% endblock %}
+
 {% block navbar %}
     {% include 'partials/navtop.html.twig' %}
 {% endblock %}
 
-
 {% block body %}
-    <form method="post">
-        {% if error %}
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+<div class="page-login">
+    <div class="login-container">
+        <form method="post" class="login-form">
+            
+            {% if error %}
+                <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-        {% if app.user %}
-            <div>
-                Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
-            </div>
-        {% endif %}
+            {% if app.user %}
+                <div class="connected">
+                    Vous êtes connecté en tant que {{ app.user.userIdentifier }}, 
+                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                </div>
+            {% endif %}
 
-        <h1>Connexion</h1>
-        <label for="username">Email</label>
-        <input type="email" value="{{ last_username }}" name="_username" id="username" required autofocus>
-                
-        <label for="password">Mot de passe</label>
-        <input type="password" name="_password" id="password" required>
-        
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        
-        <button type="submit">Se connecter</button>
-        
+            <h1>Connexion</h1>
+
+            <label for="username">Email</label>
+            <input type="email" value="{{ last_username }}" name="_username" id="username" required autofocus>
+
+            <label for="password">Mot de passe</label>
+            <input type="password" name="_password" id="password" required>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
+
+
 
 
         {#
