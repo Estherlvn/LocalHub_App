@@ -1,0 +1,41 @@
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>Navigation</h4>
+            <ul>
+                <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                <li><a href="{{ path('app_register') }}">S’inscrire</a></li>
+                <li><a href="{{ path('app_login') }}">Se connecter</a></li>
+                <li><a href="{{ path('event_public') }}">Événements</a></li>
+                <li><a href="{{ path('artiste_index') }}">Artistes</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>LocalHub</h4>
+            <ul>
+                <li><a href="{{ path('cgu') }}">CGU</a></li>
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Confidentialité</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Contact</h4>
+            <p>Email : contact@localhub.fr</p>
+            <p><a href="#">Formulaire de contact</a></p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Suivez-nous</h4>
+            <div class="social-icons">
+                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; {{ "now"|date("Y") }} LocalHub. Tous droits réservés.</p>
+    </div>
+</footer>
