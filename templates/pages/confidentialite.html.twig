@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Politique de confidentialité{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/pages.css') }}">
+{% endblock %}
+
+
+{% block navbar %}
+    {% include 'partials/navtop.html.twig' %}
+{% endblock %}
+
+{% block body %}
+<div class="cgu-page">
+        <h1>Politique de confidentialité</h1>
+
+        <p>Chez <strong>LocalHub</strong>, la protection de vos données personnelles est une priorité. Cette page vous explique quelles données nous collectons, comment elles sont utilisées, et quels sont vos droits.</p>
+
+        <h2>Données collectées</h2>
+        <p>Nous collectons uniquement les données nécessaires à l’utilisation du site, notamment lors de l’inscription, de la connexion, ou de l’utilisation de nos services :</p>
+        <ul>
+            <li>Nom ou pseudonyme</li>
+            <li>Adresse email</li>
+            <li>Département / localisation</li>
+            <li>Adresse IP, données de navigation (à des fins statistiques)</li>
+        </ul>
+
+        <h2>Utilisation des données</h2>
+        <p>Les données collectées servent à :</p>
+        <ul>
+            <li>Vous identifier et personnaliser votre expérience</li>
+            <li>Permettre les interactions avec d'autres utilisateurs</li>
+            <li>Améliorer les fonctionnalités de la plateforme</li>
+        </ul>
+
+        <h2>Conservation</h2>
+        <p>Vos données sont conservées pendant toute la durée d’utilisation de votre compte. Vous pouvez demander leur suppression à tout moment.</p>
+
+        <h2>Partage</h2>
+        <p>Vos données ne sont jamais partagées avec des tiers, sauf obligation légale ou demande de justice.</p>
+
+        <h2>Vos droits</h2>
+        <p>Conformément à la loi "Informatique et Libertés" et au RGPD, vous disposez :</p>
+        <ul>
+            <li>D’un droit d’accès, de rectification, d’opposition et de suppression</li>
+            <li>Du droit à la portabilité de vos données</li>
+            <li>Du droit de déposer une réclamation auprès de la CNIL</li>
+        </ul>
+
+        <h2>Contact</h2>
+        <p>Pour exercer vos droits ou poser une question, contactez-nous à : contact@localhub.fr</a></p>
+</div>
+{% endblock %}
